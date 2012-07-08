@@ -179,6 +179,10 @@
 		CDF3CDC315A9695800418612 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDC215A9695800418612 /* GLES-Render.mm */; };
 		CDF3CDC615A9695800418612 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDC515A9695800418612 /* PhysicsSprite.mm */; };
 		CDF3CDC815A9695800418612 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CDC715A9695800418612 /* blocks.png */; };
+		CDF3CDD615A96EE000418612 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD015A96EE000418612 /* PRFilledPolygon.m */; };
+		CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD215A96EE000418612 /* PRRatcliffTriangulator.mm */; };
+		CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD415A96EE000418612 /* triangulate.cpp */; };
+		CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -540,6 +544,15 @@
 		CDF3CDC415A9695800418612 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		CDF3CDC515A9695800418612 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CDF3CDC715A9695800418612 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CDF3CDCF15A96EE000418612 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
+		CDF3CDD015A96EE000418612 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
+		CDF3CDD115A96EE000418612 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
+		CDF3CDD215A96EE000418612 /* PRRatcliffTriangulator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PRRatcliffTriangulator.mm; sourceTree = "<group>"; };
+		CDF3CDD315A96EE000418612 /* PRTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRTriangulator.h; sourceTree = "<group>"; };
+		CDF3CDD415A96EE000418612 /* triangulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulate.cpp; sourceTree = "<group>"; };
+		CDF3CDD515A96EE000418612 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
+		CDF3CDD915A97AB000418612 /* PolygonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonSprite.h; sourceTree = "<group>"; };
+		CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonSprite.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,8 +611,11 @@
 		CDF3CBB215A9695400418612 /* CutCutCut */ = {
 			isa = PBXGroup;
 			children = (
-				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
+				CDF3CDCE15A96EE000418612 /* PRKit */,
 				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
+				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
+				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
+				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
 				CDF3CDBE15A9695800418612 /* HelloWorldLayer.h */,
 				CDF3CDBF15A9695800418612 /* HelloWorldLayer.mm */,
 				CDF3CDC115A9695800418612 /* GLES-Render.h */,
@@ -1134,6 +1150,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CDF3CDCE15A96EE000418612 /* PRKit */ = {
+			isa = PBXGroup;
+			children = (
+				CDF3CDCF15A96EE000418612 /* PRFilledPolygon.h */,
+				CDF3CDD015A96EE000418612 /* PRFilledPolygon.m */,
+				CDF3CDD115A96EE000418612 /* PRRatcliffTriangulator.h */,
+				CDF3CDD215A96EE000418612 /* PRRatcliffTriangulator.mm */,
+				CDF3CDD315A96EE000418612 /* PRTriangulator.h */,
+				CDF3CDD415A96EE000418612 /* triangulate.cpp */,
+				CDF3CDD515A96EE000418612 /* triangulate.h */,
+			);
+			path = PRKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1357,6 +1387,10 @@
 				CDF3CDC015A9695800418612 /* HelloWorldLayer.mm in Sources */,
 				CDF3CDC315A9695800418612 /* GLES-Render.mm in Sources */,
 				CDF3CDC615A9695800418612 /* PhysicsSprite.mm in Sources */,
+				CDF3CDD615A96EE000418612 /* PRFilledPolygon.m in Sources */,
+				CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */,
+				CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */,
+				CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
