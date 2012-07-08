@@ -182,6 +182,36 @@
 		CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD215A96EE000418612 /* PRRatcliffTriangulator.mm */; };
 		CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD415A96EE000418612 /* triangulate.cpp */; };
 		CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */; };
+		CDF3CDDE15A9DD3D00418612 /* Watermelon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */; };
+		CDF3CE3815A9E19300418612 /* banana-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1B15A9E19300418612 /* banana-hd.png */; };
+		CDF3CE3915A9E19300418612 /* banana-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */; };
+		CDF3CE3A15A9E19300418612 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1D15A9E19300418612 /* banana.png */; };
+		CDF3CE3B15A9E19300418612 /* bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1E15A9E19300418612 /* bg-hd.png */; };
+		CDF3CE3C15A9E19300418612 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1F15A9E19300418612 /* bg.png */; };
+		CDF3CE3D15A9E19300418612 /* bomb-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2015A9E19300418612 /* bomb-hd.png */; };
+		CDF3CE3E15A9E19300418612 /* bomb-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */; };
+		CDF3CE3F15A9E19300418612 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2215A9E19300418612 /* bomb.png */; };
+		CDF3CE4015A9E19300418612 /* fluits.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2315A9E19300418612 /* fluits.plist */; };
+		CDF3CE4115A9E19300418612 /* fruit_cut-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2415A9E19300418612 /* fruit_cut-hd.png */; };
+		CDF3CE4215A9E19300418612 /* fruit_cut.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2515A9E19300418612 /* fruit_cut.png */; };
+		CDF3CE4315A9E19300418612 /* grapes-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2615A9E19300418612 /* grapes-hd.png */; };
+		CDF3CE4415A9E19300418612 /* grapes-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2715A9E19300418612 /* grapes-ipadhd.png */; };
+		CDF3CE4515A9E19300418612 /* grapes.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2815A9E19300418612 /* grapes.png */; };
+		CDF3CE4615A9E19300418612 /* pineapple-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2915A9E19300418612 /* pineapple-hd.png */; };
+		CDF3CE4715A9E19300418612 /* pineapple-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2A15A9E19300418612 /* pineapple-ipadhd.png */; };
+		CDF3CE4815A9E19300418612 /* pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2B15A9E19300418612 /* pineapple.png */; };
+		CDF3CE4915A9E19300418612 /* strawberry-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2C15A9E19300418612 /* strawberry-hd.png */; };
+		CDF3CE4A15A9E19300418612 /* strawberry-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2D15A9E19300418612 /* strawberry-ipadhd.png */; };
+		CDF3CE4B15A9E19300418612 /* strawberry.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2E15A9E19300418612 /* strawberry.png */; };
+		CDF3CE4C15A9E19300418612 /* streak-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2F15A9E19300418612 /* streak-hd.png */; };
+		CDF3CE4D15A9E19300418612 /* streak.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3015A9E19300418612 /* streak.png */; };
+		CDF3CE4E15A9E19300418612 /* watermelon-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3115A9E19300418612 /* watermelon-hd.png */; };
+		CDF3CE4F15A9E19300418612 /* watermelon-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */; };
+		CDF3CE5015A9E19300418612 /* watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3315A9E19300418612 /* watermelon.png */; };
+		CDF3CE5115A9E19300418612 /* x_filled-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3415A9E19300418612 /* x_filled-hd.png */; };
+		CDF3CE5215A9E19300418612 /* x_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3515A9E19300418612 /* x_filled.png */; };
+		CDF3CE5315A9E19300418612 /* x_unfilled-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3615A9E19300418612 /* x_unfilled-hd.png */; };
+		CDF3CE5415A9E19300418612 /* x_unfilled.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3715A9E19300418612 /* x_unfilled.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -550,6 +580,47 @@
 		CDF3CDD515A96EE000418612 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
 		CDF3CDD915A97AB000418612 /* PolygonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonSprite.h; sourceTree = "<group>"; };
 		CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonSprite.mm; sourceTree = "<group>"; };
+		CDF3CDDC15A9DD3D00418612 /* Watermelon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watermelon.h; sourceTree = "<group>"; };
+		CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Watermelon.mm; sourceTree = "<group>"; };
+		CDF3CE1B15A9E19300418612 /* banana-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banana-hd.png"; sourceTree = "<group>"; };
+		CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banana-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE1D15A9E19300418612 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
+		CDF3CE1E15A9E19300418612 /* bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-hd.png"; sourceTree = "<group>"; };
+		CDF3CE1F15A9E19300418612 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CDF3CE2015A9E19300418612 /* bomb-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-hd.png"; sourceTree = "<group>"; };
+		CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE2215A9E19300418612 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
+		CDF3CE2315A9E19300418612 /* fluits.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fluits.plist; sourceTree = "<group>"; };
+		CDF3CE2415A9E19300418612 /* fruit_cut-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit_cut-hd.png"; sourceTree = "<group>"; };
+		CDF3CE2515A9E19300418612 /* fruit_cut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fruit_cut.png; sourceTree = "<group>"; };
+		CDF3CE2615A9E19300418612 /* grapes-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grapes-hd.png"; sourceTree = "<group>"; };
+		CDF3CE2715A9E19300418612 /* grapes-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grapes-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE2815A9E19300418612 /* grapes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grapes.png; sourceTree = "<group>"; };
+		CDF3CE2915A9E19300418612 /* pineapple-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pineapple-hd.png"; sourceTree = "<group>"; };
+		CDF3CE2A15A9E19300418612 /* pineapple-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pineapple-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE2B15A9E19300418612 /* pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pineapple.png; sourceTree = "<group>"; };
+		CDF3CE2C15A9E19300418612 /* strawberry-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strawberry-hd.png"; sourceTree = "<group>"; };
+		CDF3CE2D15A9E19300418612 /* strawberry-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strawberry-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE2E15A9E19300418612 /* strawberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry.png; sourceTree = "<group>"; };
+		CDF3CE2F15A9E19300418612 /* streak-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "streak-hd.png"; sourceTree = "<group>"; };
+		CDF3CE3015A9E19300418612 /* streak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak.png; sourceTree = "<group>"; };
+		CDF3CE3115A9E19300418612 /* watermelon-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon-hd.png"; sourceTree = "<group>"; };
+		CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon-ipadhd.png"; sourceTree = "<group>"; };
+		CDF3CE3315A9E19300418612 /* watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermelon.png; sourceTree = "<group>"; };
+		CDF3CE3415A9E19300418612 /* x_filled-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x_filled-hd.png"; sourceTree = "<group>"; };
+		CDF3CE3515A9E19300418612 /* x_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x_filled.png; sourceTree = "<group>"; };
+		CDF3CE3615A9E19300418612 /* x_unfilled-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "x_unfilled-hd.png"; sourceTree = "<group>"; };
+		CDF3CE3715A9E19300418612 /* x_unfilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x_unfilled.png; sourceTree = "<group>"; };
+		CDF3CE5515A9E24100418612 /* Banana.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Banana.h; sourceTree = "<group>"; };
+		CDF3CE5615A9E24100418612 /* Banana.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Banana.mm; sourceTree = "<group>"; };
+		CDF3CE5715A9E24100418612 /* Bomb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
+		CDF3CE5815A9E24100418612 /* Bomb.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Bomb.mm; sourceTree = "<group>"; };
+		CDF3CE5915A9E24200418612 /* Grapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Grapes.h; sourceTree = "<group>"; };
+		CDF3CE5A15A9E24200418612 /* Grapes.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Grapes.mm; sourceTree = "<group>"; };
+		CDF3CE5B15A9E24200418612 /* Pineapple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pineapple.h; sourceTree = "<group>"; };
+		CDF3CE5C15A9E24200418612 /* Pineapple.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Pineapple.mm; sourceTree = "<group>"; };
+		CDF3CE5D15A9E24200418612 /* Strawberry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Strawberry.h; sourceTree = "<group>"; };
+		CDF3CE5E15A9E24200418612 /* Strawberry.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Strawberry.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -611,6 +682,18 @@
 				CDF3CDCE15A96EE000418612 /* PRKit */,
 				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
 				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
+				CDF3CE5515A9E24100418612 /* Banana.h */,
+				CDF3CE5615A9E24100418612 /* Banana.mm */,
+				CDF3CE5715A9E24100418612 /* Bomb.h */,
+				CDF3CE5815A9E24100418612 /* Bomb.mm */,
+				CDF3CE5915A9E24200418612 /* Grapes.h */,
+				CDF3CE5A15A9E24200418612 /* Grapes.mm */,
+				CDF3CE5B15A9E24200418612 /* Pineapple.h */,
+				CDF3CE5C15A9E24200418612 /* Pineapple.mm */,
+				CDF3CE5D15A9E24200418612 /* Strawberry.h */,
+				CDF3CE5E15A9E24200418612 /* Strawberry.mm */,
+				CDF3CDDC15A9DD3D00418612 /* Watermelon.h */,
+				CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */,
 				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
 				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
 				CDF3CDBE15A9695800418612 /* HelloWorldLayer.h */,
@@ -627,6 +710,7 @@
 		CDF3CBB315A9695400418612 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CDF3CE1A15A9E19200418612 /* Images */,
 				CDF3CBB415A9695400418612 /* Default.png */,
 				CDF3CBB615A9695400418612 /* fps_images.png */,
 				CDF3CBB815A9695400418612 /* fps_images-hd.png */,
@@ -1159,6 +1243,42 @@
 			path = PRKit;
 			sourceTree = "<group>";
 		};
+		CDF3CE1A15A9E19200418612 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				CDF3CE3315A9E19300418612 /* watermelon.png */,
+				CDF3CE1B15A9E19300418612 /* banana-hd.png */,
+				CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */,
+				CDF3CE1D15A9E19300418612 /* banana.png */,
+				CDF3CE1E15A9E19300418612 /* bg-hd.png */,
+				CDF3CE1F15A9E19300418612 /* bg.png */,
+				CDF3CE2015A9E19300418612 /* bomb-hd.png */,
+				CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */,
+				CDF3CE2215A9E19300418612 /* bomb.png */,
+				CDF3CE2315A9E19300418612 /* fluits.plist */,
+				CDF3CE2415A9E19300418612 /* fruit_cut-hd.png */,
+				CDF3CE2515A9E19300418612 /* fruit_cut.png */,
+				CDF3CE2615A9E19300418612 /* grapes-hd.png */,
+				CDF3CE2715A9E19300418612 /* grapes-ipadhd.png */,
+				CDF3CE2815A9E19300418612 /* grapes.png */,
+				CDF3CE2915A9E19300418612 /* pineapple-hd.png */,
+				CDF3CE2A15A9E19300418612 /* pineapple-ipadhd.png */,
+				CDF3CE2B15A9E19300418612 /* pineapple.png */,
+				CDF3CE2C15A9E19300418612 /* strawberry-hd.png */,
+				CDF3CE2D15A9E19300418612 /* strawberry-ipadhd.png */,
+				CDF3CE2E15A9E19300418612 /* strawberry.png */,
+				CDF3CE2F15A9E19300418612 /* streak-hd.png */,
+				CDF3CE3015A9E19300418612 /* streak.png */,
+				CDF3CE3115A9E19300418612 /* watermelon-hd.png */,
+				CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */,
+				CDF3CE3415A9E19300418612 /* x_filled-hd.png */,
+				CDF3CE3515A9E19300418612 /* x_filled.png */,
+				CDF3CE3615A9E19300418612 /* x_unfilled-hd.png */,
+				CDF3CE3715A9E19300418612 /* x_unfilled.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1222,6 +1342,35 @@
 				CDF3CBCA15A9695400418612 /* iTunesArtwork in Resources */,
 				CDF3CD0815A9695700418612 /* ChangeLog in Resources */,
 				CDF3CDC815A9695800418612 /* blocks.png in Resources */,
+				CDF3CE3815A9E19300418612 /* banana-hd.png in Resources */,
+				CDF3CE3915A9E19300418612 /* banana-ipadhd.png in Resources */,
+				CDF3CE3A15A9E19300418612 /* banana.png in Resources */,
+				CDF3CE3B15A9E19300418612 /* bg-hd.png in Resources */,
+				CDF3CE3C15A9E19300418612 /* bg.png in Resources */,
+				CDF3CE3D15A9E19300418612 /* bomb-hd.png in Resources */,
+				CDF3CE3E15A9E19300418612 /* bomb-ipadhd.png in Resources */,
+				CDF3CE3F15A9E19300418612 /* bomb.png in Resources */,
+				CDF3CE4015A9E19300418612 /* fluits.plist in Resources */,
+				CDF3CE4115A9E19300418612 /* fruit_cut-hd.png in Resources */,
+				CDF3CE4215A9E19300418612 /* fruit_cut.png in Resources */,
+				CDF3CE4315A9E19300418612 /* grapes-hd.png in Resources */,
+				CDF3CE4415A9E19300418612 /* grapes-ipadhd.png in Resources */,
+				CDF3CE4515A9E19300418612 /* grapes.png in Resources */,
+				CDF3CE4615A9E19300418612 /* pineapple-hd.png in Resources */,
+				CDF3CE4715A9E19300418612 /* pineapple-ipadhd.png in Resources */,
+				CDF3CE4815A9E19300418612 /* pineapple.png in Resources */,
+				CDF3CE4915A9E19300418612 /* strawberry-hd.png in Resources */,
+				CDF3CE4A15A9E19300418612 /* strawberry-ipadhd.png in Resources */,
+				CDF3CE4B15A9E19300418612 /* strawberry.png in Resources */,
+				CDF3CE4C15A9E19300418612 /* streak-hd.png in Resources */,
+				CDF3CE4D15A9E19300418612 /* streak.png in Resources */,
+				CDF3CE4E15A9E19300418612 /* watermelon-hd.png in Resources */,
+				CDF3CE4F15A9E19300418612 /* watermelon-ipadhd.png in Resources */,
+				CDF3CE5015A9E19300418612 /* watermelon.png in Resources */,
+				CDF3CE5115A9E19300418612 /* x_filled-hd.png in Resources */,
+				CDF3CE5215A9E19300418612 /* x_filled.png in Resources */,
+				CDF3CE5315A9E19300418612 /* x_unfilled-hd.png in Resources */,
+				CDF3CE5415A9E19300418612 /* x_unfilled.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,6 +1534,7 @@
 				CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */,
 				CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */,
 				CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */,
+				CDF3CDDE15A9DD3D00418612 /* Watermelon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
