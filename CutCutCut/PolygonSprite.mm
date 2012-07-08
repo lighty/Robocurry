@@ -67,4 +67,83 @@
     // nothing to do here
     return nil;
 }
+
+-(void)setPosition:(CGPoint)position
+{
+    [super setPosition:position];
+    _body->SetTransform(b2Vec2(position.x/PTM_RATIO, position.y/PTM_RATIO), _body->GetAngle());
+}
+
+-(b2Body*)createBodyForWorld:(b2World *)world position:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2 *)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution
+{
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position = position;
+    bodyDef.angle = rotation;
+    b2Body *body = world->CreateBody(&bodyDef);
+    
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = density;
+    fixtureDef.friction = friction;
+    fixtureDef.restitution = restitution;
+    fixtureDef.filter.categoryBits = 0;
+    fixtureDef.filter.maskBits = 0;
+    
+    b2PolygonShape shape;
+    shape.Set(vertices, count);
+    fixtureDef.shape = &shape;
+    body->CreateFixture(&fixtureDef);
+    
+    return body;
+}
+
+-(void)activateCollisions
+{
+    b2Fixture *fixture = _body->GetFixtureList();
+    b2Filter filter = fixture->GetFilterData();
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0001;
+    fixture->SetFilterData(filter);
+}
+
+-(void)deactivateCollisions
+{
+    b2Fixture *fixture = _body->GetFixtureList();
+    b2Filter filter = fixture->GetFilterData();
+    filter.categoryBits = 0;
+    filter.maskBits = 0;
+    fixture->SetFilterData(filter);
+}
+
+// returns the transform matrix according the Chipmunk Body values
+-(CGAffineTransform) nodeToParentTransform
+{	
+	b2Vec2 pos  = _body->GetPosition();
+	
+	float x = pos.x * PTM_RATIO;
+	float y = pos.y * PTM_RATIO;
+	
+	if ( ignoreAnchorPointForPosition_ ) {
+		x += anchorPointInPoints_.x;
+		y += anchorPointInPoints_.y;
+	}
+	
+	// Make matrix
+	float radians = _body->GetAngle();
+	float c = cosf(radians);
+	float s = sinf(radians);
+	
+	if( ! CGPointEqualToPoint(anchorPointInPoints_, CGPointZero) ){
+		x += c*-anchorPointInPoints_.x + -s*-anchorPointInPoints_.y;
+		y += s*-anchorPointInPoints_.x + c*-anchorPointInPoints_.y;
+	}
+	
+	// Rot, Translate Matrix
+	transform_ = CGAffineTransformMake( c,  s,
+									   -s,	c,
+									   x,	y );	
+	
+	return transform_;
+}
+
 @end

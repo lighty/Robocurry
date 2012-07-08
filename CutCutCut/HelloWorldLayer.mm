@@ -6,13 +6,13 @@
 //  Copyright __MyCompanyName__ 2012年. All rights reserved.
 //
 
+#import "Watermelon.h"
+
 // Import the interfaces
 #import "HelloWorldLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-
-#import "PhysicsSprite.h"
 
 enum {
 	kTagParentNode = 1,
@@ -28,6 +28,8 @@ enum {
 @end
 
 @implementation HelloWorldLayer
+
+@synthesize cache = _cache;
 
 +(CCScene *) scene
 {
@@ -57,9 +59,22 @@ enum {
 		// init physics
 		[self initPhysics];
 		
+        [self initSprites];
+        
 		[self scheduleUpdate];
 	}
 	return self;
+}
+
+-(void)initSprites
+{
+    _cache = [[CCArray alloc] initWithCapacity:53];
+    
+    // Just create one sprite for now. This whole method will be replaced later.
+    PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
+    [self addChild:sprite z:1];
+    [sprite activateCollisions];
+    [_cache addObject:sprite];    
 }
 
 -(void) dealloc
@@ -70,6 +85,9 @@ enum {
 	delete m_debugDraw;
 	m_debugDraw = NULL;
 	
+    [_cache release];
+    _cache = nil;
+    
 	[super dealloc];
 }	
 
