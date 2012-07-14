@@ -14,6 +14,12 @@
 @synthesize original = _original;
 @synthesize centroid = _centroid;
 
+@synthesize entryPoint = _entryPoint;
+@synthesize exitPoint = _exitPoint;
+@synthesize sliceEntered = _sliceEntered;
+@synthesize sliceExited = _sliceExited;
+@synthesize sliceEntryTime = _sliceEntryTime;
+
 
 +(id)spriteWithFile:(NSString *)filename body:(b2Body *)body original:(BOOL)original
 {
@@ -48,6 +54,12 @@
         CGPoint p = ccp(shape->GetVertex(i).x * PTM_RATIO, shape->GetVertex(i).y * PTM_RATIO);
         [points addObject:[NSValue valueWithCGPoint:p]];
     }
+    
+    _sliceExited = NO;
+    _sliceEntered = NO;
+    _entryPoint.SetZero();
+    _exitPoint.SetZero();
+    _sliceExited = 0;
     
     if ((self = [super initWithPoints:points andTexture:texture]))
     {
