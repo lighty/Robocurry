@@ -65,11 +65,9 @@
 }
 
 -(id) initWithPoints:(NSArray *)polygonPoints andTexture:(CCTexture2D *)fillTexture usingTriangulator: (id<PRTriangulator>) polygonTriangulator {
-    
     if( (self=[super init])) {
-
         self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
-		self.triangulator = polygonTriangulator;
+        self.triangulator = polygonTriangulator;
         
         [self setPoints:polygonPoints];
 		self.texture = fillTexture;
@@ -100,29 +98,28 @@
 }
 
 -(void) calculateTextureCoordinates {
-	for (int j = 0; j < areaTrianglePointCount; j++) {
-		textureCoordinates[j] = ccpMult(areaTrianglePoints[j], 1.0f/texture.pixelsWide*CC_CONTENT_SCALE_FACTOR());
+    for (int j = 0; j < areaTrianglePointCount; j++) {
+        textureCoordinates[j] = ccpMult(areaTrianglePoints[j], 1.0f/texture.pixelsWide*CC_CONTENT_SCALE_FACTOR());
         textureCoordinates[j].y = 1 - textureCoordinates[j].y;
-	}
+    }
 }
 
--(void) draw {
+-(void) draw{
     CC_NODE_DRAW_SETUP();
     
-    ccGLBindTexture2D( self.texture.name);
-    
+    ccGLBindTexture2D( self.texture.name );
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
-    ccGLBlendFunc(blendFunc.src, blendFunc.dst);
-    
-    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords);
-    
-    glVertexAttribPointer(kCCVertexAttribFlag_Position, 2, GL_FLOAT, GL_FALSE, 0, areaTrianglePoints);
-    glVertexAttribPointer(kCCVertexAttribFlag_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, textureCoordinates);
-    
-    glDrawArrays(GL_TRIANGLES, 0, areaTrianglePointCount);
+    ccGLBlendFunc( blendFunc.src, blendFunc.dst);
 	
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
+    
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, areaTrianglePoints);
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, 0, textureCoordinates);
+	
+    glDrawArrays(GL_TRIANGLES, 0, areaTrianglePointCount);
 }
 
 -(void) updateBlendFunc {
