@@ -29,6 +29,9 @@
 	GLESDebugDraw *m_debugDraw;		// strong ref
     
     CCArray *_cache;
+    
+    CGPoint _startPoint;
+    CGPoint _endPoint;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

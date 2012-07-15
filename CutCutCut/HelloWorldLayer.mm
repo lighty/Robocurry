@@ -160,6 +160,8 @@ enum {
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 	
 	kmGLPushMatrix();
+    
+    ccDrawLine(_startPoint, _endPoint);
 	
 	world->DrawDebugData();	
 	
@@ -189,6 +191,25 @@ enum {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 	}
+}
+
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for(UITouch *touch in touches){
+        CGPoint location = [touch locationInView:[touch view]];
+        location = [[CCDirector sharedDirector]convertToGL:location];
+        _startPoint = location;
+        _endPoint = location;
+    }
+}
+
+-(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for(UITouch *touch in touches){
+        CGPoint location = [touch locationInView:[touch view]];
+        location = [[CCDirector sharedDirector]convertToGL:location];
+        _endPoint = location;
+    }
 }
 
 #pragma mark GameKit delegate
