@@ -283,11 +283,11 @@ int comparetor(const void *a, const void *b) {
     sprite1VerticesSorted = [self arrangeVertices:sprite1Vertices count:sprite1VerticesCount];
     sprite2VerticesSorted = [self arrangeVertices:sprite2Vertices count:sprite2VerticesCount];
     
-//    CCLOG(@"sprite1VerticesCount:%d sprite2VerticesCount:%d",sprite1VerticesCount, sprite2VerticesCount);
-//    for (int i=0; i<sprite1VerticesCount; i++) {
-//        b2Vec2 b = sprite1VerticesSorted[i];
-//        CCLOG(@"sprite1VerticesSorted[%d] x:%d y:%d",i, b.x, b.y);
-//    }
+    CCLOG(@"sprite1VerticesCount:%d sprite2VerticesCount:%d",sprite1VerticesCount, sprite2VerticesCount);
+    for (int i=0; i<sprite1VerticesCount; i++) {
+        //b2Vec2 b = sprite1VerticesSorted[i];
+        CCLOG(@"sprite1VerticesSorted[%d] x:%f y:%F",i, sprite1VerticesSorted[i].x*PTM_RATIO, sprite1VerticesSorted[i].y*PTM_RATIO);
+    }
     
     // step4
     // Box2D has some restrictions with difining shapes, so you have to consider these.
@@ -349,6 +349,7 @@ int comparetor(const void *a, const void *b) {
 -(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2 *)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution
 {
     b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
     bodyDef.position = position;
     bodyDef.angle = rotation;
     b2Body *body = world->CreateBody(&bodyDef);
