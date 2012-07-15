@@ -27,6 +27,17 @@ enum {
 -(void) createMenu;
 @end
 
+int comparetor(const void *a, const void *b) {
+    const b2Vec2 *va = (const b2Vec2 *)a;
+    const b2Vec2 *vb = (const b2Vec2 *)b;
+    if (va->x > vb->x) {
+        return 1;
+    } else if (va->x < vb->x) {
+        return -1;
+    }
+    return 0;
+}
+
 @implementation HelloWorldLayer
 
 @synthesize cache = _cache;
@@ -54,7 +65,7 @@ enum {
 		
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
-		CGSize s = [CCDirector sharedDirector].winSize;
+		//CGSize s = [CCDirector sharedDirector].winSize;
 		
 		// init physics
 		[self initPhysics];
@@ -182,6 +193,7 @@ enum {
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);	
+    [self checkAndSliceObjects];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -271,6 +283,8 @@ enum {
     sprite1VerticesSorted = [self arrangeVertices:sprite1Vertices count:sprite1VerticesCount];
     sprite2VerticesSorted = [self arrangeVertices:sprite2Vertices count:sprite2VerticesCount];
     
+    CCLOG(@"1:%p 2:%p",sprite1VerticesSorted, sprite2VerticesSorted);
+    
     // step4
     // Box2D has some restrictions with difining shapes, so you have to consider these.
     // You only cut the shape if both shapes pass certain requirements from our function
@@ -328,6 +342,77 @@ enum {
     free(sprite2Vertices);
 }
 
+-(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2 *)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution
+{
+    b2BodyDef bodyDef;
+    bodyDef.position = position;
+    bodyDef.angle = rotation;
+    b2Body *body = world->CreateBody(&bodyDef);
+    
+    b2FixtureDef fixtureDef;
+    fixtureDef.density = density;
+    fixtureDef.friction = friction;
+    fixtureDef.restitution = restitution;
+    
+    b2PolygonShape shape;
+    shape.Set(vertices, count);
+    fixtureDef.shape = &shape;
+    body->CreateFixture(&fixtureDef);
+    
+    return body;
+}
+
+-(b2Vec2*)arrangeVertices:(b2Vec2 *)vertices count:(int)count
+{
+    float determinant;
+    int iCounterClockWise = 1;
+    int iClockWise = count - 1;
+    int i;
+    
+    b2Vec2 referencePointA,referencePointB;
+    b2Vec2 *sortedVertices = (b2Vec2*)calloc(count, sizeof(b2Vec2));
+    
+    qsort(vertices, count, sizeof(b2Vec2), comparetor);
+    
+    sortedVertices[0] = vertices[0];
+    referencePointA = vertices[0];
+    referencePointB = vertices[count-1];
+    
+    for (i=1; i<count-1; i++) {
+        determinant = calculate_determinant_2x3(referencePointA.x, referencePointA.y, referencePointB.x, referencePointB.y, vertices[i].x, vertices[i].y);
+        if (determinant <0) {
+            sortedVertices[iCounterClockWise++] = vertices[i];
+        } else {
+            sortedVertices[iClockWise--] = vertices[i];
+        }
+    }
+    
+    sortedVertices[iCounterClockWise] = vertices[count-1];
+    return sortedVertices;
+}
+
+-(BOOL)areVerticesAcceptable:(b2Vec2 *)vertices count:(int)count
+{
+    return YES;
+}
+
+-(void)checkAndSliceObjects
+{
+    double curTime = CACurrentMediaTime();
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            PolygonSprite *sprite = (PolygonSprite*)b->GetUserData();
+            
+            if (sprite.sliceEntered && curTime > sprite.sliceEntryTime) {
+                sprite.sliceEntered = NO;
+            }
+            else if (sprite.sliceEntered && sprite.sliceExited)
+            {
+                [self splitPolygonSprite:sprite];
+            }
+        }
+    }
+}
 
 #pragma mark GameKit delegate
 
