@@ -60,6 +60,7 @@ enum {
 		[self initPhysics];
 		
         [self initSprites];
+        _rayCastCallback = new RayCastCallback();
         
 		[self scheduleUpdate];
 	}
@@ -191,6 +192,8 @@ enum {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 	}
+    world->RayCast(_rayCastCallback, b2Vec2(_startPoint.x/PTM_RATIO, _startPoint.y/PTM_RATIO), b2Vec2(_endPoint.x/PTM_RATIO, _endPoint.y/PTM_RATIO));
+    world->RayCast(_rayCastCallback, b2Vec2(_endPoint.x/PTM_RATIO, _endPoint.y/PTM_RATIO), b2Vec2(_startPoint.x/PTM_RATIO, _startPoint.y/PTM_RATIO));
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
