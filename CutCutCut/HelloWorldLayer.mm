@@ -142,33 +142,33 @@ int comparetor(const void *a, const void *b) {
 	
 	
 	// Define the ground body.
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0, 0); // bottom-left corner
+//	b2BodyDef groundBodyDef;
+//	groundBodyDef.position.Set(0, 0); // bottom-left corner
 	
 	// Call the body factory which allocates memory for the ground body
 	// from a pool and creates the ground box shape (also from a pool).
 	// The body is also added to the world.
-	b2Body* groundBody = world->CreateBody(&groundBodyDef);
+//	b2Body* groundBody = world->CreateBody(&groundBodyDef);
 	
 	// Define the ground box shape.
-	b2EdgeShape groundBox;		
+//	b2EdgeShape groundBox;		
 	
 	// bottom
 	
-	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
-	groundBody->CreateFixture(&groundBox,0);
-	
-	// top
-	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
-	groundBody->CreateFixture(&groundBox,0);
-	
-	// left
-	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(0,0));
-	groundBody->CreateFixture(&groundBox,0);
-	
-	// right
-	groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
-	groundBody->CreateFixture(&groundBox,0);
+//	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
+//	groundBody->CreateFixture(&groundBox,0);
+//	
+//	// top
+//	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
+//	groundBody->CreateFixture(&groundBox,0);
+//	
+//	// left
+//	groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(0,0));
+//	groundBody->CreateFixture(&groundBox,0);
+//	
+//	// right
+//	groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
+//	groundBody->CreateFixture(&groundBox,0);
 }
 
 -(void) draw

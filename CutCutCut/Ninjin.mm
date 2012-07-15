@@ -27,7 +27,7 @@
     CGSize screen = [[CCDirector sharedDirector] winSize];
     
     b2Body *body = [self createBodyForWorld:world
-                                   position:b2Vec2(screen.width/2/PTM_RATIO, screen.height/2/PTM_RATIO) 
+                                   position:b2Vec2(screen.width/2/PTM_RATIO, screen.height/4/PTM_RATIO) 
                                    rotation:0
                                    vertices:vertices
                                 vertexCount:count
