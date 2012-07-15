@@ -204,8 +204,7 @@ int comparetor(const void *a, const void *b) {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 	}
-    world->RayCast(_rayCastCallback, b2Vec2(_startPoint.x/PTM_RATIO, _startPoint.y/PTM_RATIO), b2Vec2(_endPoint.x/PTM_RATIO, _endPoint.y/PTM_RATIO));
-    world->RayCast(_rayCastCallback, b2Vec2(_endPoint.x/PTM_RATIO, _endPoint.y/PTM_RATIO), b2Vec2(_startPoint.x/PTM_RATIO, _startPoint.y/PTM_RATIO));
+    [self clearSlices];
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -225,6 +224,17 @@ int comparetor(const void *a, const void *b) {
         location = [[CCDirector sharedDirector]convertToGL:location];
         _endPoint = location;
     }
+    
+    if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25) {
+        world->RayCast(_rayCastCallback, 
+                       b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
+                       b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
+        world->RayCast(_rayCastCallback, 
+                       b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO),
+                       b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO));
+        _startPoint = _endPoint;
+    }
+    
 }
 
 -(void)splitPolygonSprite:(PolygonSprite *)sprite
@@ -415,6 +425,17 @@ int comparetor(const void *a, const void *b) {
             {
                 [self splitPolygonSprite:sprite];
             }
+        }
+    }
+}
+
+-(void)clearSlices
+{
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            PolygonSprite *sprite = (PolygonSprite*)b->GetUserData();
+            sprite.sliceEntered = NO;
+            sprite.sliceExited = NO;
         }
     }
 }
