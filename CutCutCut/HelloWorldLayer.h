@@ -5,7 +5,8 @@
 //  Created by 光 渡邊 on 12/07/08.
 //  Copyright __MyCompanyName__ 2012年. All rights reserved.
 //
-
+#define calculate_determinant_2x2(x1,y1,x2,y2) x1*y2-y1*x2
+#define calculate_determinant_2x3(x1,y1,x2,y2,x3,y3) x1*y2+x2*y3+x3*y1-y1*x2-y2*x3-y3*x1
 
 #import <GameKit/GameKit.h>
 
@@ -41,6 +42,11 @@
 +(CCScene *) scene;
 
 @property(nonatomic,retain)CCArray *cache;
+
+-(b2Vec2*)arrangeVertices:(b2Vec2*)vertices count:(int)count;
+-(void)splitPolygonSprite:(PolygonSprite*)sprite;
+-(BOOL)areVerticesAcceptable:(b2Vec2*)vertices count:(int)count;
+-(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
 
 @end
 
