@@ -406,8 +406,84 @@ int comparetor(const void *a, const void *b) {
     return sortedVertices;
 }
 
--(BOOL)areVerticesAcceptable:(b2Vec2 *)vertices count:(int)count
+-(BOOL)areVerticesAcceptable:(b2Vec2*)vertices count:(int)count
 {
+    //check 1: polygons need to at least have 3 vertices
+    if (count < 3)
+    {
+        return NO;
+    }
+    
+    //check 2: the number of vertices cannot exceed b2_maxPolygonVertices
+    if (count > b2_maxPolygonVertices)
+    {
+        return NO;
+    }
+    
+    //check 3: Box2D needs the distance from each vertex to be greater than b2_epsilon
+    int32 i;
+    for (i=0; i<count; ++i)
+    {
+        int32 i1 = i;
+        int32 i2 = i + 1 < count ? i + 1 : 0;
+        b2Vec2 edge = vertices[i2] - vertices[i1];
+        if (edge.LengthSquared() <= b2_epsilon * b2_epsilon)
+        {
+            return NO;
+        }
+    }
+    
+    //check 4: Box2D needs the area of a polygon to be greater than b2_epsilon
+    float32 area = 0.0f;
+    
+    b2Vec2 pRef(0.0f,0.0f);
+    
+    for (i=0; i<count; ++i)
+    {
+        b2Vec2 p1 = pRef;
+        b2Vec2 p2 = vertices[i];
+        b2Vec2 p3 = i + 1 < count ? vertices[i+1] : vertices[0];
+        
+        b2Vec2 e1 = p2 - p1;
+        b2Vec2 e2 = p3 - p1;
+        
+        float32 D = b2Cross(e1, e2);
+        
+        float32 triangleArea = 0.5f * D;
+        area += triangleArea;
+    }
+    
+    if (area <= 0.0001)
+    {
+        return NO;
+    }
+    
+    //check 5: Box2D requires that the shape be Convex.
+    float determinant;
+    float referenceDeterminant;
+    b2Vec2 v1 = vertices[0] - vertices[count-1];
+    b2Vec2 v2 = vertices[1] - vertices[0];
+    referenceDeterminant = calculate_determinant_2x2(v1.x, v1.y, v2.x, v2.y);
+    
+    for (i=1; i<count-1; i++)
+    {
+        v1 = v2;
+        v2 = vertices[i+1] - vertices[i];
+        determinant = calculate_determinant_2x2(v1.x, v1.y, v2.x, v2.y);
+        //you use the determinant to check direction from one point to another. A convex shape's points should only go around in one direction. The sign of the determinant determines that direction. If the sign of the determinant changes mid-way, then you have a concave shape.
+        if (referenceDeterminant * determinant < 0.0f)
+        {
+            //if multiplying two determinants result to a negative value, you know that the sign of both numbers differ, hence it is concave
+            return NO;
+        }
+    }
+    v1 = v2;
+    v2 = vertices[0]-vertices[count-1];
+    determinant = calculate_determinant_2x2(v1.x, v1.y, v2.x, v2.y);
+    if (referenceDeterminant * determinant < 0.0f)
+    {
+        return NO;
+    }
     return YES;
 }
 
