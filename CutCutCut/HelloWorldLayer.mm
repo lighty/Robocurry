@@ -252,8 +252,8 @@ int comparetor(const void *a, const void *b) {
     // the entry and exit point of our cut are considered vertices of our two new sprites, so you add these before anything else
     sprite1Vertices[sprite1VerticesCount++] = sprite.entryPoint;
     sprite1Vertices[sprite1VerticesCount++] = sprite.exitPoint;
-    sprite2Vertices[sprite1VerticesCount++] = sprite.entryPoint;
-    sprite2Vertices[sprite1VerticesCount++] = sprite.exitPoint;
+    sprite2Vertices[sprite2VerticesCount++] = sprite.entryPoint;
+    sprite2Vertices[sprite2VerticesCount++] = sprite.exitPoint;
 
     // step2
     // iterate through all the vertices and add them to each sprite's shape
@@ -283,7 +283,11 @@ int comparetor(const void *a, const void *b) {
     sprite1VerticesSorted = [self arrangeVertices:sprite1Vertices count:sprite1VerticesCount];
     sprite2VerticesSorted = [self arrangeVertices:sprite2Vertices count:sprite2VerticesCount];
     
-    CCLOG(@"1:%p 2:%p",sprite1VerticesSorted, sprite2VerticesSorted);
+//    CCLOG(@"sprite1VerticesCount:%d sprite2VerticesCount:%d",sprite1VerticesCount, sprite2VerticesCount);
+//    for (int i=0; i<sprite1VerticesCount; i++) {
+//        b2Vec2 b = sprite1VerticesSorted[i];
+//        CCLOG(@"sprite1VerticesSorted[%d] x:%d y:%d",i, b.x, b.y);
+//    }
     
     // step4
     // Box2D has some restrictions with difining shapes, so you have to consider these.
