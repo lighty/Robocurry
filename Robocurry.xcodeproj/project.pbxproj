@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD3D987A15B3598D00A60998 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg.png */; };
+		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
+		CD8CF4B515B3658C00C7B247 /* ninjin-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin-hd.png */; };
+		CD8CF4B915B3662F00C7B247 /* ninjin.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B815B3662B00C7B247 /* ninjin.png */; };
 		CDF3CBA115A9695400418612 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA015A9695400418612 /* QuartzCore.framework */; };
 		CDF3CBA315A9695400418612 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA215A9695400418612 /* OpenGLES.framework */; };
 		CDF3CBA515A9695400418612 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA415A9695400418612 /* OpenAL.framework */; };
@@ -187,7 +191,6 @@
 		CDF3CE3915A9E19300418612 /* banana-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */; };
 		CDF3CE3A15A9E19300418612 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1D15A9E19300418612 /* banana.png */; };
 		CDF3CE3B15A9E19300418612 /* bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1E15A9E19300418612 /* bg-hd.png */; };
-		CDF3CE3C15A9E19300418612 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE1F15A9E19300418612 /* bg.png */; };
 		CDF3CE3D15A9E19300418612 /* bomb-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2015A9E19300418612 /* bomb-hd.png */; };
 		CDF3CE3E15A9E19300418612 /* bomb-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */; };
 		CDF3CE3F15A9E19300418612 /* bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE2215A9E19300418612 /* bomb.png */; };
@@ -215,7 +218,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CDF3CB9C15A9695400418612 /* CutCutCut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CutCutCut.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3D987915B3598C00A60998 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CD3D988015B35D6E00A60998 /* Ninjin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ninjin.h; sourceTree = "<group>"; };
+		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
+		CD8CF4B415B3658B00C7B247 /* ninjin-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ninjin-hd.png"; sourceTree = "<group>"; };
+		CD8CF4B815B3662B00C7B247 /* ninjin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin.png; sourceTree = "<group>"; };
+		CDF2195915B24EC3001F11D9 /* RayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayCastCallback.h; sourceTree = "<group>"; };
+		CDF3CB9C15A9695400418612 /* Robocurry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Robocurry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF3CBA015A9695400418612 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDF3CBA215A9695400418612 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		CDF3CBA415A9695400418612 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -586,7 +595,6 @@
 		CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banana-ipadhd.png"; sourceTree = "<group>"; };
 		CDF3CE1D15A9E19300418612 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
 		CDF3CE1E15A9E19300418612 /* bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-hd.png"; sourceTree = "<group>"; };
-		CDF3CE1F15A9E19300418612 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		CDF3CE2015A9E19300418612 /* bomb-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-hd.png"; sourceTree = "<group>"; };
 		CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bomb-ipadhd.png"; sourceTree = "<group>"; };
 		CDF3CE2215A9E19300418612 /* bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bomb.png; sourceTree = "<group>"; };
@@ -655,7 +663,7 @@
 		CDF3CB9D15A9695400418612 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDF3CB9C15A9695400418612 /* CutCutCut.app */,
+				CDF3CB9C15A9695400418612 /* Robocurry.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -683,6 +691,7 @@
 				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
 				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
 				CDF3CE5515A9E24100418612 /* Banana.h */,
+				CDF2195915B24EC3001F11D9 /* RayCastCallback.h */,
 				CDF3CE5615A9E24100418612 /* Banana.mm */,
 				CDF3CE5715A9E24100418612 /* Bomb.h */,
 				CDF3CE5815A9E24100418612 /* Bomb.mm */,
@@ -690,6 +699,8 @@
 				CDF3CE5A15A9E24200418612 /* Grapes.mm */,
 				CDF3CE5B15A9E24200418612 /* Pineapple.h */,
 				CDF3CE5C15A9E24200418612 /* Pineapple.mm */,
+				CD3D988015B35D6E00A60998 /* Ninjin.h */,
+				CD3D988115B35D6E00A60998 /* Ninjin.mm */,
 				CDF3CE5D15A9E24200418612 /* Strawberry.h */,
 				CDF3CE5E15A9E24200418612 /* Strawberry.mm */,
 				CDF3CDDC15A9DD3D00418612 /* Watermelon.h */,
@@ -1246,12 +1257,14 @@
 		CDF3CE1A15A9E19200418612 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CD8CF4B415B3658B00C7B247 /* ninjin-hd.png */,
+				CD8CF4B815B3662B00C7B247 /* ninjin.png */,
+				CD3D987915B3598C00A60998 /* bg.png */,
 				CDF3CE3315A9E19300418612 /* watermelon.png */,
 				CDF3CE1B15A9E19300418612 /* banana-hd.png */,
 				CDF3CE1C15A9E19300418612 /* banana-ipadhd.png */,
 				CDF3CE1D15A9E19300418612 /* banana.png */,
 				CDF3CE1E15A9E19300418612 /* bg-hd.png */,
-				CDF3CE1F15A9E19300418612 /* bg.png */,
 				CDF3CE2015A9E19300418612 /* bomb-hd.png */,
 				CDF3CE2115A9E19300418612 /* bomb-ipadhd.png */,
 				CDF3CE2215A9E19300418612 /* bomb.png */,
@@ -1282,9 +1295,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CDF3CB9B15A9695400418612 /* CutCutCut */ = {
+		CDF3CB9B15A9695400418612 /* Robocurry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CDF3CDCB15A9695800418612 /* Build configuration list for PBXNativeTarget "CutCutCut" */;
+			buildConfigurationList = CDF3CDCB15A9695800418612 /* Build configuration list for PBXNativeTarget "Robocurry" */;
 			buildPhases = (
 				CDF3CB9815A9695400418612 /* Sources */,
 				CDF3CB9915A9695400418612 /* Frameworks */,
@@ -1294,9 +1307,9 @@
 			);
 			dependencies = (
 			);
-			name = CutCutCut;
+			name = Robocurry;
 			productName = CutCutCut;
-			productReference = CDF3CB9C15A9695400418612 /* CutCutCut.app */;
+			productReference = CDF3CB9C15A9695400418612 /* Robocurry.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1307,7 +1320,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = CDF3CB9615A9695400418612 /* Build configuration list for PBXProject "CutCutCut" */;
+			buildConfigurationList = CDF3CB9615A9695400418612 /* Build configuration list for PBXProject "Robocurry" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1319,7 +1332,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDF3CB9B15A9695400418612 /* CutCutCut */,
+				CDF3CB9B15A9695400418612 /* Robocurry */,
 			);
 		};
 /* End PBXProject section */
@@ -1346,7 +1359,6 @@
 				CDF3CE3915A9E19300418612 /* banana-ipadhd.png in Resources */,
 				CDF3CE3A15A9E19300418612 /* banana.png in Resources */,
 				CDF3CE3B15A9E19300418612 /* bg-hd.png in Resources */,
-				CDF3CE3C15A9E19300418612 /* bg.png in Resources */,
 				CDF3CE3D15A9E19300418612 /* bomb-hd.png in Resources */,
 				CDF3CE3E15A9E19300418612 /* bomb-ipadhd.png in Resources */,
 				CDF3CE3F15A9E19300418612 /* bomb.png in Resources */,
@@ -1371,6 +1383,9 @@
 				CDF3CE5215A9E19300418612 /* x_filled.png in Resources */,
 				CDF3CE5315A9E19300418612 /* x_unfilled-hd.png in Resources */,
 				CDF3CE5415A9E19300418612 /* x_unfilled.png in Resources */,
+				CD3D987A15B3598D00A60998 /* bg.png in Resources */,
+				CD8CF4B515B3658C00C7B247 /* ninjin-hd.png in Resources */,
+				CD8CF4B915B3662F00C7B247 /* ninjin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1535,6 +1550,7 @@
 				CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */,
 				CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */,
 				CDF3CDDE15A9DD3D00418612 /* Watermelon.mm in Sources */,
+				CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1595,7 +1611,7 @@
 					"-lz",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Robocurry;
 				USER_HEADER_SEARCH_PATHS = "\"CutCutCut/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1614,7 +1630,7 @@
 					"-lz",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Robocurry;
 				USER_HEADER_SEARCH_PATHS = "\"CutCutCut/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1624,7 +1640,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CDF3CB9615A9695400418612 /* Build configuration list for PBXProject "CutCutCut" */ = {
+		CDF3CB9615A9695400418612 /* Build configuration list for PBXProject "Robocurry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF3CDC915A9695800418612 /* Debug */,
@@ -1633,13 +1649,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CDF3CDCB15A9695800418612 /* Build configuration list for PBXNativeTarget "CutCutCut" */ = {
+		CDF3CDCB15A9695800418612 /* Build configuration list for PBXNativeTarget "Robocurry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF3CDCC15A9695800418612 /* Debug */,
 				CDF3CDCD15A9695800418612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

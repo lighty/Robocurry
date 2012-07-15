@@ -14,9 +14,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CDF3CB9B15A9695400418612"
-               BuildableName = "CutCutCut.app"
-               BlueprintName = "CutCutCut"
-               ReferencedContainer = "container:CutCutCut.xcodeproj">
+               BuildableName = "Robocurry.app"
+               BlueprintName = "Robocurry"
+               ReferencedContainer = "container:Robocurry.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,9 +32,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDF3CB9B15A9695400418612"
-            BuildableName = "CutCutCut.app"
-            BlueprintName = "CutCutCut"
-            ReferencedContainer = "container:CutCutCut.xcodeproj">
+            BuildableName = "Robocurry.app"
+            BlueprintName = "Robocurry"
+            ReferencedContainer = "container:Robocurry.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,9 +51,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDF3CB9B15A9695400418612"
-            BuildableName = "CutCutCut.app"
-            BlueprintName = "CutCutCut"
-            ReferencedContainer = "container:CutCutCut.xcodeproj">
+            BuildableName = "Robocurry.app"
+            BlueprintName = "Robocurry"
+            ReferencedContainer = "container:Robocurry.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDF3CB9B15A9695400418612"
-            BuildableName = "CutCutCut.app"
-            BlueprintName = "CutCutCut"
-            ReferencedContainer = "container:CutCutCut.xcodeproj">
+            BuildableName = "Robocurry.app"
+            BlueprintName = "Robocurry"
+            ReferencedContainer = "container:Robocurry.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

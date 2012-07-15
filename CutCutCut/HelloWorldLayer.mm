@@ -92,8 +92,8 @@ int comparetor(const void *a, const void *b) {
     _cache = [[CCArray alloc] initWithCapacity:53];
     
     // Just create one sprite for now. This whole method will be replaced later.
-    //PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
-    PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
+    PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
+    //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
     [self addChild:sprite z:1];
     [sprite activateCollisions];
     [_cache addObject:sprite];    

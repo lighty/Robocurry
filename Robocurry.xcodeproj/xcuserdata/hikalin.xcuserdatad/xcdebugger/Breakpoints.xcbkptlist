@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/PolygonSprite.h"
-         timestampString = "363447031.127233"
+         timestampString = "363950702.700314"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "-createBodyForWorld:position:rotation:vertices:vertexCount:density:friction:restitution:"
          landmarkType = "4">
       </FileBreakpoint>
@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/HelloWorldLayer.mm"
-         timestampString = "363455609.060226"
+         timestampString = "364076920.181905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
-         landmarkName = "-initSprites"
+         startingLineNumber = "110"
+         endingLineNumber = "110"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/HelloWorldLayer.mm"
-         timestampString = "363455610.637817"
+         timestampString = "364076920.181905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
-         landmarkName = "-initSprites"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -47,12 +47,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/HelloWorldLayer.mm"
-         timestampString = "363455663.033501"
+         timestampString = "364076920.181905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
-         landmarkName = "-initSprites"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/PolygonSprite.mm"
-         timestampString = "363455745.439404"
+         timestampString = "363950702.700314"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
          landmarkName = "-initWithTexture:body:original:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/PolygonSprite.mm"
-         timestampString = "363455763.509554"
+         timestampString = "363950702.700314"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "-initWithTexture:body:original:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -92,6 +92,19 @@
          startingLineNumber = "110"
          endingLineNumber = "110"
          landmarkName = "-draw"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CutCutCut/HelloWorldLayer.mm"
+         timestampString = "364076920.181905"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "364"
+         endingLineNumber = "364"
+         landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

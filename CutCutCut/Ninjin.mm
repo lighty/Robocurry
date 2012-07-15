@@ -13,15 +13,16 @@
 
 -(id)initWithWorld:(b2World*)world
 {
-    int count = 6;
-    NSString* file = @"ninjin_200x.png";
+    int count = 7;
+    NSString* file = @"ninjin-hd.png";
     b2Vec2 vertices[] = {
-        b2Vec2(-26.5f / PTM_RATIO, 47.7f / PTM_RATIO),
-        b2Vec2(-37.1f / PTM_RATIO, 29.3f / PTM_RATIO),
-        b2Vec2(-4.6f / PTM_RATIO, -90.9f / PTM_RATIO),
-        b2Vec2(8.8f / PTM_RATIO, -93.7f / PTM_RATIO),
-        b2Vec2(39.2f / PTM_RATIO, 31.5f / PTM_RATIO),
-        b2Vec2(27.2f / PTM_RATIO, 47.7f / PTM_RATIO)
+        b2Vec2(37.2 / PTM_RATIO, 240.4 / PTM_RATIO),
+        b2Vec2(14.0 / PTM_RATIO, 193.0 / PTM_RATIO),
+        b2Vec2(14.0 / PTM_RATIO, 169.0 / PTM_RATIO),
+        b2Vec2(44.0 / PTM_RATIO, 64.0 / PTM_RATIO),
+        b2Vec2(64.0 / PTM_RATIO, 69.0 / PTM_RATIO),
+        b2Vec2(89.0 / PTM_RATIO, 183.0 / PTM_RATIO),
+        b2Vec2(69.0 / PTM_RATIO, 238.0 / PTM_RATIO)
     };
     CGSize screen = [[CCDirector sharedDirector] winSize];
     
