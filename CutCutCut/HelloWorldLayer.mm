@@ -74,10 +74,18 @@ int comparetor(const void *a, const void *b) {
         _rayCastCallback = new RayCastCallback();
         
 		[self scheduleUpdate];
+
+        [self initBackground];
 	}
 	return self;
 }
-
+-(void)initBackground
+{
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    CCSprite *background = [CCSprite spriteWithFile:@"bg.png"];
+    background.position = ccp(screen.width/2,screen.height/2);
+    [self addChild:background z:0];
+}
 -(void)initSprites
 {
     _cache = [[CCArray alloc] initWithCapacity:53];
@@ -173,9 +181,9 @@ int comparetor(const void *a, const void *b) {
 	
 	kmGLPushMatrix();
     
-    ccDrawLine(_startPoint, _endPoint);
-	
-	world->DrawDebugData();	
+//    ccDrawLine(_startPoint, _endPoint);
+//	
+//	world->DrawDebugData();	
 	
 	kmGLPopMatrix();
 }
