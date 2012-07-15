@@ -6,6 +6,7 @@
 //  Copyright __MyCompanyName__ 2012年. All rights reserved.
 //
 
+#import "Ninjin.h"
 #import "Watermelon.h"
 
 // Import the interfaces
@@ -83,7 +84,7 @@ int comparetor(const void *a, const void *b) {
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
     CCSprite *background = [CCSprite spriteWithFile:@"bg.png"];
-    background.position = ccp(screen.width/2,screen.height/2);
+    background.position = ccp(screen.width/2 + 1,screen.height/2 + 1);
     [self addChild:background z:0];
 }
 -(void)initSprites
@@ -91,6 +92,7 @@ int comparetor(const void *a, const void *b) {
     _cache = [[CCArray alloc] initWithCapacity:53];
     
     // Just create one sprite for now. This whole method will be replaced later.
+    //PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
     PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
     [self addChild:sprite z:1];
     [sprite activateCollisions];
@@ -117,7 +119,8 @@ int comparetor(const void *a, const void *b) {
 	CGSize s = [[CCDirector sharedDirector] winSize];
 	
 	b2Vec2 gravity;
-	gravity.Set(0.0f, -10.0f);
+	//gravity.Set(0.0f, -10.0f);
+	gravity.Set(0.0f, 0.0f);
 	world = new b2World(gravity);
 	
 	
