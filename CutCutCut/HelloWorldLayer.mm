@@ -7,6 +7,7 @@
 //
 
 #import "Ninjin.h"
+#import "Potato.h"
 //#import "Watermelon.h"
 
 // Import the interfaces
@@ -97,6 +98,12 @@ int comparetor(const void *a, const void *b) {
     [self addChild:sprite z:1];
     [sprite deactivateCollisions];
     [_cache addObject:sprite];    
+
+    PolygonSprite *sprite2 = [[Potato alloc] initWithWorld:world];
+    [self addChild:sprite2 z:1];
+    [sprite2 deactivateCollisions];
+    [_cache addObject:sprite2];    
+
 }
 
 -(void) dealloc
