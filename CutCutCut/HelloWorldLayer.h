@@ -27,6 +27,7 @@
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
+#define NABE_SPEED 2
 
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
@@ -44,9 +45,14 @@
     RayCastCallback *_rayCastCallback;
     
     b2MouseJoint *_mouseJoint;
+    
+    // 野菜を画面外からpushするための変数
     double _nextPushTime;
     double _pushInterval;
     int _tmPushCount;
+    
+    // ナベを画面下からズズッとするための変数
+    BOOL _isNabeMoving;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

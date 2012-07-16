@@ -81,6 +81,15 @@ int comparetor(const void *a, const void *b) {
         
         _nextPushTime = CACurrentMediaTime() + 1;
         
+        [self initNabe];
+        
+        _isNabeMoving = NO;
+        [NSTimer scheduledTimerWithTimeInterval:10.0 // 時間間隔(秒)
+                                         target:self //呼び出すオブジェクト
+                                       selector:@selector(updateNabe:)
+                                       userInfo:nil
+                                        repeats:NO];
+        
 	}
 	return self;
 }
@@ -89,8 +98,35 @@ int comparetor(const void *a, const void *b) {
     CGSize screen = [[CCDirector sharedDirector] winSize];
     CCSprite *background = [CCSprite spriteWithFile:@"bg.png"];
     background.position = ccp(screen.width/2 + 1,screen.height/2 + 1);
-    [self addChild:background z:0];
+    [self addChild:background z:-1];
 }
+
+-(void)initNabe
+{
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
+    nabe.position = ccp(screen.width/2,-64);
+    // ナベのタグをどっかに定義したい
+    [self addChild:nabe z:0 tag:1];
+}
+
+-(void)updateNabe:(ccTime *)timer
+{
+    _isNabeMoving = YES;
+}
+
+-(void)moveNabe
+{
+    if (_isNabeMoving) {
+        CCSprite* nabe;
+        nabe = (CCSprite*)[self getChildByTag:1];
+        nabe.position = ccp(nabe.position.x, nabe.position.y+NABE_SPEED);
+        if(nabe.position.y > 64){
+            _isNabeMoving = false;
+        }
+    }
+}
+
 -(void)initSprites
 {
     _cache = [[CCArray alloc] initWithCapacity:5];
@@ -224,6 +260,8 @@ int comparetor(const void *a, const void *b) {
 	world->Step(dt, velocityIterations, positionIterations);	
     [self checkAndSliceObjects];
     [self spriteLoop];
+    [self moveNabe];
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
