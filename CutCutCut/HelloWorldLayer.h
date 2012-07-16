@@ -36,6 +36,9 @@
     CGPoint _endPoint;
     
     RayCastCallback *_rayCastCallback;
+    
+    b2MouseJoint *_mouseJoint;
+    
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

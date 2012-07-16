@@ -158,4 +158,21 @@
 	return transform_;
 }
 
+-(b2MouseJoint*)testPointWithLocation:(b2Vec2)location groundBody:(b2Body *)groundBody world:(b2World *)world
+{
+    for (b2Fixture* f = _body->GetFixtureList(); f; f->GetNext()) {
+        // 1回しかループしない想定...
+        if (f->TestPoint(location)) {
+            b2MouseJointDef md;
+            md.bodyA = groundBody;
+            md.bodyB = _body;
+            md.target = location;
+            md.collideConnected = true;
+            md.maxForce = 1000.0f * _body->GetMass();
+            _body->SetAwake(true);
+            return (b2MouseJoint *)world->CreateJoint(&md);
+        }
+    }
+}
+
 @end

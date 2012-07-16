@@ -43,4 +43,6 @@
 -(b2Body*)createBodyForWorld:(b2World*)world position:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
 -(void)activateCollisions;
 -(void)deactivateCollisions;
+-(b2MouseJoint*)testPointWithLocation:(b2Vec2)location groundBody:(b2Body*)groundBody world:(b2World*)world;
+
 @end

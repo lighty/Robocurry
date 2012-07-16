@@ -226,6 +226,7 @@ int comparetor(const void *a, const void *b) {
         _startPoint = location;
         _endPoint = location;
     }
+    
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
