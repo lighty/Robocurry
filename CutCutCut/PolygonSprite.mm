@@ -164,7 +164,7 @@
         // 1回しかループしない想定...
         //CCLOG(@"location.x:%f location.y:%f", location.x, location.y);
         if (f->TestPoint(location)) {
-            CCLOG(@"testPoint");
+            //CCLOG(@"testPoint");
             b2MouseJointDef md;
             md.bodyA = groundBody;
             md.bodyB = _body;

@@ -95,7 +95,7 @@ int comparetor(const void *a, const void *b) {
     PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
     //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
     [self addChild:sprite z:1];
-    [sprite activateCollisions];
+    [sprite deactivateCollisions];
     [_cache addObject:sprite];    
 }
 
@@ -236,14 +236,14 @@ int comparetor(const void *a, const void *b) {
         CCNode* node;
         CCARRAY_FOREACH([self children], node){
             if ([node isKindOfClass:[PolygonSprite class]]) {
-                CCLOG(@"startTest:%p",_mouseJoint);
+                //CCLOG(@"startTest:%p",_mouseJoint);
                 _mouseJoint = [(PolygonSprite*)node testPointWithLocation:b2Vec2(location.x / PTM_RATIO, location.y / PTM_RATIO) 
                                                  groundBody:groundBody 
                                                       world:world];
                 if(_mouseJoint){
                     break;
                 }
-                CCLOG(@"endTest:%p", _mouseJoint);
+                //CCLOG(@"endTest:%p", _mouseJoint);
             }
         }
     }
@@ -282,7 +282,6 @@ int comparetor(const void *a, const void *b) {
         _mouseJoint = NULL;
     }
 }
-
 
 
 -(void)splitPolygonSprite:(PolygonSprite *)sprite
@@ -341,12 +340,6 @@ int comparetor(const void *a, const void *b) {
     sprite1VerticesSorted = [self arrangeVertices:sprite1Vertices count:sprite1VerticesCount];
     sprite2VerticesSorted = [self arrangeVertices:sprite2Vertices count:sprite2VerticesCount];
     
-    CCLOG(@"sprite1VerticesCount:%d sprite2VerticesCount:%d",sprite1VerticesCount, sprite2VerticesCount);
-    for (int i=0; i<sprite1VerticesCount; i++) {
-        //b2Vec2 b = sprite1VerticesSorted[i];
-        CCLOG(@"sprite1VerticesSorted[%d] x:%f y:%F",i, sprite1VerticesSorted[i].x*PTM_RATIO, sprite1VerticesSorted[i].y*PTM_RATIO);
-    }
-    
     // step4
     // Box2D has some restrictions with difining shapes, so you have to consider these.
     // You only cut the shape if both shapes pass certain requirements from our function
@@ -367,6 +360,7 @@ int comparetor(const void *a, const void *b) {
         // create the first sprite
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:1];
+        [newSprite1 deactivateCollisions];
         
         // create the second sprite's body
         b2Body *body2 = [self createBodyWithPosition:sprite.body->GetPosition() 
@@ -379,6 +373,7 @@ int comparetor(const void *a, const void *b) {
         // create the second sprite
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:1];
+        [newSprite2 deactivateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
         if (sprite.original) {
