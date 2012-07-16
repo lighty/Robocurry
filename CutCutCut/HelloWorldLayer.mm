@@ -7,7 +7,7 @@
 //
 
 #import "Ninjin.h"
-#import "Watermelon.h"
+//#import "Watermelon.h"
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
