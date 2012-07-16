@@ -148,7 +148,7 @@
 	if( ! CGPointEqualToPoint(anchorPointInPoints_, CGPointZero) ){
 		x += c*-anchorPointInPoints_.x + -s*-anchorPointInPoints_.y;
 		y += s*-anchorPointInPoints_.x + c*-anchorPointInPoints_.y;
-	}
+	}   
 	
 	// Rot, Translate Matrix
 	transform_ = CGAffineTransformMake( c,  s,
@@ -160,9 +160,11 @@
 
 -(b2MouseJoint*)testPointWithLocation:(b2Vec2)location groundBody:(b2Body *)groundBody world:(b2World *)world
 {
-    for (b2Fixture* f = _body->GetFixtureList(); f; f->GetNext()) {
+    for (b2Fixture* f = _body->GetFixtureList(); f;f = f->GetNext()) {
         // 1回しかループしない想定...
+        CCLOG(@"location.x:%f location.y:%f", location.x, location.y);
         if (f->TestPoint(location)) {
+            CCLOG(@"testPoint");
             b2MouseJointDef md;
             md.bodyA = groundBody;
             md.bodyB = _body;
@@ -173,6 +175,7 @@
             return (b2MouseJoint *)world->CreateJoint(&md);
         }
     }
+    return nil;
 }
 
 @end

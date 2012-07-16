@@ -28,7 +28,9 @@
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
 	b2World* world;					// strong ref
+    b2Body* groundBody;
 	GLESDebugDraw *m_debugDraw;		// strong ref
+    
     
     CCArray *_cache;
     

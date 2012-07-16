@@ -142,13 +142,13 @@ int comparetor(const void *a, const void *b) {
 	
 	
 	// Define the ground body.
-//	b2BodyDef groundBodyDef;
-//	groundBodyDef.position.Set(0, 0); // bottom-left corner
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0, 0); // bottom-left corner
 	
 	// Call the body factory which allocates memory for the ground body
 	// from a pool and creates the ground box shape (also from a pool).
 	// The body is also added to the world.
-//	b2Body* groundBody = world->CreateBody(&groundBodyDef);
+	groundBody = world->CreateBody(&groundBodyDef);
 	
 	// Define the ground box shape.
 //	b2EdgeShape groundBox;		
@@ -215,6 +215,13 @@ int comparetor(const void *a, const void *b) {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 	}
+    
+    // タッチ移動の解除
+    if (_mouseJoint) {
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
+    
     [self clearSlices];
 }
 
@@ -225,6 +232,17 @@ int comparetor(const void *a, const void *b) {
         location = [[CCDirector sharedDirector]convertToGL:location];
         _startPoint = location;
         _endPoint = location;
+        
+        CCNode* node;
+        CCARRAY_FOREACH([self children], node){
+            if ([node isKindOfClass:[PolygonSprite class]]) {
+                CCLOG(@"start:%p",_mouseJoint);
+                _mouseJoint = [(PolygonSprite*)node testPointWithLocation:b2Vec2(location.x / PTM_RATIO, location.y / PTM_RATIO) 
+                                                 groundBody:groundBody 
+                                                      world:world];
+                CCLOG(@"end:%p", _mouseJoint);
+            }
+        }
     }
     
 }
@@ -235,6 +253,10 @@ int comparetor(const void *a, const void *b) {
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector]convertToGL:location];
         _endPoint = location;
+        
+        if (_mouseJoint) {
+            _mouseJoint->SetTarget(b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO));
+        }
     }
     
     if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25) {
@@ -248,6 +270,16 @@ int comparetor(const void *a, const void *b) {
     }
     
 }
+
+-(void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (_mouseJoint) {
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
+}
+
+
 
 -(void)splitPolygonSprite:(PolygonSprite *)sprite
 {
