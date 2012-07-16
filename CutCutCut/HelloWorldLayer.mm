@@ -477,6 +477,7 @@ int comparetor(const void *a, const void *b) {
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = position;
     bodyDef.angle = rotation;
+    bodyDef.linearDamping = 2;
     b2Body *body = world->CreateBody(&bodyDef);
     
     b2FixtureDef fixtureDef;
