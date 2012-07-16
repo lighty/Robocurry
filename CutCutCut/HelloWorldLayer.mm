@@ -78,6 +78,9 @@ int comparetor(const void *a, const void *b) {
 		[self scheduleUpdate];
 
         [self initBackground];
+        
+        _nextPushTime = CACurrentMediaTime() + 1;
+        
 	}
 	return self;
 }
@@ -90,20 +93,28 @@ int comparetor(const void *a, const void *b) {
 }
 -(void)initSprites
 {
-    _cache = [[CCArray alloc] initWithCapacity:53];
+    _cache = [[CCArray alloc] initWithCapacity:5];
+    
+    //CGSize screen = [[CCDirector sharedDirector] winSize];
     
     // Just create one sprite for now. This whole method will be replaced later.
-    PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
-    //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
-    [self addChild:sprite z:1];
-    [sprite deactivateCollisions];
-    [_cache addObject:sprite];    
-
-    PolygonSprite *sprite2 = [[Potato alloc] initWithWorld:world];
-    [self addChild:sprite2 z:1];
-    [sprite2 deactivateCollisions];
-    [_cache addObject:sprite2];    
-
+    {
+        PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
+        //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(-128,0);
+        [sprite deactivateCollisions];
+        [_cache addObject:sprite];    
+    }
+    {
+        PolygonSprite *sprite = [[Potato alloc] initWithWorld:world];
+        //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(-128,0);
+        [sprite deactivateCollisions];
+        [_cache addObject:sprite];    
+    }
+    _tmPushCount = 0;
 }
 
 -(void) dealloc
@@ -212,6 +223,7 @@ int comparetor(const void *a, const void *b) {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);	
     [self checkAndSliceObjects];
+    [self spriteLoop];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -580,6 +592,33 @@ int comparetor(const void *a, const void *b) {
         }
     }
 }
+
+-(void)pushSprite:(PolygonSprite*)sprite
+{
+    sprite.body->SetLinearVelocity(b2Vec2(100/PTM_RATIO,10/PTM_RATIO));
+    //sprite.body->SetAngularVelocity(1.0);
+}
+
+-(void)spriteLoop
+{
+    double curTime = CACurrentMediaTime();
+    
+    if (_tmPushCount < 2 && curTime > _nextPushTime) {
+        //PolygonSprite* sprite;
+        
+        int pushSpriteIndex = random_range(0, [_cache count] -1);
+        CCLOG(@"cache count:%i",[_cache count]);
+        CCLOG(@"pushSpriteIndex:%i",pushSpriteIndex);
+        [self pushSprite:[_cache objectAtIndex:pushSpriteIndex]];
+        
+        [_cache removeObjectAtIndex:pushSpriteIndex];
+        
+        _pushInterval = random_range(2,8);
+        _nextPushTime = curTime + _pushInterval;
+        _tmPushCount++;
+    }
+}
+
 
 #pragma mark GameKit delegate
 

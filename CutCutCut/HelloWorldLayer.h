@@ -7,6 +7,9 @@
 //
 #define calculate_determinant_2x2(x1,y1,x2,y2) x1*y2-y1*x2
 #define calculate_determinant_2x3(x1,y1,x2,y2,x3,y3) x1*y2+x2*y3+x3*y1-y1*x2-y2*x3-y3*x1
+#define frandom (float)arc4random()/UINT64_C(0x100000000)
+#define frandom_range(low,high) ((high-low)*frandom)+low
+#define random_range(low,high) (arc4random()%(high-low+1))+low
 #define midpoint(a,b) (float)(a+b)/2
 
 #import <GameKit/GameKit.h>
@@ -41,7 +44,9 @@
     RayCastCallback *_rayCastCallback;
     
     b2MouseJoint *_mouseJoint;
-    
+    double _nextPushTime;
+    double _pushInterval;
+    int _tmPushCount;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
