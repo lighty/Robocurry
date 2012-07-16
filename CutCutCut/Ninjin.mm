@@ -14,7 +14,7 @@
 -(id)initWithWorld:(b2World*)world
 {
     int count = 7;
-    NSString* file = @"ninjin.png";
+    NSString* file = @"ninjin1.png";
     b2Vec2 vertices[] = {
         b2Vec2(37.2 / PTM_RATIO, 240.4 / PTM_RATIO),
         b2Vec2(14.0 / PTM_RATIO, 193.0 / PTM_RATIO),

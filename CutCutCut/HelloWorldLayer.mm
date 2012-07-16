@@ -96,7 +96,7 @@ int comparetor(const void *a, const void *b) {
 -(void)initBackground
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
-    CCSprite *background = [CCSprite spriteWithFile:@"bg.png"];
+    CCSprite *background = [CCSprite spriteWithFile:@"bg1.png"];
     background.position = ccp(screen.width/2 + 1,screen.height/2 + 1);
     [self addChild:background z:-1];
 }
