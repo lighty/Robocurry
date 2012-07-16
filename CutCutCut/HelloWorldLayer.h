@@ -7,6 +7,7 @@
 //
 #define calculate_determinant_2x2(x1,y1,x2,y2) x1*y2-y1*x2
 #define calculate_determinant_2x3(x1,y1,x2,y2,x3,y3) x1*y2+x2*y3+x3*y1-y1*x2-y2*x3-y3*x1
+#define midpoint(a,b) (float)(a+b)/2
 
 #import <GameKit/GameKit.h>
 

@@ -349,6 +349,16 @@ int comparetor(const void *a, const void *b) {
     // step5
     // you destroy the old shape and create the new shapes and sprites
     if (sprite1VerticesAcceptable && sprite2VerticesAcceptable) {
+        
+        // linearImplus to splitted bodys
+        b2Vec2 worldEntry = sprite.body->GetWorldPoint(sprite.entryPoint);
+        b2Vec2 worldExit = sprite.body->GetWorldPoint(sprite.exitPoint);
+        float angle = ccpToAngle(ccpSub(ccp(worldExit.x,worldExit.y), ccp(worldEntry.x,worldEntry.y)));
+        CGPoint vector1 = ccpForAngle(angle + 1.570796);
+        CGPoint vector2 = ccpForAngle(angle - 1.570796);
+        float midX = midpoint(worldEntry.x, worldExit.x);
+        float midY = midpoint(worldEntry.y, worldExit.y);
+        
         // create the first sprite's body
         b2Body *body1 = [self createBodyWithPosition:sprite.body->GetPosition() 
                                             rotation:sprite.body->GetAngle() 
@@ -360,6 +370,7 @@ int comparetor(const void *a, const void *b) {
         // create the first sprite
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:1];
+        newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x,body1->GetMass()*vector1.y), b2Vec2(midX,midY));
         [newSprite1 deactivateCollisions];
         
         // create the second sprite's body
@@ -373,6 +384,7 @@ int comparetor(const void *a, const void *b) {
         // create the second sprite
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:1];
+        newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x,body2->GetMass()*vector2.y), b2Vec2(midX,midY));
         [newSprite2 deactivateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away

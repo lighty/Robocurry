@@ -33,7 +33,7 @@
                                 vertexCount:count
                                     density:5.0
                                    friction:0.2
-                                restitution:0.0];
+                                restitution:0.2];
     if((self = [super initWithFile:file body:body original:YES]))
     {
         
