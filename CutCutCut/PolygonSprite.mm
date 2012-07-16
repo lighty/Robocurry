@@ -162,7 +162,7 @@
 {
     for (b2Fixture* f = _body->GetFixtureList(); f;f = f->GetNext()) {
         // 1回しかループしない想定...
-        CCLOG(@"location.x:%f location.y:%f", location.x, location.y);
+        //CCLOG(@"location.x:%f location.y:%f", location.x, location.y);
         if (f->TestPoint(location)) {
             CCLOG(@"testPoint");
             b2MouseJointDef md;

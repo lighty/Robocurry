@@ -236,11 +236,14 @@ int comparetor(const void *a, const void *b) {
         CCNode* node;
         CCARRAY_FOREACH([self children], node){
             if ([node isKindOfClass:[PolygonSprite class]]) {
-                CCLOG(@"start:%p",_mouseJoint);
+                CCLOG(@"startTest:%p",_mouseJoint);
                 _mouseJoint = [(PolygonSprite*)node testPointWithLocation:b2Vec2(location.x / PTM_RATIO, location.y / PTM_RATIO) 
                                                  groundBody:groundBody 
                                                       world:world];
-                CCLOG(@"end:%p", _mouseJoint);
+                if(_mouseJoint){
+                    break;
+                }
+                CCLOG(@"endTest:%p", _mouseJoint);
             }
         }
     }
@@ -259,7 +262,7 @@ int comparetor(const void *a, const void *b) {
         }
     }
     
-    if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25) {
+    if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25 && !_mouseJoint) {
         world->RayCast(_rayCastCallback, 
                        b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
                        b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
@@ -267,6 +270,7 @@ int comparetor(const void *a, const void *b) {
                        b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO),
                        b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO));
         _startPoint = _endPoint;
+        
     }
     
 }
@@ -384,6 +388,9 @@ int comparetor(const void *a, const void *b) {
             sprite.sliceExited = NO;
             sprite.entryPoint.SetZero();
             sprite.exitPoint.SetZero();
+            // オリジナル消したらまずいのか...?
+//            world->DestroyBody(sprite.body);
+//            [self removeChild:sprite cleanup:YES];
         } else {
             world->DestroyBody(sprite.body);
             [self removeChild:sprite cleanup:YES];
