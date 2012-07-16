@@ -370,7 +370,7 @@ int comparetor(const void *a, const void *b) {
         // create the first sprite
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:1];
-        newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x,body1->GetMass()*vector1.y), b2Vec2(midX,midY));
+        newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x/4,body1->GetMass()*vector1.y/4), b2Vec2(midX,midY));
         [newSprite1 deactivateCollisions];
         
         // create the second sprite's body
@@ -384,7 +384,7 @@ int comparetor(const void *a, const void *b) {
         // create the second sprite
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:1];
-        newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x,body2->GetMass()*vector2.y), b2Vec2(midX,midY));
+        newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x/4,body2->GetMass()*vector2.y/4), b2Vec2(midX,midY));
         [newSprite2 deactivateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
