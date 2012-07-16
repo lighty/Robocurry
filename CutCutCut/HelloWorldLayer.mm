@@ -567,8 +567,8 @@ int comparetor(const void *a, const void *b) {
         float32 triangleArea = 0.5f * D;
         area += triangleArea;
     }
-    
-    if (area <= 0.0001)
+    CCLOG(@"area:%f",area);
+    if (area <= MIN_CUT_AREA)
     {
         return NO;
     }
@@ -599,6 +599,7 @@ int comparetor(const void *a, const void *b) {
     {
         return NO;
     }
+    
     return YES;
 }
 
@@ -656,7 +657,6 @@ int comparetor(const void *a, const void *b) {
         _tmPushCount++;
     }
 }
-
 
 #pragma mark GameKit delegate
 

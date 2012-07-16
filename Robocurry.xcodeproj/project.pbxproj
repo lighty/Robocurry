@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CD3D987A15B3598D00A60998 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg.png */; };
+		CD3D987A15B3598D00A60998 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg1.png */; };
 		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
-		CD8CF4B515B3658C00C7B247 /* ninjin.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin.png */; };
-		CD8CF4C015B3EEB200C7B247 /* potato.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4BF15B3EEB100C7B247 /* potato.png */; };
+		CD8CF4B515B3658C00C7B247 /* ninjin1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin1.png */; };
+		CD8CF4C015B3EEB200C7B247 /* potato1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4BF15B3EEB100C7B247 /* potato1.png */; };
 		CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD8CF4C215B3EF5900C7B247 /* Potato.mm */; };
 		CD8CF4C515B40DE900C7B247 /* nabe.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4C415B40DE900C7B247 /* nabe.png */; };
+		CDB151E315B45B78006A94CF /* nabe-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB151E015B45B78006A94CF /* nabe-hd.png */; };
+		CDB151E415B45B78006A94CF /* ninjin1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB151E115B45B78006A94CF /* ninjin1-hd.png */; };
+		CDB151E515B45B78006A94CF /* potato1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB151E215B45B78006A94CF /* potato1-hd.png */; };
+		CDC3A54F15B45A3400CDD5E7 /* bg1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC3A54E15B45A3400CDD5E7 /* bg1-hd.png */; };
 		CDF3CBA115A9695400418612 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA015A9695400418612 /* QuartzCore.framework */; };
 		CDF3CBA315A9695400418612 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA215A9695400418612 /* OpenGLES.framework */; };
 		CDF3CBA515A9695400418612 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA415A9695400418612 /* OpenAL.framework */; };
@@ -195,14 +199,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CD3D987915B3598C00A60998 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CD3D987915B3598C00A60998 /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		CD3D988015B35D6E00A60998 /* Ninjin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ninjin.h; sourceTree = "<group>"; };
 		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
-		CD8CF4B415B3658B00C7B247 /* ninjin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin.png; sourceTree = "<group>"; };
-		CD8CF4BF15B3EEB100C7B247 /* potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato.png; sourceTree = "<group>"; };
+		CD8CF4B415B3658B00C7B247 /* ninjin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin1.png; sourceTree = "<group>"; };
+		CD8CF4BF15B3EEB100C7B247 /* potato1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato1.png; sourceTree = "<group>"; };
 		CD8CF4C115B3EF5900C7B247 /* Potato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato.h; sourceTree = "<group>"; };
 		CD8CF4C215B3EF5900C7B247 /* Potato.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Potato.mm; sourceTree = "<group>"; };
 		CD8CF4C415B40DE900C7B247 /* nabe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nabe.png; sourceTree = "<group>"; };
+		CDB151E015B45B78006A94CF /* nabe-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nabe-hd.png"; sourceTree = "<group>"; };
+		CDB151E115B45B78006A94CF /* ninjin1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ninjin1-hd.png"; sourceTree = "<group>"; };
+		CDB151E215B45B78006A94CF /* potato1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "potato1-hd.png"; sourceTree = "<group>"; };
+		CDC3A54E15B45A3400CDD5E7 /* bg1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1-hd.png"; sourceTree = "<group>"; };
 		CDF2195915B24EC3001F11D9 /* RayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayCastCallback.h; sourceTree = "<group>"; };
 		CDF3CB9C15A9695400418612 /* Robocurry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Robocurry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF3CBA015A9695400418612 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1203,10 +1211,14 @@
 		CDF3CE1A15A9E19200418612 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CD8CF4B415B3658B00C7B247 /* ninjin.png */,
-				CD8CF4BF15B3EEB100C7B247 /* potato.png */,
+				CD8CF4B415B3658B00C7B247 /* ninjin1.png */,
+				CD8CF4BF15B3EEB100C7B247 /* potato1.png */,
 				CD8CF4C415B40DE900C7B247 /* nabe.png */,
-				CD3D987915B3598C00A60998 /* bg.png */,
+				CD3D987915B3598C00A60998 /* bg1.png */,
+				CDC3A54E15B45A3400CDD5E7 /* bg1-hd.png */,
+				CDB151E015B45B78006A94CF /* nabe-hd.png */,
+				CDB151E115B45B78006A94CF /* ninjin1-hd.png */,
+				CDB151E215B45B78006A94CF /* potato1-hd.png */,
 				CDF3CE3315A9E19300418612 /* watermelon.png */,
 				CDF3CE3115A9E19300418612 /* watermelon-hd.png */,
 				CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */,
@@ -1280,10 +1292,14 @@
 				CDF3CE4E15A9E19300418612 /* watermelon-hd.png in Resources */,
 				CDF3CE4F15A9E19300418612 /* watermelon-ipadhd.png in Resources */,
 				CDF3CE5015A9E19300418612 /* watermelon.png in Resources */,
-				CD3D987A15B3598D00A60998 /* bg.png in Resources */,
-				CD8CF4B515B3658C00C7B247 /* ninjin.png in Resources */,
-				CD8CF4C015B3EEB200C7B247 /* potato.png in Resources */,
+				CD3D987A15B3598D00A60998 /* bg1.png in Resources */,
+				CD8CF4B515B3658C00C7B247 /* ninjin1.png in Resources */,
+				CD8CF4C015B3EEB200C7B247 /* potato1.png in Resources */,
 				CD8CF4C515B40DE900C7B247 /* nabe.png in Resources */,
+				CDC3A54F15B45A3400CDD5E7 /* bg1-hd.png in Resources */,
+				CDB151E315B45B78006A94CF /* nabe-hd.png in Resources */,
+				CDB151E415B45B78006A94CF /* ninjin1-hd.png in Resources */,
+				CDB151E515B45B78006A94CF /* potato1-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

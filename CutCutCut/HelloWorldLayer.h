@@ -28,6 +28,7 @@
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 #define NABE_SPEED 2
+#define MIN_CUT_AREA 1.0
 
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
