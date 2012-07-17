@@ -29,17 +29,19 @@
 	{
 		CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
 		
-		CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"ロボカレー" fontName:@"Marker Felt" fontSize:32];
-		titleLabel.color = ccGREEN;
+        [self initBackground];
+        
 		CGSize size = [[CCDirector sharedDirector] winSize];
-		titleLabel.position = CGPointMake(size.width / 2, size.height / 4 * 3);
-		[self addChild:titleLabel];
-		
+//		CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"ロボカレー" fontName:@"Marker Felt" fontSize:32];
+//		titleLabel.color = ccGREEN;
+//		titleLabel.position = CGPointMake(size.width / 2, size.height / 4 * 3);
+//		[self addChild:titleLabel];
+//		
         // setup menu
-        CCMenuItem *startItem = [CCMenuItemFont itemWithString:@"start" target:self selector:@selector(onStart:)];
-        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"作った人たち" target:self selector:@selector(onCreator:)];
-        CCMenu *menu = [CCMenu menuWithItems:startItem, createrItem, nil];
-        menu.position = ccp(size.width / 2, size.height / 4 * 2);
+        CCMenuItem *startItem = [CCMenuItemFont itemWithString:@"ハジメル" target:self selector:@selector(onStart:)];
+//        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"作った人たち" target:self selector:@selector(onCreator:)];
+        CCMenu *menu = [CCMenu menuWithItems:startItem, nil];
+        menu.position = ccp(size.width / 2, size.height / 10 * 1);
         [menu alignItemsVertically];
         [self addChild:menu];
         
@@ -47,6 +49,15 @@
 	}
 	return self;
 }
+
+-(void)initBackground
+{
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    CCSprite *background = [CCSprite spriteWithFile:@"kls_start.png"];
+    background.position = ccp(screen.width/2 + 1,screen.height/2 + 1);
+    [self addChild:background z:-1];
+}
+
 
 -(void) onStart:(id)item
 {
