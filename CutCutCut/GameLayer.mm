@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.mm
+//  GameLayer.mm
 //  CutCutCut
 //
 //  Created by 光 渡邊 on 12/07/08.
@@ -11,7 +11,7 @@
 //#import "Watermelon.h"
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "GameLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -21,9 +21,9 @@ enum {
 };
 
 
-#pragma mark - HelloWorldLayer
+#pragma mark - GameLayer
 
-@interface HelloWorldLayer()
+@interface GameLayer()
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) createMenu;
@@ -40,7 +40,7 @@ int comparetor(const void *a, const void *b) {
     return 0;
 }
 
-@implementation HelloWorldLayer
+@implementation GameLayer
 
 @synthesize cache = _cache;
 
@@ -50,7 +50,7 @@ int comparetor(const void *a, const void *b) {
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
+	GameLayer *layer = [GameLayer node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -83,13 +83,6 @@ int comparetor(const void *a, const void *b) {
         
         [self initNabe];
         
-        _isNabeMoving = NO;
-        [NSTimer scheduledTimerWithTimeInterval:10.0 // 時間間隔(秒)
-                                         target:self //呼び出すオブジェクト
-                                       selector:@selector(updateNabe:)
-                                       userInfo:nil
-                                        repeats:NO];
-        
 	}
 	return self;
 }
@@ -108,6 +101,15 @@ int comparetor(const void *a, const void *b) {
     nabe.position = ccp(screen.width/2,-64);
     // ナベのタグをどっかに定義したい
     [self addChild:nabe z:0 tag:1];
+    
+    _isNabeMoving = NO;
+    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(updateNabe:)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+    
 }
 
 -(void)updateNabe:(ccTime *)timer

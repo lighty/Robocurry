@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.h
+//  titleLabelLayer.h
 //  CutCutCut
 //
 //  Created by 光 渡邊 on 12/07/08.
@@ -30,8 +30,8 @@
 #define NABE_SPEED 2
 #define MIN_CUT_AREA 1.0
 
-// HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+// GameLayer
+@interface GameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
 	b2World* world;					// strong ref
     b2Body* groundBody;
@@ -56,7 +56,7 @@
     BOOL _isNabeMoving;
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains the GameLayer as the only child
 +(CCScene *) scene;
 
 @property(nonatomic,retain)CCArray *cache;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CD3D987A15B3598D00A60998 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg1.png */; };
 		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
+		CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */; };
 		CD8CF4B515B3658C00C7B247 /* ninjin1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin1.png */; };
 		CD8CF4C015B3EEB200C7B247 /* potato1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4BF15B3EEB100C7B247 /* potato1.png */; };
 		CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD8CF4C215B3EF5900C7B247 /* Potato.mm */; };
@@ -185,14 +186,13 @@
 		CDF3CDB415A9695800418612 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDB315A9695800418612 /* b2Rope.cpp */; };
 		CDF3CDBA15A9695800418612 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDB915A9695800418612 /* main.m */; };
 		CDF3CDBD15A9695800418612 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDBC15A9695800418612 /* AppDelegate.mm */; };
-		CDF3CDC015A9695800418612 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDBF15A9695800418612 /* HelloWorldLayer.mm */; };
+		CDF3CDC015A9695800418612 /* GameLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDBF15A9695800418612 /* GameLayer.mm */; };
 		CDF3CDC315A9695800418612 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDC215A9695800418612 /* GLES-Render.mm */; };
 		CDF3CDC815A9695800418612 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CDC715A9695800418612 /* blocks.png */; };
 		CDF3CDD615A96EE000418612 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD015A96EE000418612 /* PRFilledPolygon.m */; };
 		CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD215A96EE000418612 /* PRRatcliffTriangulator.mm */; };
 		CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDD415A96EE000418612 /* triangulate.cpp */; };
 		CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */; };
-		CDF3CDDE15A9DD3D00418612 /* Watermelon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */; };
 		CDF3CE4E15A9E19300418612 /* watermelon-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3115A9E19300418612 /* watermelon-hd.png */; };
 		CDF3CE4F15A9E19300418612 /* watermelon-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */; };
 		CDF3CE5015A9E19300418612 /* watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF3CE3315A9E19300418612 /* watermelon.png */; };
@@ -202,6 +202,8 @@
 		CD3D987915B3598C00A60998 /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		CD3D988015B35D6E00A60998 /* Ninjin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ninjin.h; sourceTree = "<group>"; };
 		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
+		CD70D49C15B57FC0002C94D6 /* TitleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLayer.h; sourceTree = "<group>"; };
+		CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleLayer.mm; sourceTree = "<group>"; };
 		CD8CF4B415B3658B00C7B247 /* ninjin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin1.png; sourceTree = "<group>"; };
 		CD8CF4BF15B3EEB100C7B247 /* potato1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato1.png; sourceTree = "<group>"; };
 		CD8CF4C115B3EF5900C7B247 /* Potato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato.h; sourceTree = "<group>"; };
@@ -563,8 +565,8 @@
 		CDF3CDB915A9695800418612 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CDF3CDBB15A9695800418612 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CDF3CDBC15A9695800418612 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		CDF3CDBE15A9695800418612 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		CDF3CDBF15A9695800418612 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
+		CDF3CDBE15A9695800418612 /* GameLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		CDF3CDBF15A9695800418612 /* GameLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GameLayer.mm; sourceTree = "<group>"; };
 		CDF3CDC115A9695800418612 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CDF3CDC215A9695800418612 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CDF3CDC715A9695800418612 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
@@ -577,8 +579,6 @@
 		CDF3CDD515A96EE000418612 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
 		CDF3CDD915A97AB000418612 /* PolygonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonSprite.h; sourceTree = "<group>"; };
 		CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PolygonSprite.mm; sourceTree = "<group>"; };
-		CDF3CDDC15A9DD3D00418612 /* Watermelon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watermelon.h; sourceTree = "<group>"; };
-		CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Watermelon.mm; sourceTree = "<group>"; };
 		CDF3CE3115A9E19300418612 /* watermelon-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon-hd.png"; sourceTree = "<group>"; };
 		CDF3CE3215A9E19300418612 /* watermelon-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watermelon-ipadhd.png"; sourceTree = "<group>"; };
 		CDF3CE3315A9E19300418612 /* watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermelon.png; sourceTree = "<group>"; };
@@ -653,15 +653,15 @@
 			children = (
 				CD8CF4BE15B3EC6300C7B247 /* Vegetable */,
 				CDF3CDCE15A96EE000418612 /* PRKit */,
-				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
-				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
 				CDF2195915B24EC3001F11D9 /* RayCastCallback.h */,
-				CDF3CDDC15A9DD3D00418612 /* Watermelon.h */,
-				CDF3CDDD15A9DD3D00418612 /* Watermelon.mm */,
+				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
+				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
 				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
 				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
-				CDF3CDBE15A9695800418612 /* HelloWorldLayer.h */,
-				CDF3CDBF15A9695800418612 /* HelloWorldLayer.mm */,
+				CDF3CDBE15A9695800418612 /* GameLayer.h */,
+				CDF3CDBF15A9695800418612 /* GameLayer.mm */,
+				CD70D49C15B57FC0002C94D6 /* TitleLayer.h */,
+				CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */,
 				CDF3CDC115A9695800418612 /* GLES-Render.h */,
 				CDF3CDC215A9695800418612 /* GLES-Render.mm */,
 				CDF3CBB315A9695400418612 /* Resources */,
@@ -1457,15 +1457,15 @@
 				CDF3CDB415A9695800418612 /* b2Rope.cpp in Sources */,
 				CDF3CDBA15A9695800418612 /* main.m in Sources */,
 				CDF3CDBD15A9695800418612 /* AppDelegate.mm in Sources */,
-				CDF3CDC015A9695800418612 /* HelloWorldLayer.mm in Sources */,
+				CDF3CDC015A9695800418612 /* GameLayer.mm in Sources */,
 				CDF3CDC315A9695800418612 /* GLES-Render.mm in Sources */,
 				CDF3CDD615A96EE000418612 /* PRFilledPolygon.m in Sources */,
 				CDF3CDD715A96EE000418612 /* PRRatcliffTriangulator.mm in Sources */,
 				CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */,
 				CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */,
-				CDF3CDDE15A9DD3D00418612 /* Watermelon.mm in Sources */,
 				CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */,
 				CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */,
+				CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

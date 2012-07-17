@@ -92,7 +92,7 @@
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = position;
     bodyDef.angle = rotation;
-    bodyDef.linearDamping = 0.5;
+    bodyDef.linearDamping = 0.2;
     b2Body *body = world->CreateBody(&bodyDef);
     
     b2FixtureDef fixtureDef;
