@@ -83,6 +83,8 @@ int comparetor(const void *a, const void *b) {
         
         [self initNabe];
         
+        [self initScene];
+        
 	}
 	return self;
 }
@@ -127,6 +129,21 @@ int comparetor(const void *a, const void *b) {
             _isNabeMoving = false;
         }
     }
+}
+
+-(void) initScene
+{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+
+    CCMenuItem *returnItem = [CCMenuItemImage itemWithNormalImage:@"home.png" selectedImage:@"home_selected.png" target:self selector:@selector(onReturn:)];
+    CCMenu *menu = [CCMenu menuWithItems:returnItem, nil];
+    menu.position = ccp(returnItem.boundingBox.size.width /2 , size.height - returnItem.boundingBox.size.height / 2);
+    [self addChild:menu];
+}
+
+-(void) onReturn:(id)item
+{
+    [[CCDirector sharedDirector] popScene];
 }
 
 -(void)initSprites
