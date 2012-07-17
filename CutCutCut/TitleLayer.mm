@@ -60,7 +60,7 @@
     scene = [CreatorLayer scene];
     //[self addChild:scene];
     CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:scene];
-    [[CCDirector sharedDirector] pushScene:scene];
+    [[CCDirector sharedDirector] pushScene:transition];
 }
 
 -(void) dealloc

@@ -57,8 +57,6 @@
 
 -(void) onReturn:(id)item
 {
-    CCLOG(@"onReturn");
-    CCTransitionSlideInR* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[TitleLayer scene]];
     [[CCDirector sharedDirector] popScene];
 }
 
