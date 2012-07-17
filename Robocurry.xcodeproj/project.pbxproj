@@ -10,6 +10,7 @@
 		CD3D987A15B3598D00A60998 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg1.png */; };
 		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
 		CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */; };
+		CD70D4A115B58A4A002C94D6 /* CreatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */; };
 		CD8CF4B515B3658C00C7B247 /* ninjin1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin1.png */; };
 		CD8CF4C015B3EEB200C7B247 /* potato1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4BF15B3EEB100C7B247 /* potato1.png */; };
 		CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD8CF4C215B3EF5900C7B247 /* Potato.mm */; };
@@ -204,6 +205,8 @@
 		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
 		CD70D49C15B57FC0002C94D6 /* TitleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLayer.h; sourceTree = "<group>"; };
 		CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleLayer.mm; sourceTree = "<group>"; };
+		CD70D49F15B58A4A002C94D6 /* CreatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatorLayer.h; sourceTree = "<group>"; };
+		CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatorLayer.m; sourceTree = "<group>"; };
 		CD8CF4B415B3658B00C7B247 /* ninjin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin1.png; sourceTree = "<group>"; };
 		CD8CF4BF15B3EEB100C7B247 /* potato1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato1.png; sourceTree = "<group>"; };
 		CD8CF4C115B3EF5900C7B247 /* Potato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato.h; sourceTree = "<group>"; };
@@ -662,6 +665,8 @@
 				CDF3CDBF15A9695800418612 /* GameLayer.mm */,
 				CD70D49C15B57FC0002C94D6 /* TitleLayer.h */,
 				CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */,
+				CD70D49F15B58A4A002C94D6 /* CreatorLayer.h */,
+				CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */,
 				CDF3CDC115A9695800418612 /* GLES-Render.h */,
 				CDF3CDC215A9695800418612 /* GLES-Render.mm */,
 				CDF3CBB315A9695400418612 /* Resources */,
@@ -1466,6 +1471,7 @@
 				CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */,
 				CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */,
 				CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */,
+				CD70D4A115B58A4A002C94D6 /* CreatorLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

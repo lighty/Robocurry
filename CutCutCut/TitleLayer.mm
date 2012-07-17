@@ -8,7 +8,7 @@
 
 #import "TitleLayer.h"
 #import "GameLayer.h"
-
+#import "CreatorLayer.h"
 
 @implementation TitleLayer
 
@@ -37,7 +37,7 @@
 		
         // setup menu
         CCMenuItem *startItem = [CCMenuItemFont itemWithString:@"start" target:self selector:@selector(onStart:)];
-        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"creater" target:self selector:@selector(onCreator:)];
+        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"作った人たち" target:self selector:@selector(onCreator:)];
         CCMenu *menu = [CCMenu menuWithItems:startItem, createrItem, nil];
         menu.position = ccp(size.width / 2, size.height / 4 * 2);
         [menu alignItemsVertically];
@@ -51,13 +51,16 @@
 -(void) onStart:(id)item
 {
     CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[GameLayer scene]];
-    [[CCDirector sharedDirector] replaceScene:transition];
+    [[CCDirector sharedDirector] pushScene:transition];
 }
 
 -(void) onCreator:(id)item
 {
-    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[GameLayer scene]];
-    [[CCDirector sharedDirector] replaceScene:transition];
+    CCScene *scene;
+    scene = [CreatorLayer scene];
+    //[self addChild:scene];
+    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:scene];
+    [[CCDirector sharedDirector] pushScene:scene];
 }
 
 -(void) dealloc
