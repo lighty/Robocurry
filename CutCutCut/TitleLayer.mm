@@ -32,11 +32,6 @@
         [self initBackground];
         
 		CGSize size = [[CCDirector sharedDirector] winSize];
-//		CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"ロボカレー" fontName:@"Marker Felt" fontSize:32];
-//		titleLabel.color = ccGREEN;
-//		titleLabel.position = CGPointMake(size.width / 2, size.height / 4 * 3);
-//		[self addChild:titleLabel];
-//		
         // setup menu
         CCMenuItem *startItem = [CCMenuItemFont itemWithString:@"ハジメル" target:self selector:@selector(onStart:)];
 //        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"作った人たち" target:self selector:@selector(onCreator:)];

@@ -1,0 +1,58 @@
+//
+//  Nabe.m
+//  Robocurry
+//
+//  Created by 光 渡邊 on 12/07/18.
+//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import "Nabe.h"
+
+
+@implementation Nabe
+
+-(id)initWithWorld:(b2World*)world
+{
+
+    int count = 8;
+    NSString* file = @"nabe.png";
+    b2Vec2 vertices[] = {
+        b2Vec2(42.0 / PTM_RATIO, 113.0 / PTM_RATIO),
+        b2Vec2(42.0 / PTM_RATIO, 18.0 / PTM_RATIO),
+        b2Vec2(65.0 / PTM_RATIO, 8.0 / PTM_RATIO),
+        b2Vec2(98.0 / PTM_RATIO, 3.0 / PTM_RATIO),
+        b2Vec2(153.0 / PTM_RATIO, 3.0 / PTM_RATIO),
+        b2Vec2(193.0 / PTM_RATIO, 8.0 / PTM_RATIO),
+        b2Vec2(215.0 / PTM_RATIO, 18.0 / PTM_RATIO),
+        b2Vec2(215.0 / PTM_RATIO, 113.0 / PTM_RATIO)
+    };
+    
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    
+    b2Body *body = [self createBodyForWorld:world
+                                   position:b2Vec2(screen.width/2/PTM_RATIO, screen.height/4/PTM_RATIO) 
+                                   rotation:0
+                                   vertices:vertices
+                                vertexCount:count
+                                    density:5.0
+                                   friction:0.2
+                                restitution:0.2];
+    if((self = [super initWithFile:file body:body original:YES]))
+    {
+        
+    }
+    return self;
+}
+
+// スプライトのカットを抑制
+-(BOOL)sliceExited
+{
+    return NO;
+}
+-(BOOL)sliceEntered
+{
+    return NO;
+}
+
+
+@end

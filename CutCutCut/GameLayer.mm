@@ -8,8 +8,7 @@
 
 #import "Ninjin.h"
 #import "Potato.h"
-//#import "Watermelon.h"
-
+#import "Nabe.h"
 // Import the interfaces
 #import "GameLayer.h"
 
@@ -99,10 +98,19 @@ int comparetor(const void *a, const void *b) {
 -(void)initNabe
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
-    CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
-    nabe.position = ccp(screen.width/2,-64);
+    //CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
+    //nabe.position = ccp(screen.width/2,-64); // spriteの中心がccpで指定した場所
     // ナベのタグをどっかに定義したい
-    [self addChild:nabe z:0 tag:1];
+    //[self addChild:nabe z:0 tag:1];
+    
+    {
+        PolygonSprite *sprite = [[Nabe alloc] initWithWorld:world];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(screen.width/2,-64);
+        [sprite activateCollisions];
+        [_cache addObject:sprite];    
+    }
+
     
     _isNabeMoving = NO;
     [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
@@ -149,8 +157,6 @@ int comparetor(const void *a, const void *b) {
 -(void)initSprites
 {
     _cache = [[CCArray alloc] initWithCapacity:5];
-    
-    //CGSize screen = [[CCDirector sharedDirector] winSize];
     
     // Just create one sprite for now. This whole method will be replaced later.
     {
@@ -259,7 +265,7 @@ int comparetor(const void *a, const void *b) {
     
 //    ccDrawLine(_startPoint, _endPoint);
 //	
-//	world->DrawDebugData();	
+	world->DrawDebugData();	
 	
 	kmGLPopMatrix();
 }
@@ -626,16 +632,20 @@ int comparetor(const void *a, const void *b) {
 -(void)checkAndSliceObjects
 {
     double curTime = CACurrentMediaTime();
+    id* userData;
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData() != NULL) {
-            PolygonSprite *sprite = (PolygonSprite*)b->GetUserData();
-            
-            if (sprite.sliceEntered && curTime > sprite.sliceEntryTime) {
-                sprite.sliceEntered = NO;
-            }
-            else if (sprite.sliceEntered && sprite.sliceExited)
-            {
-                [self splitPolygonSprite:sprite];
+            userData = (id*)b->GetUserData();
+            if ([userData isKindOfClass:[PolygonSprite class]]) {
+                PolygonSprite *sprite = (PolygonSprite*)userData;
+                
+                if (sprite.sliceEntered && curTime > sprite.sliceEntryTime) {
+                    sprite.sliceEntered = NO;
+                }
+                else if (sprite.sliceEntered && sprite.sliceExited)
+                {
+                    [self splitPolygonSprite:sprite];
+                }
             }
         }
     }
@@ -643,11 +653,15 @@ int comparetor(const void *a, const void *b) {
 
 -(void)clearSlices
 {
+    id* userData;
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData() != NULL) {
-            PolygonSprite *sprite = (PolygonSprite*)b->GetUserData();
-            sprite.sliceEntered = NO;
-            sprite.sliceExited = NO;
+            userData = (id*)b->GetUserData();
+            if ([userData isKindOfClass:[PolygonSprite class]]) {
+                PolygonSprite *sprite = (PolygonSprite*)userData;
+                sprite.sliceEntered = NO;
+                sprite.sliceExited = NO;
+            }
         }
     }
 }
