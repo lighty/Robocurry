@@ -1,29 +1,29 @@
 //
-//  Potato.m
+//  Onion.m
 //  Robocurry
 //
-//  Created by 光 渡邊 on 12/07/16.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 光 渡邊 on 12/07/19.
+//  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "Potato.h"
+#import "Onion.h"
 
 
-@implementation Potato
+@implementation Onion
 
 -(id)initWithWorld:(b2World*)world
 {
     int count = 8;
-    NSString* file = @"potato1.png";
+    NSString* file = @"onion.png";
     b2Vec2 vertices[] = {
-        b2Vec2(6.0 / PTM_RATIO, 69.0 / PTM_RATIO),
-        b2Vec2(43.0 / PTM_RATIO, 49.0 / PTM_RATIO),
-        b2Vec2(68.0 / PTM_RATIO, 59.0 / PTM_RATIO),
-        b2Vec2(70.0 / PTM_RATIO, 79.0 / PTM_RATIO),
-        b2Vec2(71.8 / PTM_RATIO, 109.0 / PTM_RATIO),
-        b2Vec2(54.0 / PTM_RATIO, 127.0 / PTM_RATIO),
-        b2Vec2(21.0 / PTM_RATIO, 127.0 / PTM_RATIO),
-        b2Vec2(4.0 / PTM_RATIO, 106.0 / PTM_RATIO)
+        b2Vec2(117.0 / PTM_RATIO, 27.0 / PTM_RATIO),  
+        b2Vec2(116.0 / PTM_RATIO, 54.0 / PTM_RATIO),
+        b2Vec2(81.0  / PTM_RATIO, 120.0/ PTM_RATIO),
+        b2Vec2(58.0  / PTM_RATIO, 115.0/ PTM_RATIO),
+        b2Vec2(18.0  / PTM_RATIO, 60.0 / PTM_RATIO),
+        b2Vec2(20.0  / PTM_RATIO, 30.0 / PTM_RATIO),
+        b2Vec2(47.0  / PTM_RATIO, 4.0  / PTM_RATIO),
+        b2Vec2(85.0  / PTM_RATIO, 4.0  / PTM_RATIO)
     };
     CGSize screen = [[CCDirector sharedDirector] winSize];
     

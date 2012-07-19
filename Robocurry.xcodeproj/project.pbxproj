@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD027E2B15B832FD0083FF69 /* caro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E2715B832FD0083FF69 /* caro-hd.png */; };
+		CD027E2C15B832FD0083FF69 /* onion-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E2815B832FD0083FF69 /* onion-hd.png */; };
+		CD027E2D15B832FD0083FF69 /* pote_d-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E2915B832FD0083FF69 /* pote_d-hd.png */; };
+		CD027E2E15B832FD0083FF69 /* pote_m-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E2A15B832FD0083FF69 /* pote_m-hd.png */; };
+		CD027E3415B836700083FF69 /* caro.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3015B8366F0083FF69 /* caro.png */; };
+		CD027E3515B836700083FF69 /* onion.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3115B836700083FF69 /* onion.png */; };
+		CD027E3615B836700083FF69 /* pote_d.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3215B836700083FF69 /* pote_d.png */; };
+		CD027E3715B836700083FF69 /* pote_m.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3315B836700083FF69 /* pote_m.png */; };
+		CD027E3A15B83B470083FF69 /* Onion.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD027E3915B83B470083FF69 /* Onion.mm */; };
+		CD027E3D15B83CAE0083FF69 /* Potato_d.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD027E3C15B83CAD0083FF69 /* Potato_d.mm */; };
+		CD027E4015B83ED60083FF69 /* robot1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3E15B83ED60083FF69 /* robot1-hd.png */; };
+		CD027E4115B83ED60083FF69 /* robot1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3F15B83ED60083FF69 /* robot1.png */; };
 		CD3D987A15B3598D00A60998 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg1.png */; };
 		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
 		CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */; };
 		CD70D4A115B58A4A002C94D6 /* CreatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */; };
 		CD8CF4B515B3658C00C7B247 /* ninjin1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4B415B3658B00C7B247 /* ninjin1.png */; };
 		CD8CF4C015B3EEB200C7B247 /* potato1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4BF15B3EEB100C7B247 /* potato1.png */; };
-		CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD8CF4C215B3EF5900C7B247 /* Potato.mm */; };
+		CD8CF4C315B3EF5900C7B247 /* Potato_m.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD8CF4C215B3EF5900C7B247 /* Potato_m.mm */; };
 		CD8CF4C515B40DE900C7B247 /* nabe.png in Resources */ = {isa = PBXBuildFile; fileRef = CD8CF4C415B40DE900C7B247 /* nabe.png */; };
 		CD9CCBF515B59873001D329D /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9CCBF315B59873001D329D /* home_selected.png */; };
 		CD9CCBF615B59873001D329D /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = CD9CCBF415B59873001D329D /* home.png */; };
@@ -207,6 +219,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD027E2715B832FD0083FF69 /* caro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "caro-hd.png"; sourceTree = "<group>"; };
+		CD027E2815B832FD0083FF69 /* onion-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onion-hd.png"; sourceTree = "<group>"; };
+		CD027E2915B832FD0083FF69 /* pote_d-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pote_d-hd.png"; sourceTree = "<group>"; };
+		CD027E2A15B832FD0083FF69 /* pote_m-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pote_m-hd.png"; sourceTree = "<group>"; };
+		CD027E3015B8366F0083FF69 /* caro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = caro.png; sourceTree = "<group>"; };
+		CD027E3115B836700083FF69 /* onion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onion.png; sourceTree = "<group>"; };
+		CD027E3215B836700083FF69 /* pote_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pote_d.png; sourceTree = "<group>"; };
+		CD027E3315B836700083FF69 /* pote_m.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pote_m.png; sourceTree = "<group>"; };
+		CD027E3815B83B460083FF69 /* Onion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Onion.h; sourceTree = "<group>"; };
+		CD027E3915B83B470083FF69 /* Onion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Onion.mm; sourceTree = "<group>"; };
+		CD027E3B15B83CAD0083FF69 /* Potato_d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato_d.h; sourceTree = "<group>"; };
+		CD027E3C15B83CAD0083FF69 /* Potato_d.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Potato_d.mm; sourceTree = "<group>"; };
+		CD027E3E15B83ED60083FF69 /* robot1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "robot1-hd.png"; sourceTree = "<group>"; };
+		CD027E3F15B83ED60083FF69 /* robot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robot1.png; sourceTree = "<group>"; };
 		CD3D987915B3598C00A60998 /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		CD3D988015B35D6E00A60998 /* Ninjin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ninjin.h; sourceTree = "<group>"; };
 		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
@@ -216,8 +242,8 @@
 		CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatorLayer.m; sourceTree = "<group>"; };
 		CD8CF4B415B3658B00C7B247 /* ninjin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ninjin1.png; sourceTree = "<group>"; };
 		CD8CF4BF15B3EEB100C7B247 /* potato1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = potato1.png; sourceTree = "<group>"; };
-		CD8CF4C115B3EF5900C7B247 /* Potato.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato.h; sourceTree = "<group>"; };
-		CD8CF4C215B3EF5900C7B247 /* Potato.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Potato.mm; sourceTree = "<group>"; };
+		CD8CF4C115B3EF5900C7B247 /* Potato_m.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Potato_m.h; sourceTree = "<group>"; };
+		CD8CF4C215B3EF5900C7B247 /* Potato_m.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Potato_m.mm; sourceTree = "<group>"; };
 		CD8CF4C415B40DE900C7B247 /* nabe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nabe.png; sourceTree = "<group>"; };
 		CD9CCBF315B59873001D329D /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_selected.png; sourceTree = "<group>"; };
 		CD9CCBF415B59873001D329D /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
@@ -627,8 +653,12 @@
 			children = (
 				CD3D988015B35D6E00A60998 /* Ninjin.h */,
 				CD3D988115B35D6E00A60998 /* Ninjin.mm */,
-				CD8CF4C115B3EF5900C7B247 /* Potato.h */,
-				CD8CF4C215B3EF5900C7B247 /* Potato.mm */,
+				CD8CF4C115B3EF5900C7B247 /* Potato_m.h */,
+				CD8CF4C215B3EF5900C7B247 /* Potato_m.mm */,
+				CD027E3B15B83CAD0083FF69 /* Potato_d.h */,
+				CD027E3C15B83CAD0083FF69 /* Potato_d.mm */,
+				CD027E3815B83B460083FF69 /* Onion.h */,
+				CD027E3915B83B470083FF69 /* Onion.mm */,
 			);
 			name = Vegetable;
 			sourceTree = "<group>";
@@ -1242,6 +1272,16 @@
 			isa = PBXGroup;
 			children = (
 				CD9CCBF815B59BC7001D329D /* kls_start.png */,
+				CD027E3015B8366F0083FF69 /* caro.png */,
+				CD027E3115B836700083FF69 /* onion.png */,
+				CD027E3E15B83ED60083FF69 /* robot1-hd.png */,
+				CD027E3F15B83ED60083FF69 /* robot1.png */,
+				CD027E3215B836700083FF69 /* pote_d.png */,
+				CD027E3315B836700083FF69 /* pote_m.png */,
+				CD027E2715B832FD0083FF69 /* caro-hd.png */,
+				CD027E2815B832FD0083FF69 /* onion-hd.png */,
+				CD027E2915B832FD0083FF69 /* pote_d-hd.png */,
+				CD027E2A15B832FD0083FF69 /* pote_m-hd.png */,
 				CD8CF4B415B3658B00C7B247 /* ninjin1.png */,
 				CD9CCBF315B59873001D329D /* home_selected.png */,
 				CD9CCBF415B59873001D329D /* home.png */,
@@ -1342,6 +1382,16 @@
 				CD9CCC0115B5A16B001D329D /* home_selected-hd.png in Resources */,
 				CD9CCC0215B5A16B001D329D /* home-hd.png in Resources */,
 				CD9CCC0315B5A16B001D329D /* kls_start-hd.png in Resources */,
+				CD027E2B15B832FD0083FF69 /* caro-hd.png in Resources */,
+				CD027E2C15B832FD0083FF69 /* onion-hd.png in Resources */,
+				CD027E2D15B832FD0083FF69 /* pote_d-hd.png in Resources */,
+				CD027E2E15B832FD0083FF69 /* pote_m-hd.png in Resources */,
+				CD027E3415B836700083FF69 /* caro.png in Resources */,
+				CD027E3515B836700083FF69 /* onion.png in Resources */,
+				CD027E3615B836700083FF69 /* pote_d.png in Resources */,
+				CD027E3715B836700083FF69 /* pote_m.png in Resources */,
+				CD027E4015B83ED60083FF69 /* robot1-hd.png in Resources */,
+				CD027E4115B83ED60083FF69 /* robot1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1506,10 +1556,12 @@
 				CDF3CDD815A96EE000418612 /* triangulate.cpp in Sources */,
 				CDF3CDDB15A97AB000418612 /* PolygonSprite.mm in Sources */,
 				CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */,
-				CD8CF4C315B3EF5900C7B247 /* Potato.mm in Sources */,
+				CD8CF4C315B3EF5900C7B247 /* Potato_m.mm in Sources */,
 				CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */,
 				CD70D4A115B58A4A002C94D6 /* CreatorLayer.m in Sources */,
 				CD9CCC1415B6F1FF001D329D /* Nabe.mm in Sources */,
+				CD027E3A15B83B470083FF69 /* Onion.mm in Sources */,
+				CD027E3D15B83CAE0083FF69 /* Potato_d.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

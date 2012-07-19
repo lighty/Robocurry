@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "PolygonSprite.h"
 
-@interface Potato : PolygonSprite {
+@interface Potato_d : PolygonSprite {
     
 }
 

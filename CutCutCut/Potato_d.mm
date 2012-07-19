@@ -1,29 +1,29 @@
 //
-//  Ninjin.m
-//  CutCutCut
+//  Potato.m
+//  Robocurry
 //
-//  Created by 光 渡邊 on 12/07/09.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 光 渡邊 on 12/07/16.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "Ninjin.h"
+#import "Potato_d.h"
 
 
-@implementation Ninjin
+@implementation Potato_d
 
 -(id)initWithWorld:(b2World*)world
 {
     int count = 8;
-    NSString* file = @"caro.png";
+    NSString* file = @"pote_d.png";
     b2Vec2 vertices[] = {
-        b2Vec2(171.0 / PTM_RATIO, 195.0 / PTM_RATIO),
-        b2Vec2(152.0 / PTM_RATIO, 187.0 / PTM_RATIO),
-        b2Vec2(61.0 / PTM_RATIO, 61.0 / PTM_RATIO),
-        b2Vec2(75.0 / PTM_RATIO, 47.0   / PTM_RATIO),
-        b2Vec2(200.0 / PTM_RATIO, 150.0 / PTM_RATIO),
-        b2Vec2(202.0 / PTM_RATIO, 168.0 / PTM_RATIO),
-        b2Vec2(198.0 / PTM_RATIO, 180.0 / PTM_RATIO),
-        b2Vec2(188.0 / PTM_RATIO, 190.0 / PTM_RATIO)
+        b2Vec2(	15.000  / PTM_RATIO, 47.000 / PTM_RATIO),
+        b2Vec2(	60.000  / PTM_RATIO, 29.000 / PTM_RATIO),
+        b2Vec2(	96.000  / PTM_RATIO, 44.000 / PTM_RATIO),
+        b2Vec2(	103.000 / PTM_RATIO, 77.000 / PTM_RATIO),
+        b2Vec2(	92.000  / PTM_RATIO, 99.000 / PTM_RATIO),
+        b2Vec2(	58.000  / PTM_RATIO, 109.000/ PTM_RATIO),
+        b2Vec2(	26.000  / PTM_RATIO, 97.000 / PTM_RATIO),
+        b2Vec2(	16.000  / PTM_RATIO, 80.000 / PTM_RATIO)
     };
     CGSize screen = [[CCDirector sharedDirector] winSize];
     

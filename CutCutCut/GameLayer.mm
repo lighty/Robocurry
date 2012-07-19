@@ -7,7 +7,10 @@
 //
 
 #import "Ninjin.h"
-#import "Potato.h"
+#import "Potato_m.h"
+#import "Potato_d.h"
+#import "Onion.h"
+
 #import "Nabe.h"
 // Import the interfaces
 #import "GameLayer.h"
@@ -99,25 +102,23 @@ int comparetor(const void *a, const void *b) {
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
     //CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
-    //nabe.position = ccp(screen.width/2,-64); // spriteの中心がccpで指定した場所
+    //nabe.position = ccp(screen.width/2,64); // spriteの中心がccpで指定した場所
     // ナベのタグをどっかに定義したい
     //[self addChild:nabe z:0 tag:1];
     
     {
-        PolygonSprite *sprite = [[Nabe alloc] initWithWorld:world];
+        Nabe *sprite = [[Nabe alloc] initWithWorld:world parentNode:self];
         [self addChild:sprite z:1];
-        sprite.position = ccp(screen.width/2,-64);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
+        sprite.position = ccp(screen.width/2, 64);
     }
 
     
     _isNabeMoving = NO;
-    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
-                                     target:self //呼び出すオブジェクト
-                                   selector:@selector(updateNabe:)
-                                   userInfo:nil
-                                    repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
+//                                     target:self //呼び出すオブジェクト
+//                                   selector:@selector(updateNabe:)
+//                                   userInfo:nil
+//                                    repeats:NO];
     
     
 }
@@ -161,20 +162,43 @@ int comparetor(const void *a, const void *b) {
     // Just create one sprite for now. This whole method will be replaced later.
     {
         PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
-        //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
+        [sprite deactivateCollisions];
         [_cache addObject:sprite];    
     }
     {
-        PolygonSprite *sprite = [[Potato alloc] initWithWorld:world];
-        //PolygonSprite *sprite = [[Watermelon alloc] initWithWorld:world];
+        PolygonSprite *sprite = [[Potato_m alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
+        [sprite deactivateCollisions];
         [_cache addObject:sprite];    
     }
+    {
+        PolygonSprite *sprite = [[Potato_d alloc] initWithWorld:world];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(-128,0);
+        [sprite deactivateCollisions];
+        [_cache addObject:sprite];    
+    }
+    {
+        PolygonSprite *sprite = [[Onion alloc] initWithWorld:world];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(-128,0);
+        [sprite deactivateCollisions];
+        [_cache addObject:sprite];    
+    }
+    
+    // ロボ
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robot1.png"];
+        [self addChild:sprite z:1];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
+    }
+    
+    
+    
     _tmPushCount = 0;
 }
 
@@ -289,24 +313,6 @@ int comparetor(const void *a, const void *b) {
     
 }
 
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	//Add a new body/atlas sprite at the touched location
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-	}
-    
-    // タッチ移動の解除
-    if (_mouseJoint) {
-        world->DestroyJoint(_mouseJoint);
-        _mouseJoint = NULL;
-    }
-    
-    [self clearSlices];
-}
-
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches){
@@ -363,6 +369,24 @@ int comparetor(const void *a, const void *b) {
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
     }
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	//Add a new body/atlas sprite at the touched location
+	for( UITouch *touch in touches ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		location = [[CCDirector sharedDirector] convertToGL: location];
+	}
+    
+    // タッチ移動の解除
+    if (_mouseJoint) {
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
+    
+    [self clearSlices];
 }
 
 
@@ -453,7 +477,7 @@ int comparetor(const void *a, const void *b) {
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:1];
         newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x/4,body1->GetMass()*vector1.y/4), b2Vec2(midX,midY));
-        //[newSprite1 deactivateCollisions];
+        [newSprite1 deactivateCollisions];
         
         // create the second sprite's body
         b2Body *body2 = [self createBodyWithPosition:sprite.body->GetPosition() 
@@ -467,7 +491,7 @@ int comparetor(const void *a, const void *b) {
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:1];
         newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x/4,body2->GetMass()*vector2.y/4), b2Vec2(midX,midY));
-        //[newSprite2 deactivateCollisions];
+        [newSprite2 deactivateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
         if (sprite.original) {
@@ -638,7 +662,7 @@ int comparetor(const void *a, const void *b) {
             userData = (id*)b->GetUserData();
             if ([userData isKindOfClass:[PolygonSprite class]]) {
                 PolygonSprite *sprite = (PolygonSprite*)userData;
-                
+
                 if (sprite.sliceEntered && curTime > sprite.sliceEntryTime) {
                     sprite.sliceEntered = NO;
                 }

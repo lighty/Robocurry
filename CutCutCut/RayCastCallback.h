@@ -22,7 +22,11 @@ public:
     
     float32 ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float32 fraction)
     {
-        PolygonSprite *ps = (PolygonSprite*)fixture->GetBody()->GetUserData();
+        id sprite = (id)fixture->GetBody()->GetUserData();
+        if (![sprite isKindOfClass:[PolygonSprite class]]) {
+            return 0;
+        }
+        PolygonSprite *ps = (PolygonSprite*)sprite;
         if(!ps.sliceEntered){
             ps.sliceEntered = YES;
             

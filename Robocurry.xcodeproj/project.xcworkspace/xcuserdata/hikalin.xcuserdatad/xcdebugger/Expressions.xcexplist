@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[PolygonSprite initWithTexture:body:original:]:PolygonSprite.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[Nabe update:]:Nabe.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "_body-&gt;GetPosition()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "b2Body::GetPosition() const:b2Body.h">
+      </ContextState>
+      <ContextState
+         contextName = "-[PolygonSprite update:]:PolygonSprite.mm">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

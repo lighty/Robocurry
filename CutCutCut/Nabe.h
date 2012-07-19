@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "PolygonSprite.h"
+#import "Box2D.h"
 
-@interface Nabe : PolygonSprite {
-    
+#define PTM_RATIO 32
+
+
+@interface Nabe : CCNode {
+    CCSprite* _sprite;
+    b2Body* _body;
 }
+
+@property(nonatomic,assign)b2Body *body;
+@property(nonatomic,assign)CCSprite *sprite;
 
 @end
