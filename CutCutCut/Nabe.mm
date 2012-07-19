@@ -22,10 +22,10 @@
 
         _sprite = [CCSprite spriteWithFile:@"nabe.png"];
         [parentNode addChild:_sprite];
-    
+   
         // Create _sprite body
         b2BodyDef _spriteBodyDef;
-        _spriteBodyDef.type = b2_dynamicBody;
+        _spriteBodyDef.type = b2_staticBody;
         _spriteBodyDef.userData = _sprite;
         _body = world->CreateBody(&_spriteBodyDef);
     
@@ -60,11 +60,11 @@
 
 -(void)update:(ccTime)delta
 {
-    _sprite.position = ccp(_body->GetPosition().x*PTM_RATIO + _sprite.boundingBox.size.width/2 , _body->GetPosition().y*PTM_RATIO + _sprite.boundingBox.size.height/2);
-    float angle = _body->GetAngle();
-    _sprite.rotation = CC_RADIANS_TO_DEGREES(angle);
-    CCLOG(@"update sprite x:%f y:%f", _sprite.position.x, _sprite.position.y);
-    CCLOG(@"update body x:%f y:%f", _body->GetPosition().x, _body->GetPosition().y);
+    _sprite.position = ccp(_body->GetPosition().x*PTM_RATIO + _sprite.texture.contentSize.width/2 , _body->GetPosition().y*PTM_RATIO + _sprite.texture.contentSize.height/2);
+    _sprite.rotation = -1 * CC_RADIANS_TO_DEGREES(_body->GetAngle());
+//    CCLOG(@"update sprite x:%f y:%f", _sprite.position.x, _sprite.position.y);
+//    CCLOG(@"update body x:%f y:%f", _body->GetPosition().x, _body->GetPosition().y);
+    CCLOG(@"update boundingbox x:%f y:%f", _sprite.texture.contentSize.width, _sprite.texture.contentSize.height);
 }
 
 -(void)setPosition:(CGPoint)position

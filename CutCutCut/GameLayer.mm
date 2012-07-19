@@ -114,11 +114,11 @@ int comparetor(const void *a, const void *b) {
 
     
     _isNabeMoving = NO;
-//    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
-//                                     target:self //呼び出すオブジェクト
-//                                   selector:@selector(updateNabe:)
-//                                   userInfo:nil
-//                                    repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(updateNabe:)
+                                   userInfo:nil
+                                    repeats:NO];
     
     
 }
@@ -164,28 +164,28 @@ int comparetor(const void *a, const void *b) {
         PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite deactivateCollisions];
+        [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Potato_m alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite deactivateCollisions];
+        [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Potato_d alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite deactivateCollisions];
+        [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Onion alloc] initWithWorld:world];
         [self addChild:sprite z:1];
         sprite.position = ccp(-128,0);
-        [sprite deactivateCollisions];
+        [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     

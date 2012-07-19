@@ -651,6 +651,8 @@
 		CD8CF4BE15B3EC6300C7B247 /* Vegetable */ = {
 			isa = PBXGroup;
 			children = (
+				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
+				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
 				CD3D988015B35D6E00A60998 /* Ninjin.h */,
 				CD3D988115B35D6E00A60998 /* Ninjin.mm */,
 				CD8CF4C115B3EF5900C7B247 /* Potato_m.h */,
@@ -714,8 +716,6 @@
 				CDF2195915B24EC3001F11D9 /* RayCastCallback.h */,
 				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
 				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
-				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
-				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
 				CDF3CDBE15A9695800418612 /* GameLayer.h */,
 				CDF3CDBF15A9695800418612 /* GameLayer.mm */,
 				CD70D49C15B57FC0002C94D6 /* TitleLayer.h */,
