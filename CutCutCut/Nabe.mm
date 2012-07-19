@@ -43,7 +43,7 @@
             b2Vec2(215.0 / PTM_RATIO, 113.0 / PTM_RATIO)
         };
     
-        _spriteShape.Set(vertices, count);
+        _spriteShape.Set(vertices, count);  
     
         b2FixtureDef _spriteShapeDef;
         _spriteShapeDef.shape = &_spriteShape;
@@ -64,14 +64,14 @@
     _sprite.rotation = -1 * CC_RADIANS_TO_DEGREES(_body->GetAngle());
 //    CCLOG(@"update sprite x:%f y:%f", _sprite.position.x, _sprite.position.y);
 //    CCLOG(@"update body x:%f y:%f", _body->GetPosition().x, _body->GetPosition().y);
-    CCLOG(@"update boundingbox x:%f y:%f", _sprite.texture.contentSize.width, _sprite.texture.contentSize.height);
+    //CCLOG(@"update boundingbox x:%f y:%f", _sprite.texture.contentSize.width, _sprite.texture.contentSize.height);
 }
 
 -(void)setPosition:(CGPoint)position
 {
     _sprite.position = position;
     _body->SetTransform(b2Vec2((position.x - _sprite.boundingBox.size.width/2) /PTM_RATIO, (position.y - _sprite.boundingBox.size.height/2) /PTM_RATIO), _body->GetAngle());
-    CCLOG(@"setPosition body x:%f y:%f", _body->GetPosition().x, _body->GetPosition().y);
-    CCLOG(@"setPosition sprite x:%f y:%f", _sprite.position.x, _sprite.position.y);
+//    CCLOG(@"setPosition body x:%f y:%f", _body->GetPosition().x, _body->GetPosition().y);
+//    CCLOG(@"setPosition sprite x:%f y:%f", _sprite.position.x, _sprite.position.y);
 }
 @end

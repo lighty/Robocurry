@@ -22,6 +22,8 @@
 #import "PolygonSprite.h"
 #import "RayCastCallback.h"
 
+#import "ContactListener.h"
+
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -54,6 +56,8 @@
     
     // ナベを画面下からズズッとするための変数
     BOOL _isNabeMoving;
+    
+    ContactListener* _contactListener;
 }
 
 // returns a CCScene that contains the GameLayer as the only child

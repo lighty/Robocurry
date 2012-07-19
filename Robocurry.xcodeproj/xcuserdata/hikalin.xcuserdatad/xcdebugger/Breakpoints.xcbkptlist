@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "364396430.674411"
+         timestampString = "364402254.964484"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "326"
-         endingLineNumber = "326"
+         startingLineNumber = "331"
+         endingLineNumber = "331"
          landmarkName = "-ccTouchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "364396430.674411"
+         timestampString = "364402254.964484"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "509"
-         endingLineNumber = "509"
+         startingLineNumber = "514"
+         endingLineNumber = "514"
          landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "364396430.674411"
+         timestampString = "364402254.964484"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "500"
-         endingLineNumber = "500"
+         startingLineNumber = "505"
+         endingLineNumber = "505"
          landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,12 +268,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "364396430.674411"
+         timestampString = "364402254.964484"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "666"
-         endingLineNumber = "666"
+         startingLineNumber = "671"
+         endingLineNumber = "671"
          landmarkName = "-checkAndSliceObjects"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CutCutCut/ContactListener.mm"
+         timestampString = "364406924.394422"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "10"
+         endingLineNumber = "10"
+         landmarkName = "ContactListener::BeginContact(b2Contact* contact)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

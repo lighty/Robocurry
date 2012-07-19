@@ -212,7 +212,8 @@ int comparetor(const void *a, const void *b) {
 	
     [_cache release];
     _cache = nil;
-    
+
+    delete _contactListener;
 	[super dealloc];
 }	
 
@@ -272,6 +273,10 @@ int comparetor(const void *a, const void *b) {
 //	// right
 //	groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
 //	groundBody->CreateFixture(&groundBox,0);
+    
+    // ナベの衝突判定
+    _contactListener = new ContactListener();
+    world->SetContactListener(_contactListener);
 }
 
 -(void) draw

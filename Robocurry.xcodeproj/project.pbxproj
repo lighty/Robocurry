@@ -19,6 +19,7 @@
 		CD027E3D15B83CAE0083FF69 /* Potato_d.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD027E3C15B83CAD0083FF69 /* Potato_d.mm */; };
 		CD027E4015B83ED60083FF69 /* robot1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3E15B83ED60083FF69 /* robot1-hd.png */; };
 		CD027E4115B83ED60083FF69 /* robot1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD027E3F15B83ED60083FF69 /* robot1.png */; };
+		CD027E4415B8551B0083FF69 /* ContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD027E4315B8551A0083FF69 /* ContactListener.mm */; };
 		CD3D987A15B3598D00A60998 /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CD3D987915B3598C00A60998 /* bg1.png */; };
 		CD3D988215B35D6E00A60998 /* Ninjin.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD3D988115B35D6E00A60998 /* Ninjin.mm */; };
 		CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */; };
@@ -233,6 +234,8 @@
 		CD027E3C15B83CAD0083FF69 /* Potato_d.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Potato_d.mm; sourceTree = "<group>"; };
 		CD027E3E15B83ED60083FF69 /* robot1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "robot1-hd.png"; sourceTree = "<group>"; };
 		CD027E3F15B83ED60083FF69 /* robot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robot1.png; sourceTree = "<group>"; };
+		CD027E4215B855100083FF69 /* ContactListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListener.h; sourceTree = "<group>"; };
+		CD027E4315B8551A0083FF69 /* ContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ContactListener.mm; sourceTree = "<group>"; };
 		CD3D987915B3598C00A60998 /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		CD3D988015B35D6E00A60998 /* Ninjin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ninjin.h; sourceTree = "<group>"; };
 		CD3D988115B35D6E00A60998 /* Ninjin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Ninjin.mm; sourceTree = "<group>"; };
@@ -714,6 +717,8 @@
 				CD8CF4BE15B3EC6300C7B247 /* Vegetable */,
 				CDF3CDCE15A96EE000418612 /* PRKit */,
 				CDF2195915B24EC3001F11D9 /* RayCastCallback.h */,
+				CD027E4215B855100083FF69 /* ContactListener.h */,
+				CD027E4315B8551A0083FF69 /* ContactListener.mm */,
 				CDF3CDBB15A9695800418612 /* AppDelegate.h */,
 				CDF3CDBC15A9695800418612 /* AppDelegate.mm */,
 				CDF3CDBE15A9695800418612 /* GameLayer.h */,
@@ -1562,6 +1567,7 @@
 				CD9CCC1415B6F1FF001D329D /* Nabe.mm in Sources */,
 				CD027E3A15B83B470083FF69 /* Onion.mm in Sources */,
 				CD027E3D15B83CAE0083FF69 /* Potato_d.mm in Sources */,
+				CD027E4415B8551B0083FF69 /* ContactListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
