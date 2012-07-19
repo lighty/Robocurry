@@ -106,32 +106,41 @@ int comparetor(const void *a, const void *b) {
     // ナベのタグをどっかに定義したい
     [self addChild:nabe z:0 tag:1];
     
+    
     // Define the ground body.
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0, 0); // bottom-left corner
-	groundBody = world->CreateBody(&groundBodyDef);
+	b2BodyDef nabeBodyDef;
+	nabeBodyDef.position.Set(0, 0); // bottom-left corner
+    b2Body* nabeBody;
+	nabeBody = world->CreateBody(&nabeBodyDef);
    	b2EdgeShape groundBox;		
     groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
     groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    nabeBody->CreateFixture(&groundBox,0);
+    // top
+    groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO));
+    b2Fixture *sensorfixture = nabeBody->CreateFixture(&groundBox,0);
+    b2Filter filter = sensorfixture->GetFilterData();
+    filter.categoryBits = 0;
+    filter.maskBits = 0;
+    sensorfixture->SetFilterData(filter);
     
     _isNabeMoving = NO;
-    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
-                                     target:self //呼び出すオブジェクト
-                                   selector:@selector(updateNabe:)
-                                   userInfo:nil
-                                    repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
+//                                     target:self //呼び出すオブジェクト
+//                                   selector:@selector(updateNabe:)
+//                                   userInfo:nil
+//                                    repeats:NO];
     
     
 }
