@@ -101,17 +101,30 @@ int comparetor(const void *a, const void *b) {
 -(void)initNabe
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
-    //CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
-    //nabe.position = ccp(screen.width/2,64); // spriteの中心がccpで指定した場所
+    CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
+    nabe.position = ccp(nabe.texture.contentSize.width/2, nabe.texture.contentSize.height/2);
     // ナベのタグをどっかに定義したい
-    //[self addChild:nabe z:0 tag:1];
+    [self addChild:nabe z:0 tag:1];
     
-    {
-        Nabe *sprite = [[Nabe alloc] initWithWorld:world parentNode:self];
-        [self addChild:sprite z:1];
-        sprite.position = ccp(screen.width/2, 64);
-    }
-
+    // Define the ground body.
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0, 0); // bottom-left corner
+	groundBody = world->CreateBody(&groundBodyDef);
+   	b2EdgeShape groundBox;		
+    groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
     
     _isNabeMoving = NO;
     [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
@@ -482,7 +495,7 @@ int comparetor(const void *a, const void *b) {
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:1];
         newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x/4,body1->GetMass()*vector1.y/4), b2Vec2(midX,midY));
-        [newSprite1 deactivateCollisions];
+        [newSprite1 activateCollisions];
         
         // create the second sprite's body
         b2Body *body2 = [self createBodyWithPosition:sprite.body->GetPosition() 
@@ -496,7 +509,7 @@ int comparetor(const void *a, const void *b) {
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:1];
         newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x/4,body2->GetMass()*vector2.y/4), b2Vec2(midX,midY));
-        [newSprite2 deactivateCollisions];
+        [newSprite2 activateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
         if (sprite.original) {
