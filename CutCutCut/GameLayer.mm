@@ -134,7 +134,7 @@ int comparetor(const void *a, const void *b) {
     b2Fixture *sensorFixture = nabeTopBody->CreateFixture(&groundBox,0);
     nabeTopBody->SetUserData(@"nabe_top");
     sensorFixture->SetUserData(@"nabe_top");
-    sensorFixture->SetSensor(true);
+    //sensorFixture->SetSensor(true); // sensor cannot get contact point
     b2Filter filter = sensorFixture->GetFilterData();
     filter.categoryBits = 0x0001;
     filter.maskBits = 0x0001;

@@ -48,3 +48,21 @@ void ContactListener::EndContact(b2Contact* contact)
     if( spriteA != NULL && spriteB != NULL){
     }
 }
+
+void ContactListener::PreSolve(b2Contact* contact, 
+                                 const b2Manifold* oldManifold) {
+    b2Body* bodyA = contact->GetFixtureA()->GetBody();
+    b2Body* bodyB = contact->GetFixtureB()->GetBody();
+    id spriteA = (id)bodyA->GetUserData();
+    id spriteB = (id)bodyB->GetUserData();
+
+    if(spriteA != NULL && spriteB != NULL && [spriteA isKindOfClass:[NSString class]] && spriteA == @"nabe_top"){
+         contact->SetEnabled(false);
+    }
+   
+}
+
+void ContactListener::PostSolve(b2Contact* contact, 
+                                  const b2ContactImpulse* impulse) {
+    contact->SetEnabled(true);
+}
