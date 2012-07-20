@@ -4,6 +4,7 @@
 #import "CCSprite.h"
 #import "Nabe.h"
 #import "CCAnimationHelper.h"
+#import "GameLayer.h"
 
 void ContactListener::SetNode(id node)
 {
@@ -26,11 +27,17 @@ void ContactListener::BeginContact(b2Contact* contact)
         id act_func =[CCCallFunc actionWithTarget:_node selector:@selector(cleanUpShibuki)];
         id act = [CCSequence actions:anim, act_func, nil];
         
+        // 衝突位置の割り出し
+        b2WorldManifold manifold;
+        contact->GetWorldManifold(&manifold);
+        b2Vec2 b2ContactPoint = manifold.points[0];
+        
+        // 水しぶきのスプライト作成
         CCSprite *sprite = [CCSprite spriteWithFile:@"shibuk0.png"];
-        sprite.position = ccp(240, 240);
+        sprite.position = ccp(b2ContactPoint.x * PTM_RATIO, b2ContactPoint.y * PTM_RATIO + sprite.texture.contentSize.height/2-5);
         [sprite runAction:act];
         // ナベのタグをどっかに定義したい
-        [(CCNode*)_node addChild:sprite z:0 tag:100];
+        [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];
         
         
 //        CCLOG(@"spriteA class:%@", [spriteA class]);

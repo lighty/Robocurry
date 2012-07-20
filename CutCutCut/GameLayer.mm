@@ -104,9 +104,13 @@ int comparetor(const void *a, const void *b) {
     CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
     nabe.position = ccp((screen.width/2), nabe.texture.contentSize.height/2);
     // ナベのタグをどっかに定義したい
-    [self addChild:nabe z:0 tag:1];
+    [self addChild:nabe z:Z_NABE tag:1];
     
+    CCSprite *nabe_front = [CCSprite spriteWithFile:@"nabe_front.png"];
+    nabe_front.position = ccp((screen.width/2), nabe_front.texture.contentSize.height/2);
+    [self addChild:nabe_front z:Z_NABE_FRONT tag:1];
     
+
     // Define the ground body.
 	b2BodyDef nabeBodyDef;
 	nabeBodyDef.position.Set((screen.width/2-nabe.texture.contentSize.width/2)/PTM_RATIO, 8/PTM_RATIO);
@@ -189,28 +193,28 @@ int comparetor(const void *a, const void *b) {
     // Just create one sprite for now. This whole method will be replaced later.
     {
         PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
-        [self addChild:sprite z:1];
+        [self addChild:sprite z:Z_VEGE];
         sprite.position = ccp(-128,0);
         [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Potato_m alloc] initWithWorld:world];
-        [self addChild:sprite z:1];
+        [self addChild:sprite z:Z_VEGE];
         sprite.position = ccp(-128,0);
         [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Potato_d alloc] initWithWorld:world];
-        [self addChild:sprite z:1];
+        [self addChild:sprite z:Z_VEGE];
         sprite.position = ccp(-128,0);
         [sprite activateCollisions];
         [_cache addObject:sprite];    
     }
     {
         PolygonSprite *sprite = [[Onion alloc] initWithWorld:world];
-        [self addChild:sprite z:1];
+        [self addChild:sprite z:Z_VEGE];
         sprite.position = ccp(-128,0);
         [sprite activateCollisions];
         [_cache addObject:sprite];    
@@ -223,8 +227,6 @@ int comparetor(const void *a, const void *b) {
         [self addChild:sprite z:1];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
     }
-    
-    
     
     _tmPushCount = 0;
 }
@@ -508,7 +510,7 @@ int comparetor(const void *a, const void *b) {
                                          restitution:originalFixture->GetRestitution()];
         // create the first sprite
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
-        [self addChild:newSprite1 z:1];
+        [self addChild:newSprite1 z:Z_VEGE_SLICED];
         newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x/4,body1->GetMass()*vector1.y/4), b2Vec2(midX,midY));
         [newSprite1 activateCollisions];
         
@@ -522,7 +524,7 @@ int comparetor(const void *a, const void *b) {
                                          restitution:originalFixture->GetRestitution()];
         // create the second sprite
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
-        [self addChild:newSprite2 z:1];
+        [self addChild:newSprite2 z:Z_VEGE_SLICED];
         newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x/4,body2->GetMass()*vector2.y/4), b2Vec2(midX,midY));
         [newSprite2 activateCollisions];
         

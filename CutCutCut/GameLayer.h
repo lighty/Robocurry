@@ -36,6 +36,12 @@ typedef enum _Tag
 #define PTM_RATIO 32
 #define NABE_SPEED 2
 #define MIN_CUT_AREA 1.0
+// zOrderの管理はどうするべき?
+#define Z_NABE_FRONT 100
+#define Z_NABE 20
+#define Z_SHIBUKI 90
+#define Z_VEGE 50
+#define Z_VEGE_SLICED 50
 
 // GameLayer
 @interface GameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
