@@ -114,8 +114,11 @@
 {
     b2Fixture *fixture = _body->GetFixtureList();
     b2Filter filter = fixture->GetFilterData();
-    filter.categoryBits = 0x0001;
-    filter.maskBits = 0x0001;
+    // カテゴリーbitはどこか1桁だけbitを立てておく方がよさそう
+    // マスクは、各bitが意味するカテゴリと衝突させたいなら1で埋める
+    // activeの場合は野菜と壁に衝突
+    filter.categoryBits = 0x0004;   // 0100 
+    filter.maskBits = 0x0007;       // 0111
     fixture->SetFilterData(filter);
 }
 
@@ -123,8 +126,9 @@
 {
     b2Fixture *fixture = _body->GetFixtureList();
     b2Filter filter = fixture->GetFilterData();
-    filter.categoryBits = 0;
-    filter.maskBits = 0;
+    // ナベの壁には衝突させたい
+    filter.categoryBits = 0x0004;   // 0100
+    filter.maskBits = 0x0003;       // 0011
     fixture->SetFilterData(filter);
 }
 

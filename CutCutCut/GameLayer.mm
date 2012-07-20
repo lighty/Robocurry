@@ -140,8 +140,9 @@ int comparetor(const void *a, const void *b) {
     sensorFixture->SetUserData(@"nabe_top");
     //sensorFixture->SetSensor(true); // sensor cannot get contact point
     b2Filter filter = sensorFixture->GetFilterData();
-    filter.categoryBits = 0x0001;
-    filter.maskBits = 0x0001;
+    // 水のセンサーは2桁目のbitを立てる
+    filter.categoryBits = 0x0002;   // 0010
+    filter.maskBits = 0x0007;       // 0111
     sensorFixture->SetFilterData(filter);
     
     _isNabeMoving = NO;
@@ -530,15 +531,15 @@ int comparetor(const void *a, const void *b) {
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
         if (sprite.original) {
-            [sprite deactivateCollisions];
-            sprite.position = ccp(-256, -256);
-            sprite.sliceEntered = NO;
-            sprite.sliceExited = NO;
-            sprite.entryPoint.SetZero();
-            sprite.exitPoint.SetZero();
+//            [sprite deactivateCollisions];
+//            sprite.position = ccp(-256, -256);
+//            sprite.sliceEntered = NO;
+//            sprite.sliceExited = NO;
+//            sprite.entryPoint.SetZero();
+//            sprite.exitPoint.SetZero();
             // オリジナル消したらまずいのか...?
-//            world->DestroyBody(sprite.body);
-//            [self removeChild:sprite cleanup:YES];
+            world->DestroyBody(sprite.body);
+            [self removeChild:sprite cleanup:YES];
         } else {
             world->DestroyBody(sprite.body);
             [self removeChild:sprite cleanup:YES];

@@ -39,6 +39,9 @@ void ContactListener::BeginContact(b2Contact* contact)
         // ナベのタグをどっかに定義したい
         [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];
         
+        // 水に入ったやつは衝突させない
+        [spriteB deactivateCollisions];
+        
         
 //        CCLOG(@"spriteA class:%@", [spriteA class]);
 //        CCLOG(@"spriteB class:%@", [spriteB class]);
