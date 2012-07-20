@@ -80,7 +80,7 @@ int comparetor(const void *a, const void *b) {
 		[self scheduleUpdate];
 
         [self initBackground];
-        
+
         _nextPushTime = CACurrentMediaTime() + 1;
         
         [self initNabe];
@@ -102,14 +102,14 @@ int comparetor(const void *a, const void *b) {
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
     CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
-    nabe.position = ccp(nabe.texture.contentSize.width/2, nabe.texture.contentSize.height/2);
+    nabe.position = ccp((screen.width/2), nabe.texture.contentSize.height/2);
     // ナベのタグをどっかに定義したい
     [self addChild:nabe z:0 tag:1];
     
     
     // Define the ground body.
 	b2BodyDef nabeBodyDef;
-	nabeBodyDef.position.Set(0, 0); // bottom-left corner
+	nabeBodyDef.position.Set((screen.width/2-nabe.texture.contentSize.width/2)/PTM_RATIO, 8/PTM_RATIO);
     b2Body* nabeBody;
 	nabeBody = world->CreateBody(&nabeBodyDef);
    	b2EdgeShape groundBox;		
@@ -128,12 +128,17 @@ int comparetor(const void *a, const void *b) {
     groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
     nabeBody->CreateFixture(&groundBox,0);
     // top
-    groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO));
-    b2Fixture *sensorfixture = nabeBody->CreateFixture(&groundBox,0);
-    b2Filter filter = sensorfixture->GetFilterData();
-    filter.categoryBits = 0;
-    filter.maskBits = 0;
-    sensorfixture->SetFilterData(filter);
+    b2Body* nabeTopBody;
+    nabeTopBody = world->CreateBody(&nabeBodyDef);
+    groundBox.Set(b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO));
+    b2Fixture *sensorFixture = nabeTopBody->CreateFixture(&groundBox,0);
+    nabeTopBody->SetUserData(@"nabe_top");
+    sensorFixture->SetUserData(@"nabe_top");
+    sensorFixture->SetSensor(true);
+    b2Filter filter = sensorFixture->GetFilterData();
+    filter.categoryBits = 0x0001;
+    filter.maskBits = 0x0001;
+    sensorFixture->SetFilterData(filter);
     
     _isNabeMoving = NO;
 //    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
@@ -298,6 +303,7 @@ int comparetor(const void *a, const void *b) {
     
     // ナベの衝突判定
     _contactListener = new ContactListener();
+    _contactListener->SetNode(self);
     world->SetContactListener(_contactListener);
 }
 
@@ -741,6 +747,11 @@ int comparetor(const void *a, const void *b) {
         _nextPushTime = curTime + _pushInterval;
         _tmPushCount++;
     }
+}
+
+-(void)cleanUpShibuki
+{
+    [self removeChildByTag:100 cleanup:YES];
 }
 
 #pragma mark GameKit delegate

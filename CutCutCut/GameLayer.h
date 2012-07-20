@@ -12,6 +12,11 @@
 #define random_range(low,high) (arc4random()%(high-low+1))+low
 #define midpoint(a,b) (float)(a+b)/2
 
+typedef enum _Tag
+{
+    kTagNabeTop = 1
+} Tag;
+
 #import <GameKit/GameKit.h>
 
 // When you import this file, you import all the cocos2d classes
