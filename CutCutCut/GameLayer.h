@@ -39,6 +39,7 @@ typedef enum _Tag
 // zOrderの管理はどうするべき?
 #define Z_NABE_FRONT 100
 #define Z_NABE 20
+#define Z_BUTTON 15
 #define Z_SHIBUKI 90
 #define Z_VEGE 50
 #define Z_VEGE_SLICED 50

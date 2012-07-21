@@ -39,8 +39,9 @@ void ContactListener::BeginContact(b2Contact* contact)
         // ナベのタグをどっかに定義したい
         [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];
         
-        // 水に入ったやつは衝突させない
-        [spriteB deactivateCollisions];
+        // ナベの下についたやつは壁以外の衝突を無効にして、以降MouseJointさせない
+        //[spriteB deactivateCollisions];
+        //((PolygonSprite*)spriteB).canGrab = NO;
         
         
 //        CCLOG(@"spriteA class:%@", [spriteA class]);

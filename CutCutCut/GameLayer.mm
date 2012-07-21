@@ -20,6 +20,8 @@
 
 enum {
 	kTagParentNode = 1,
+	kTagNabe,
+	kTagButton
 };
 
 
@@ -117,27 +119,46 @@ int comparetor(const void *a, const void *b) {
     b2Body* nabeBody;
 	nabeBody = world->CreateBody(&nabeBodyDef);
    	b2EdgeShape groundBox;		
-    groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
-    groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
-    nabeBody->CreateFixture(&groundBox,0);
+    {
+        groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
+		nabeBody->CreateFixture(&groundBox,0);
+    }
+    {
+        groundBox.Set(b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO));
+		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
+		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
+    }
+    {
+        groundBox.Set(b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO));
+		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
+		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
+    }
+    {
+        groundBox.Set(b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO));
+		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
+		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
+    }
+    {
+        groundBox.Set(b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO));
+		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
+		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
+    }
+    {
+        groundBox.Set(b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO));
+		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
+		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
+    }
+    {
+        groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
+		nabeBody->CreateFixture(&groundBox,0);
+    }
     // top
     b2Body* nabeTopBody;
     nabeTopBody = world->CreateBody(&nabeBodyDef);
     groundBox.Set(b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO));
     b2Fixture *sensorFixture = nabeTopBody->CreateFixture(&groundBox,0);
     nabeTopBody->SetUserData(@"nabe_top");
-    sensorFixture->SetUserData(@"nabe_top");
+    //sensorFixture->SetUserData(@"nabe_top");
     //sensorFixture->SetSensor(true); // sensor cannot get contact point
     b2Filter filter = sensorFixture->GetFilterData();
     // 水のセンサーは2桁目のbitを立てる
@@ -152,7 +173,35 @@ int comparetor(const void *a, const void *b) {
 //                                   userInfo:nil
 //                                    repeats:NO];
     
+    // 発射ボタン
+    CCSprite *button = [CCSprite spriteWithFile:@"button.png"];
+    button.position = ccp((screen.width/4*3), 40);
+    [self addChild:button z:Z_BUTTON tag:kTagButton];
+    // とりあえず15秒後にちかちかさせる
+    [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(blinkingButton:)
+                                   userInfo:nil
+                                    repeats:NO];
+
+}
+
+-(void)blinkingButton:(ccTime *)timer
+{
+    CCAnimation* animation = [CCAnimation animationWithFile:@"button_lighted" frameCount:2 delay:0.2f];
+    id anim = [CCAnimate actionWithAnimation:animation];
+    id act = [CCSequence actions:anim, nil];
+//    id repeat_act = [CCRepeat actionWithAction:act times:4];
+    id repeat_act = [CCRepeatForever actionWithAction:act];
+    CCSprite* sprite = [self getChildByTag:kTagButton];
+    CCLOG(@"animation.frames:%d",animation.frames.count);
+    CCSprite *button_blink = [CCSprite spriteWithSpriteFrame:[[animation.frames objectAtIndex:0] spriteFrame]];
+    button_blink.position = sprite.position;
     
+    [button_blink runAction:repeat_act];
+    [self removeChild:sprite cleanup:YES];
+    // ナベのタグをどっかに定義したい
+    [self addChild:button_blink z:Z_BUTTON tag:kTagButton];
 }
 
 -(void)updateNabe:(ccTime *)timer
@@ -356,6 +405,20 @@ int comparetor(const void *a, const void *b) {
         location = [[CCDirector sharedDirector]convertToGL:location];
         _startPoint = location;
         _endPoint = location;
+
+        // 発射ボタンの押下判定
+        {
+            CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+            CCNode* sprite = [self getChildByTag:kTagButton];
+            if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
+                // ボタン押下でpushed画像に変更
+                CCSprite *button_pushed = [CCSprite spriteWithFile:@"button_pushed.png"];
+                button_pushed.position = sprite.position;
+                [self addChild:button_pushed z:Z_BUTTON tag:kTagButton];
+                [self removeChild:sprite cleanup:YES];
+                break;
+            }
+        }
         
         CCNode* node;
         CCARRAY_FOREACH([self children], node){
@@ -414,6 +477,20 @@ int comparetor(const void *a, const void *b) {
 		CGPoint location = [touch locationInView: [touch view]];
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
+
+        // 発射ボタンの判定（リファクタリングしたい）
+        {
+            CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
+            CCNode* sprite = [self getChildByTag:kTagButton];
+            if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
+                // ボタン押下で普通のボタン画像に変更
+                CCSprite *button = [CCSprite spriteWithFile:@"button.png"];
+                button.position = sprite.position;
+                [self addChild:button z:Z_BUTTON tag:kTagButton];
+                [self removeChild:sprite cleanup:YES];
+                break;
+            }
+        }
 	}
     
     // タッチ移動の解除
@@ -421,7 +498,7 @@ int comparetor(const void *a, const void *b) {
         world->DestroyJoint(_mouseJoint);
         _mouseJoint = NULL;
     }
-    
+        
     [self clearSlices];
 }
 

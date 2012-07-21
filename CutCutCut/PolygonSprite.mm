@@ -19,6 +19,7 @@
 @synthesize sliceEntered = _sliceEntered;
 @synthesize sliceExited = _sliceExited;
 @synthesize sliceEntryTime = _sliceEntryTime;
+@synthesize canGrab = _canGrab;
 
 
 +(id)spriteWithFile:(NSString *)filename body:(b2Body *)body original:(BOOL)original
@@ -60,6 +61,7 @@
     _entryPoint.SetZero();
     _exitPoint.SetZero();
     _sliceExited = 0;
+    _canGrab = YES;
     
     if ((self = [super initWithPoints:points andTexture:texture]))
     {
@@ -165,6 +167,9 @@
 
 -(b2MouseJoint*)testPointWithLocation:(b2Vec2)location groundBody:(b2Body *)groundBody world:(b2World *)world
 {
+    if (!_canGrab) {
+        return nil;
+    }
     for (b2Fixture* f = _body->GetFixtureList(); f;f = f->GetNext()) {
         // 1回しかループしない想定...
         //CCLOG(@"location.x:%f location.y:%f", location.x, location.y);

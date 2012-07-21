@@ -34,10 +34,10 @@
 }
 
 // Creates an animation from sprite frames.
-+(CCAnimation*) animationWithFrame:(NSString*)frame frameCount:(int)frameCount delay:(float)delay
-{
-	// Not implemented yet.
-	return nil;
-}
+//+(CCAnimation*) animationWithFrame:(NSString*)frame frameCount:(int)frameCount delay:(float)delay
+//{
+//	// Not implemented yet.
+//	return nil;
+//}
 
 @end

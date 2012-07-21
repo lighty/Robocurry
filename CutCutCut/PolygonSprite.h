@@ -22,6 +22,7 @@
     b2Vec2 _entryPoint;
     b2Vec2 _exitPoint;
     double _sliceEntryTime;    
+    BOOL _canGrab;
 }
 
 @property(nonatomic,assign)b2Body *body;
@@ -33,6 +34,8 @@
 @property(nonatomic,readwrite)b2Vec2 entryPoint;
 @property(nonatomic,readwrite)b2Vec2 exitPoint;
 @property(nonatomic,readwrite)double sliceEntryTime;
+
+@property(nonatomic,readwrite)BOOL canGrab;
 
 -(id)initWithFile:(NSString*)filename body:(b2Body*)body original:(BOOL)original;
 -(id)initWithTexture:(CCTexture2D*)texture body:(b2Body*)body original:(BOOL)original;
