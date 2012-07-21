@@ -39,6 +39,7 @@ typedef enum _Tag
 // zOrderの管理はどうするべき?
 #define Z_NABE_FRONT 100
 #define Z_NABE 20
+#define Z_NABEBUTA 110
 #define Z_BUTTON 15
 #define Z_SHIBUKI 90
 #define Z_VEGE 50
@@ -76,6 +77,8 @@ typedef enum _Tag
     
     // どの野菜を作成するかを決めるために利用する配列
     NSMutableArray *_vegeArray;
+    
+    NSTimer *_createVegeTimer;
     
     ContactListener* _contactListener;
 }

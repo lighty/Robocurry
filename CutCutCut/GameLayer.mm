@@ -14,6 +14,7 @@
 #import "Nabe.h"
 // Import the interfaces
 #import "GameLayer.h"
+#import "DekiagaLayer.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -21,6 +22,8 @@
 enum {
 	kTagParentNode = 1,
 	kTagNabe,
+	kTagNabebuta,
+	kTagNabeFront,
 	kTagButton
 };
 
@@ -107,14 +110,14 @@ int comparetor(const void *a, const void *b) {
 -(void)initNabe
 {
     CGSize screen = [[CCDirector sharedDirector] winSize];
-    CCSprite *nabe = [CCSprite spriteWithFile:@"nabe.png"];
+    CCSprite *nabe = [CCSprite spriteWithFile:@"nabe0.png"];
     nabe.position = ccp((screen.width/2), nabe.texture.contentSize.height/2);
     // ナベのタグをどっかに定義したい
-    [self addChild:nabe z:Z_NABE tag:1];
+    [self addChild:nabe z:Z_NABE tag:kTagNabe];
     
-    CCSprite *nabe_front = [CCSprite spriteWithFile:@"nabe_front.png"];
+    CCSprite *nabe_front = [CCSprite spriteWithFile:@"nabe_front0.png"];
     nabe_front.position = ccp((screen.width/2), nabe_front.texture.contentSize.height/2);
-    [self addChild:nabe_front z:Z_NABE_FRONT tag:1];
+    [self addChild:nabe_front z:Z_NABE_FRONT tag:kTagNabeFront];
     
 
     // Define the ground body.
@@ -274,7 +277,7 @@ int comparetor(const void *a, const void *b) {
         }
     }
     [self createVegetableRandom:NULL];
-    [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
+    _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
                                      target:self //呼び出すオブジェクト
                                    selector:@selector(createVegetableRandom:)
                                    userInfo:nil
@@ -755,7 +758,7 @@ int comparetor(const void *a, const void *b) {
         float32 triangleArea = 0.5f * D;
         area += triangleArea;
     }
-    CCLOG(@"area:%f",area);
+    //CCLOG(@"area:%f",area);
     if (area <= MIN_CUT_AREA)
     {
         return NO;
@@ -859,7 +862,7 @@ int comparetor(const void *a, const void *b) {
     }
 }
 
-// 時よとまれぃ！
+// 時よとまれ
 -(void)theWorld
 {
     // 野菜のCutを要請
@@ -884,8 +887,28 @@ int comparetor(const void *a, const void *b) {
     }
     _canTouch = NO;
     
+    // 野菜の生成を止める
+    [_createVegeTimer invalidate];
+    _createVegeTimer = nil;
+    
+    // ボディの非表示
+    [NSTimer scheduledTimerWithTimeInterval:0.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(balseBody:)
+                                   userInfo:nil
+                                    repeats:NO];
+    // 鍋ぶたをセット
+    CCSprite *nabebuta = [CCSprite spriteWithFile:@"nabebuta.png"];
+    nabebuta.position = ccp((screen.width/2), screen.height);
+    [self addChild:nabebuta z:Z_NABEBUTA tag:kTagNabebuta];
+    CGPoint nabePosition = [self getChildByTag:kTagNabe].position;
+    CCLOG(@"nabePosion.x:%d y:%d", nabePosition.x, nabePosition.y);
+    id anim = [CCMoveTo actionWithDuration:1.0f position:nabePosition];
+    [nabebuta runAction:anim];
+    
+    
     // 発射のアニメーションセット
-    [NSTimer scheduledTimerWithTimeInterval:2.0 // 時間間隔(秒)
+    [NSTimer scheduledTimerWithTimeInterval:1.5 // 時間間隔(秒)
                                      target:self //呼び出すオブジェクト
                                    selector:@selector(fire:)
                                    userInfo:nil
@@ -893,23 +916,56 @@ int comparetor(const void *a, const void *b) {
     
     
 }
-
--(void)fire:(ccTime *)timer
+-(void)balseBody:(ccTime *)timer
 {
+    id userData;
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
-        id userData = (id)b->GetUserData();
-        if (userData != NULL && [userData isKindOfClass:[NSString class]] && userData == @"nabe_body") {
-            CCLOG(@"ApplyForce");
-            b->ApplyForce(b2Vec2(0,10), b2Vec2(0,30));
-            
+        userData = (id)b->GetUserData();
+        if ([userData isKindOfClass:[PolygonSprite class]]) {
+            world->DestroyBody(b);
+            [self removeChild:(CCNode*)userData cleanup:YES];
         }
     }
+}
+-(void)fire:(ccTime *)timer
+{
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    CCSprite* nabe = (CCSprite*)[self getChildByTag:kTagNabe];
+    CCSprite* nabebuta = (CCSprite*)[self getChildByTag:kTagNabebuta];
+    CCSprite* nabeFront = (CCSprite*)[self getChildByTag:kTagNabeFront];
+    CCSprite* perfectNabe = [CCSprite spriteWithFile:@"nabe_perfect.png"];
+    perfectNabe.position = ccp(nabe.position.x, nabe.contentSize.height * -1);
+    [self addChild:perfectNabe z:Z_NABE tag:kTagNabe];
+    id anim = [CCMoveTo actionWithDuration:2.0f position:ccp(nabe.position.x, screen.height+nabe.contentSize.height)];
+//    id act_func =[CCCallFunc actionWithTarget:self selector:@selector(changeToDekiagaLayer)];
+    id seqAnim = [CCSequence actions:anim, nil];
+    [perfectNabe runAction:seqAnim];
+    [self removeChild:nabe cleanup:YES];
+    [self removeChild:nabebuta cleanup:YES];
+    [self removeChild:nabeFront cleanup:YES];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.2 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(changeToDekiagaLayer)
+                                   userInfo:nil
+                                    repeats:NO];
     
 }
 
 -(void)cleanUpShibuki
 {
     [self removeChildByTag:100 cleanup:YES];
+}
+-(void)changeToDekiagaLayer
+{
+    CCScene *scene;
+    scene = [DekiagaLayer scene];
+    //[self addChild:scene];
+//    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:scene];
+//    [[CCDirector sharedDirector] pushScene:transition];
+    ccColor3B color = {245,245,245};
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:3.5f scene:scene withColor:color]];
+
 }
 
 -(BOOL)hasMouseJoint:(b2Body*)body
