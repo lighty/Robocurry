@@ -47,6 +47,8 @@ void ContactListener::BeginContact(b2Contact* contact)
 //        CCLOG(@"spriteA class:%@", [spriteA class]);
 //        CCLOG(@"spriteB class:%@", [spriteB class]);
     }
+    
+
 }
 
 void ContactListener::EndContact(b2Contact* contact)
@@ -71,6 +73,28 @@ void ContactListener::PreSolve(b2Contact* contact,
          contact->SetEnabled(false);
     }
    
+    // ナベが底に付いたら動きとめて衝突&タッチをできないようにする。マウスジョイントしている場合は除く
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    id fixtureAUserData = (id)fixtureA->GetUserData();
+    id fixtureBUserData = (id)fixtureB->GetUserData();
+    if(spriteA != NULL && spriteB != NULL && [fixtureAUserData isKindOfClass:[NSString class]] && fixtureAUserData == @"nabe_bottom_fixture" && ![_node hasMouseJoint:bodyB]){
+        
+        
+        
+        bodyA->SetLinearVelocity(b2Vec2(0,0));
+        bodyA->SetAngularVelocity(0);
+        [spriteB deactivateCollisions];
+        ((PolygonSprite*)spriteB).canGrab = NO;
+        contact->SetEnabled(false);        
+        // マウスジョイントしてたら外す
+//        [_node destroyMouseJoint:bodyB];
+        
+        //        CCLOG(@"spriteA class:%@", [spriteA class]);
+        //        CCLOG(@"spriteB class:%@", [spriteB class]);
+    }    
+
+
 }
 
 void ContactListener::PostSolve(b2Contact* contact, 

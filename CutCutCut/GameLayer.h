@@ -43,6 +43,7 @@ typedef enum _Tag
 #define Z_SHIBUKI 90
 #define Z_VEGE 50
 #define Z_VEGE_SLICED 50
+#define Z_BG_BLACK 100
 
 // GameLayer
 @interface GameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
@@ -51,8 +52,6 @@ typedef enum _Tag
     b2Body* groundBody;
 	GLESDebugDraw *m_debugDraw;		// strong ref
     
-    
-    CCArray *_cache;
     
     CGPoint _startPoint;
     CGPoint _endPoint;
@@ -69,6 +68,15 @@ typedef enum _Tag
     // ナベを画面下からズズッとするための変数
     BOOL _isNabeMoving;
     
+    // オブジェクトのcutのon/offを設定
+    BOOL _canSliceObject;
+    
+    // タッチを呈しする
+    BOOL _canTouch;
+    
+    // どの野菜を作成するかを決めるために利用する配列
+    NSMutableArray *_vegeArray;
+    
     ContactListener* _contactListener;
 }
 
@@ -81,6 +89,8 @@ typedef enum _Tag
 -(void)splitPolygonSprite:(PolygonSprite*)sprite;
 -(BOOL)areVerticesAcceptable:(b2Vec2*)vertices count:(int)count;
 -(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
+-(void)destroyMouseJoint:(b2Body*)body;
+-(BOOL)hasMouseJoint:(b2Body*)body;
 
 @end
 

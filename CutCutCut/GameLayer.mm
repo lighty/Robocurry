@@ -71,6 +71,10 @@ int comparetor(const void *a, const void *b) {
 		
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
+        
+        _canSliceObject = YES;
+        _canTouch = YES;
+        
 		//CGSize s = [CCDirector sharedDirector].winSize;
 		
 		// init physics
@@ -118,7 +122,8 @@ int comparetor(const void *a, const void *b) {
 	nabeBodyDef.position.Set((screen.width/2-nabe.texture.contentSize.width/2)/PTM_RATIO, 8/PTM_RATIO);
     b2Body* nabeBody;
 	nabeBody = world->CreateBody(&nabeBodyDef);
-   	b2EdgeShape groundBox;		
+    nabeBody->SetUserData(@"nabe_body");
+   	b2EdgeShape groundBox;	
     {
         groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
 		nabeBody->CreateFixture(&groundBox,0);
@@ -240,36 +245,6 @@ int comparetor(const void *a, const void *b) {
 {
     _cache = [[CCArray alloc] initWithCapacity:5];
     
-    // Just create one sprite for now. This whole method will be replaced later.
-    {
-        PolygonSprite *sprite = [[Ninjin alloc] initWithWorld:world];
-        [self addChild:sprite z:Z_VEGE];
-        sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
-    }
-    {
-        PolygonSprite *sprite = [[Potato_m alloc] initWithWorld:world];
-        [self addChild:sprite z:Z_VEGE];
-        sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
-    }
-    {
-        PolygonSprite *sprite = [[Potato_d alloc] initWithWorld:world];
-        [self addChild:sprite z:Z_VEGE];
-        sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
-    }
-    {
-        PolygonSprite *sprite = [[Onion alloc] initWithWorld:world];
-        [self addChild:sprite z:Z_VEGE];
-        sprite.position = ccp(-128,0);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
-    }
-    
     // ロボ
     CGSize screen = [[CCDirector sharedDirector] winSize];
     {
@@ -278,7 +253,49 @@ int comparetor(const void *a, const void *b) {
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
     }
     
+    // 野菜作成の準備
+    NSMutableDictionary *vegeDefine = [NSMutableDictionary dictionary];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Ninjin class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_d class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_m class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Onion class]];
+    NSArray *vegeDefineKeys = [vegeDefine allKeys];
+    _vegeArray = [[NSMutableArray alloc]init];
+    int vegeDefineCount = [vegeDefineKeys count];
+    id clazz = NULL;
+    int keisu;
+    for (int i = 0; i < vegeDefineCount; i++) {
+        clazz = [vegeDefineKeys objectAtIndex:i];
+        NSNumber *num = (NSNumber*)[vegeDefine objectForKey:clazz];
+        keisu = [num intValue];
+        // keisu回分オブジェクトを作成
+        for (int j=0; j < keisu; j++) {
+            [_vegeArray addObject:clazz];
+        }
+    }
+    [self createVegetableRandom:NULL];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(createVegetableRandom:)
+                                   userInfo:nil
+                                    repeats:YES];
+    
     _tmPushCount = 0;
+}
+
+-(void)createVegetableRandom:(ccTime)timer
+{
+    CCLOG(@"vegecount:%d",[_vegeArray count]);
+    id clazz = [_vegeArray objectAtIndex:random_range(0, [_vegeArray count]-1)];
+    // Just create one sprite for now. This whole method will be replaced later.
+    {
+        PolygonSprite *sprite = [[clazz alloc] initWithWorld:world];
+        [self addChild:sprite z:Z_VEGE];
+        sprite.position = ccp(128,128);
+        [sprite activateCollisions];
+        [_cache addObject:sprite];    
+    }
+     _tmPushCount++;
 }
 
 -(void) dealloc
@@ -294,12 +311,13 @@ int comparetor(const void *a, const void *b) {
 
     delete _contactListener;
 	[super dealloc];
+    
+    _vegeArray = nil;
+    
 }	
 
 -(void) initPhysics
 {
-	
-	CGSize s = [[CCDirector sharedDirector] winSize];
 	
 	b2Vec2 gravity;
 	//gravity.Set(0.0f, -10.0f);
@@ -393,13 +411,16 @@ int comparetor(const void *a, const void *b) {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);	
     [self checkAndSliceObjects];
-    [self spriteLoop];
+//    [self spriteLoop];
     [self moveNabe];
     
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_canTouch) {
+        return;
+    }
     for(UITouch *touch in touches){
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector]convertToGL:location];
@@ -472,6 +493,9 @@ int comparetor(const void *a, const void *b) {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_canTouch) {
+        return;
+    }
 	//Add a new body/atlas sprite at the touched location
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
@@ -488,6 +512,7 @@ int comparetor(const void *a, const void *b) {
                 button.position = sprite.position;
                 [self addChild:button z:Z_BUTTON tag:kTagButton];
                 [self removeChild:sprite cleanup:YES];
+                [self theWorld];
                 break;
             }
         }
@@ -770,6 +795,11 @@ int comparetor(const void *a, const void *b) {
 {
     double curTime = CACurrentMediaTime();
     id* userData;
+    
+    if (!_canSliceObject) {
+        return;
+    }
+    
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData() != NULL) {
             userData = (id*)b->GetUserData();
@@ -829,9 +859,73 @@ int comparetor(const void *a, const void *b) {
     }
 }
 
+// 時よとまれぃ！
+-(void)theWorld
+{
+    // 野菜のCutを要請
+    _canSliceObject = NO;
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+
+    // 暗い背景を付ける
+    CCSprite *backGroundBlack = [CCSprite spriteWithFile:@"bg_black.png"];
+    backGroundBlack.position = ccp(screen.width/2,screen.height/2);
+    [self addChild:backGroundBlack z:Z_BG_BLACK tag:1];
+    
+    // 効果音とか
+    
+    // 野菜のタッチ抑制
+    
+    // 野菜の動きを止める
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            b->SetLinearVelocity(b2Vec2(0,0));
+            b->SetAngularVelocity(0);
+        }
+    }
+    _canTouch = NO;
+    
+    // 発射のアニメーションセット
+    [NSTimer scheduledTimerWithTimeInterval:2.0 // 時間間隔(秒)
+                                     target:self //呼び出すオブジェクト
+                                   selector:@selector(fire:)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+    
+}
+
+-(void)fire:(ccTime *)timer
+{
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
+        id userData = (id)b->GetUserData();
+        if (userData != NULL && [userData isKindOfClass:[NSString class]] && userData == @"nabe_body") {
+            CCLOG(@"ApplyForce");
+            b->ApplyForce(b2Vec2(0,10), b2Vec2(0,30));
+            
+        }
+    }
+    
+}
+
 -(void)cleanUpShibuki
 {
     [self removeChildByTag:100 cleanup:YES];
+}
+
+-(BOOL)hasMouseJoint:(b2Body*)body
+{
+    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
+        return YES;
+    }else {
+        return NO;
+    };
+}
+-(void)destroyMouseJoint:(b2Body*)body
+{
+    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
+        world->DestroyJoint(_mouseJoint);
+        _mouseJoint = NULL;
+    }
 }
 
 #pragma mark GameKit delegate
