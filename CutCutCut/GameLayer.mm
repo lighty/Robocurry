@@ -10,6 +10,7 @@
 #import "Potato_m.h"
 #import "Potato_d.h"
 #import "Onion.h"
+#import "Roo.h"
 
 #import "Nabe.h"
 // Import the interfaces
@@ -18,15 +19,7 @@
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-
-enum {
-	kTagParentNode = 1,
-	kTagNabe,
-	kTagNabebuta,
-	kTagNabeFront,
-	kTagButton
-};
-
+#import "CCAnimationHelper.h"
 
 #pragma mark - GameLayer
 
@@ -49,7 +42,7 @@ int comparetor(const void *a, const void *b) {
 
 @implementation GameLayer
 
-@synthesize cache = _cache;
+@synthesize nabeContents = _nabeContents;
 
 +(CCScene *) scene
 {
@@ -109,6 +102,10 @@ int comparetor(const void *a, const void *b) {
 
 -(void)initNabe
 {
+    // ナベの内容物
+    _nabeContents = [[NSMutableDictionary alloc]init];
+    [_nabeContents setObject:[NSNumber numberWithFloat:0] forKey:[Roo class]];
+    
     CGSize screen = [[CCDirector sharedDirector] winSize];
     CCSprite *nabe = [CCSprite spriteWithFile:@"nabe0.png"];
     nabe.position = ccp((screen.width/2), nabe.texture.contentSize.height/2);
@@ -128,42 +125,22 @@ int comparetor(const void *a, const void *b) {
     nabeBody->SetUserData(@"nabe_body");
    	b2EdgeShape groundBox;	
     {
-        groundBox.Set(b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO));
+        groundBox.Set(b2Vec2(30.0/PTM_RATIO,100.0/PTM_RATIO), b2Vec2(33.0/PTM_RATIO,0.0/PTM_RATIO));
 		nabeBody->CreateFixture(&groundBox,0);
     }
     {
-        groundBox.Set(b2Vec2(42.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO));
+        groundBox.Set(b2Vec2(33.0/PTM_RATIO,0.0/PTM_RATIO), b2Vec2(222.0/PTM_RATIO,0.0/PTM_RATIO));
 		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
 		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
     }
     {
-        groundBox.Set(b2Vec2(65.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO));
-		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
-		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
-    }
-    {
-        groundBox.Set(b2Vec2(98.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO));
-		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
-		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
-    }
-    {
-        groundBox.Set(b2Vec2(153.0/PTM_RATIO,3.0/PTM_RATIO), b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO));
-		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
-		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
-    }
-    {
-        groundBox.Set(b2Vec2(193.0/PTM_RATIO,8.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO));
-		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
-		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
-    }
-    {
-        groundBox.Set(b2Vec2(215.0/PTM_RATIO,18.0/PTM_RATIO), b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO));
+        groundBox.Set(b2Vec2(222.0/PTM_RATIO,0.0/PTM_RATIO), b2Vec2(225.0/PTM_RATIO,100.0/PTM_RATIO));
 		nabeBody->CreateFixture(&groundBox,0);
     }
     // top
     b2Body* nabeTopBody;
     nabeTopBody = world->CreateBody(&nabeBodyDef);
-    groundBox.Set(b2Vec2(215.0/PTM_RATIO,113.0/PTM_RATIO), b2Vec2(42.0/PTM_RATIO,113.0/PTM_RATIO));
+    groundBox.Set(b2Vec2(44.0/PTM_RATIO,93.0/PTM_RATIO), b2Vec2(203.0/PTM_RATIO,93.0/PTM_RATIO));
     b2Fixture *sensorFixture = nabeTopBody->CreateFixture(&groundBox,0);
     nabeTopBody->SetUserData(@"nabe_top");
     //sensorFixture->SetUserData(@"nabe_top");
@@ -246,8 +223,6 @@ int comparetor(const void *a, const void *b) {
 
 -(void)initSprites
 {
-    _cache = [[CCArray alloc] initWithCapacity:5];
-    
     // ロボ
     CGSize screen = [[CCDirector sharedDirector] winSize];
     {
@@ -262,6 +237,7 @@ int comparetor(const void *a, const void *b) {
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_d class]];
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_m class]];
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Onion class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:1000] forKey:[Roo class]];
     NSArray *vegeDefineKeys = [vegeDefine allKeys];
     _vegeArray = [[NSMutableArray alloc]init];
     int vegeDefineCount = [vegeDefineKeys count];
@@ -281,22 +257,51 @@ int comparetor(const void *a, const void *b) {
                                      target:self //呼び出すオブジェクト
                                    selector:@selector(createVegetableRandom:)
                                    userInfo:nil
-                                    repeats:YES];
-    
+                                    repeats:NO];
     _tmPushCount = 0;
 }
 
 -(void)createVegetableRandom:(ccTime)timer
 {
-    CCLOG(@"vegecount:%d",[_vegeArray count]);
+    CGSize screen = [[CCDirector sharedDirector]winSize];
+    // ランダムで作成するものを決める
     id clazz = [_vegeArray objectAtIndex:random_range(0, [_vegeArray count]-1)];
     // Just create one sprite for now. This whole method will be replaced later.
-    {
-        PolygonSprite *sprite = [[clazz alloc] initWithWorld:world];
-        [self addChild:sprite z:Z_VEGE];
-        sprite.position = ccp(128,128);
-        [sprite activateCollisions];
-        [_cache addObject:sprite];    
+    PolygonSprite *sprite = [[clazz alloc] initWithWorld:world];
+    [self addChild:sprite z:Z_VEGE];
+    [sprite activateCollisions];
+    
+    // ランダムで作成する場所を決める
+    switch (random_range(0, 3)) {
+        case 0:
+            sprite.position = ccp(-256,screen.height/2);
+            sprite.body->ApplyLinearImpulse(b2Vec2(100,0), b2Vec2(sprite.body->GetPosition()));
+            break;
+        case 1:
+            sprite.position = ccp(screen.width,screen.height/2);
+            sprite.body->ApplyLinearImpulse(b2Vec2(-100,0), b2Vec2(sprite.body->GetPosition()));
+            break;
+        case 2:
+            sprite.position = ccp(screen.width/3,screen.height);
+            sprite.body->ApplyLinearImpulse(b2Vec2(0,-100), b2Vec2(sprite.body->GetPosition()));
+            break;
+        case 3:
+            sprite.position = ccp(screen.width/3*2,screen.height);
+            sprite.body->ApplyLinearImpulse(b2Vec2(0,-100), b2Vec2(sprite.body->GetPosition()));
+            break;
+            
+        default:
+            break;
+    }
+    
+
+    // ランダムで作成する時間を決める
+    if (_createVegeTimer != nil) {
+        _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:frandom_range(4.0, 10.0) // 時間間隔(秒)
+                                                            target:self //呼び出すオブジェクト
+                                                          selector:@selector(createVegetableRandom:)
+                                                          userInfo:nil
+                                                           repeats:NO];
     }
      _tmPushCount++;
 }
@@ -309,13 +314,14 @@ int comparetor(const void *a, const void *b) {
 	delete m_debugDraw;
 	m_debugDraw = NULL;
 	
-    [_cache release];
-    _cache = nil;
+//    [_cache release];
+//    _cache = nil;
 
     delete _contactListener;
 	[super dealloc];
     
     _vegeArray = nil;
+    _nabeContents = nil;
     
 }	
 
@@ -618,6 +624,7 @@ int comparetor(const void *a, const void *b) {
         newSprite1 = [PolygonSprite spriteWithTexture:sprite.texture body:body1 original:NO];
         [self addChild:newSprite1 z:Z_VEGE_SLICED];
         newSprite1.body->ApplyLinearImpulse(b2Vec2(body1->GetMass()*vector1.x/4,body1->GetMass()*vector1.y/4), b2Vec2(midX,midY));
+        newSprite1.tag = sprite.tag;
         [newSprite1 activateCollisions];
         
         // create the second sprite's body
@@ -632,6 +639,7 @@ int comparetor(const void *a, const void *b) {
         newSprite2 = [PolygonSprite spriteWithTexture:sprite.texture body:body2 original:NO];
         [self addChild:newSprite2 z:Z_VEGE_SLICED];
         newSprite2.body->ApplyLinearImpulse(b2Vec2(body2->GetMass()*vector2.x/4,body2->GetMass()*vector2.y/4), b2Vec2(midX,midY));
+        newSprite2.tag = sprite.tag;
         [newSprite2 activateCollisions];
         
         // you don't need the old shape & sprite anymore so you either destroy it or squirrel it away
@@ -842,25 +850,25 @@ int comparetor(const void *a, const void *b) {
     //sprite.body->SetAngularVelocity(1.0);
 }
 
--(void)spriteLoop
-{
-    double curTime = CACurrentMediaTime();
-    
-    if (_tmPushCount < 2 && curTime > _nextPushTime) {
-        //PolygonSprite* sprite;
-        
-        int pushSpriteIndex = random_range(0, [_cache count] -1);
-        CCLOG(@"cache count:%i",[_cache count]);
-        CCLOG(@"pushSpriteIndex:%i",pushSpriteIndex);
-        [self pushSprite:[_cache objectAtIndex:pushSpriteIndex]];
-        
-        [_cache removeObjectAtIndex:pushSpriteIndex];
-        
-        _pushInterval = random_range(2,8);
-        _nextPushTime = curTime + _pushInterval;
-        _tmPushCount++;
-    }
-}
+//-(void)spriteLoop
+//{
+//    double curTime = CACurrentMediaTime();
+//    
+//    if (_tmPushCount < 2 && curTime > _nextPushTime) {
+//        //PolygonSprite* sprite;
+//        
+//        int pushSpriteIndex = random_range(0, [_cache count] -1);
+//        CCLOG(@"cache count:%i",[_cache count]);
+//        CCLOG(@"pushSpriteIndex:%i",pushSpriteIndex);
+//        [self pushSprite:[_cache objectAtIndex:pushSpriteIndex]];
+//        
+//        [_cache removeObjectAtIndex:pushSpriteIndex];
+//        
+//        _pushInterval = random_range(2,8);
+//        _nextPushTime = curTime + _pushInterval;
+//        _tmPushCount++;
+//    }
+//}
 
 // 時よとまれ
 -(void)theWorld
@@ -876,8 +884,6 @@ int comparetor(const void *a, const void *b) {
     
     // 効果音とか
     
-    // 野菜のタッチ抑制
-    
     // 野菜の動きを止める
     for (b2Body* b = world->GetBodyList(); b; b = b->GetNext()) {
         if (b->GetUserData() != NULL) {
@@ -885,6 +891,7 @@ int comparetor(const void *a, const void *b) {
             b->SetAngularVelocity(0);
         }
     }
+    // 野菜のタッチ抑制
     _canTouch = NO;
     
     // 野菜の生成を止める

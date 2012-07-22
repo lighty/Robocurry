@@ -12,6 +12,14 @@
 #import "PRFilledPolygon.h"
 #define PTM_RATIO 32
 
+enum {
+	kTagVegeNinjin,
+	kTagVegePote_m,
+	kTagVegePote_d,
+	kTagVegeOnion,
+	kTagRoo
+};
+
 @interface PolygonSprite : PRFilledPolygon {
     b2Body * _body;
     BOOL _original;
@@ -23,6 +31,8 @@
     b2Vec2 _exitPoint;
     double _sliceEntryTime;    
     BOOL _canGrab;
+    float32 _area;
+    int _tag;
 }
 
 @property(nonatomic,assign)b2Body *body;
@@ -34,6 +44,10 @@
 @property(nonatomic,readwrite)b2Vec2 entryPoint;
 @property(nonatomic,readwrite)b2Vec2 exitPoint;
 @property(nonatomic,readwrite)double sliceEntryTime;
+
+@property(nonatomic,readwrite)int tag;
+
+@property(nonatomic,readwrite)float32 area;
 
 @property(nonatomic,readwrite)BOOL canGrab;
 

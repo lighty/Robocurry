@@ -31,16 +31,14 @@
     
         // Create _sprite shape
         b2PolygonShape _spriteShape;
-        int count = 8;
+        int count = 6;
         b2Vec2 vertices[] = {
-            b2Vec2(42.0 / PTM_RATIO, 113.0 / PTM_RATIO),
-            b2Vec2(42.0 / PTM_RATIO, 18.0 / PTM_RATIO),
-            b2Vec2(65.0 / PTM_RATIO, 8.0 / PTM_RATIO),
-            b2Vec2(98.0 / PTM_RATIO, 3.0 / PTM_RATIO),
-            b2Vec2(153.0 / PTM_RATIO, 3.0 / PTM_RATIO),
-            b2Vec2(193.0 / PTM_RATIO, 8.0 / PTM_RATIO),
-            b2Vec2(215.0 / PTM_RATIO, 18.0 / PTM_RATIO),
-            b2Vec2(215.0 / PTM_RATIO, 113.0 / PTM_RATIO)
+            b2Vec2(32.0 / PTM_RATIO, 28.0 / PTM_RATIO),
+            b2Vec2(90.0 / PTM_RATIO, 12.0 / PTM_RATIO),
+            b2Vec2(165.0 / PTM_RATIO, 12.0 / PTM_RATIO),
+            b2Vec2(221.0 / PTM_RATIO, 27.0 / PTM_RATIO),
+            b2Vec2(225.0 / PTM_RATIO, 100.0 / PTM_RATIO),
+            b2Vec2(30.0 / PTM_RATIO, 100.0 / PTM_RATIO)
         };
     
         _spriteShape.Set(vertices, count);  

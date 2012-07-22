@@ -37,7 +37,7 @@
                                 restitution:0.2];
     if((self = [super initWithFile:file body:body original:YES]))
     {
-        
+        _tag = kTagVegeNinjin;
     }
     return self;
 }

@@ -20,7 +20,8 @@
 @synthesize sliceExited = _sliceExited;
 @synthesize sliceEntryTime = _sliceEntryTime;
 @synthesize canGrab = _canGrab;
-
+@synthesize area = _area;
+@synthesize tag = _tag;
 
 +(id)spriteWithFile:(NSString *)filename body:(b2Body *)body original:(BOOL)original
 {
@@ -72,6 +73,8 @@
         _centroid = self.body->GetLocalCenter();
         
         self.anchorPoint = ccp(_centroid.x * PTM_RATIO / texture.contentSize.width, _centroid.y * PTM_RATIO / texture.contentSize.height);
+        _area = [self culcArea];
+        //CCLOG(@"area : %f", _area);
     }
     return self;
 }
@@ -186,6 +189,37 @@
         }
     }
     return nil;
+}
+
+-(float32)culcArea
+{
+    b2Fixture *originalFixture = _body->GetFixtureList();
+    b2PolygonShape *originalPolygon = (b2PolygonShape*)originalFixture->GetShape();
+    int count = originalPolygon->GetVertexCount();
+    
+    b2Vec2 *vertices = (b2Vec2*)calloc(24, sizeof(b2Vec2));
+//    vertices[sprite1VerticesCount++] = sprite.entryPoint;
+    
+    
+    float32 area = 0.0f;
+    int i;
+    b2Vec2 pRef(0.0f,0.0f);
+    for (i=0; i<count; ++i)
+    {
+        
+        b2Vec2 p1 = pRef;
+        b2Vec2 p2 = originalPolygon->GetVertex(i);
+        b2Vec2 p3 = i + 1 < count ? originalPolygon->GetVertex(i+1) : originalPolygon->GetVertex(0);
+        
+        b2Vec2 e1 = p2 - p1;
+        b2Vec2 e2 = p3 - p1;
+        
+        float32 D = b2Cross(e1, e2);
+        
+        float32 triangleArea = 0.5f * D;
+        area += triangleArea;
+    }
+    return area;
 }
 
 @end

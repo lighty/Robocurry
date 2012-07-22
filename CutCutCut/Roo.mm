@@ -1,29 +1,27 @@
 //
-//  Potato.m
+//  Lue.m
 //  Robocurry
 //
-//  Created by 光 渡邊 on 12/07/16.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Created by 光 渡邊 on 12/07/22.
+//  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "Potato_d.h"
+#import "Roo.h"
 
 
-@implementation Potato_d
+@implementation Roo
 
 -(id)initWithWorld:(b2World*)world
 {
-    int count = 8;
-    NSString* file = @"pote_d.png";
+    int count = 6;
+    NSString* file = @"roo.png";
     b2Vec2 vertices[] = {
-        b2Vec2(	15.000  / PTM_RATIO, 47.000 / PTM_RATIO),
-        b2Vec2(	60.000  / PTM_RATIO, 29.000 / PTM_RATIO),
-        b2Vec2(	96.000  / PTM_RATIO, 44.000 / PTM_RATIO),
-        b2Vec2(	103.000 / PTM_RATIO, 77.000 / PTM_RATIO),
-        b2Vec2(	92.000  / PTM_RATIO, 99.000 / PTM_RATIO),
-        b2Vec2(	58.000  / PTM_RATIO, 109.000/ PTM_RATIO),
-        b2Vec2(	26.000  / PTM_RATIO, 97.000 / PTM_RATIO),
-        b2Vec2(	16.000  / PTM_RATIO, 80.000 / PTM_RATIO)
+        b2Vec2(127.0 / PTM_RATIO, 14.5 / PTM_RATIO),
+        b2Vec2(118.0 / PTM_RATIO, 112.0 / PTM_RATIO),
+        b2Vec2(112.0 / PTM_RATIO, 114.0 / PTM_RATIO),
+        b2Vec2(35.0 / PTM_RATIO, 114.0   / PTM_RATIO),
+        b2Vec2(7.0 / PTM_RATIO, 112.0 / PTM_RATIO),
+        b2Vec2(0.0 / PTM_RATIO, 15.0 / PTM_RATIO)
     };
     CGSize screen = [[CCDirector sharedDirector] winSize];
     
@@ -37,7 +35,7 @@
                                 restitution:0.2];
     if((self = [super initWithFile:file body:body original:YES]))
     {
-        _tag = kTagVegePote_d;
+        _tag = kTagRoo;
     }
     return self;
 }

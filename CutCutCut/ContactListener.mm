@@ -3,8 +3,14 @@
 #import "cocos2d.h"
 #import "CCSprite.h"
 #import "Nabe.h"
+#import "Roo.h"
 #import "CCAnimationHelper.h"
 #import "GameLayer.h"
+
+#define ROO_CHANGE_0 10
+#define ROO_CHANGE_1 20
+#define ROO_CHANGE_2 30
+#define ROO_CHANGE_3 40
 
 void ContactListener::SetNode(id node)
 {
@@ -48,6 +54,29 @@ void ContactListener::BeginContact(b2Contact* contact)
 //        CCLOG(@"spriteB class:%@", [spriteB class]);
     }
     
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    id fixtureAUserData = (id)fixtureA->GetUserData();
+    if(spriteA != NULL && spriteB != NULL && [fixtureAUserData isKindOfClass:[NSString class]] && fixtureAUserData == @"nabe_bottom_fixture" && ![_node hasMouseJoint:bodyB]){
+        // ここにいるということはナベに入ったと考えてデータを保存しておく
+        // いまのところルーの分しか数えない
+        if (((PolygonSprite*)spriteB).tag == kTagRoo) {
+            float32 nabeContentsArea = [[[_node nabeContents] objectForKey:[Roo class]] floatValue];
+            float32 sum = [spriteB area] + nabeContentsArea;
+            [[_node nabeContents] setObject:[NSNumber numberWithFloat:sum] forKey:[Roo class]];
+            // ルーの合計の面積が一定数を超えたら画像切り替え
+            if(sum > ROO_CHANGE_2){
+                id action1 = [CCTintTo actionWithDuration:1 red:70 green:51 blue:13];
+                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+            }else if(sum > ROO_CHANGE_1){
+                id action1 = [CCTintTo actionWithDuration:1 red:103 green:77 blue:32];
+                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+            }else if(sum > ROO_CHANGE_0){
+                id action1 = [CCTintTo actionWithDuration:1 red:145 green:122 blue:92];
+                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+            }
+            CCLOG(@"Roo area:%f",sum);
+        }
+    }    
 
 }
 
@@ -75,18 +104,17 @@ void ContactListener::PreSolve(b2Contact* contact,
    
     // ナベが底に付いたら動きとめて衝突&タッチをできないようにする。マウスジョイントしている場合は除く
     b2Fixture* fixtureA = contact->GetFixtureA();
-    b2Fixture* fixtureB = contact->GetFixtureB();
+//    b2Fixture* fixtureB = contact->GetFixtureB();
     id fixtureAUserData = (id)fixtureA->GetUserData();
-    id fixtureBUserData = (id)fixtureB->GetUserData();
+//    id fixtureBUserData = (id)fixtureB->GetUserData();
     if(spriteA != NULL && spriteB != NULL && [fixtureAUserData isKindOfClass:[NSString class]] && fixtureAUserData == @"nabe_bottom_fixture" && ![_node hasMouseJoint:bodyB]){
-        
-        
-        
+
         bodyA->SetLinearVelocity(b2Vec2(0,0));
         bodyA->SetAngularVelocity(0);
         [spriteB deactivateCollisions];
         ((PolygonSprite*)spriteB).canGrab = NO;
         contact->SetEnabled(false);        
+        
         // マウスジョイントしてたら外す
 //        [_node destroyMouseJoint:bodyB];
         

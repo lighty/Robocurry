@@ -42,6 +42,9 @@
 		CDABFDAF15BB2036004CE52A /* dekiagari-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDAD15BB2036004CE52A /* dekiagari-hd.png */; };
 		CDABFDB015BB2036004CE52A /* dekiagari.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDAE15BB2036004CE52A /* dekiagari.png */; };
 		CDABFDB315BB22DA004CE52A /* nabe_perfect-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDB215BB22DA004CE52A /* nabe_perfect-hd.png */; };
+		CDABFDB615BB280D004CE52A /* Roo.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDABFDB515BB280D004CE52A /* Roo.mm */; };
+		CDABFDB915BB28B7004CE52A /* roo.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDB715BB28B6004CE52A /* roo.png */; };
+		CDABFDBA15BB28B7004CE52A /* roo-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDB815BB28B6004CE52A /* roo-hd.png */; };
 		CDB4508215BA7E7600429DC3 /* button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4508015BA7E7600429DC3 /* button-hd.png */; };
 		CDB4508315BA7E7600429DC3 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4508115BA7E7600429DC3 /* button.png */; };
 		CDB4508715BA7FFE00429DC3 /* button_pushed-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4508515BA7FFE00429DC3 /* button_pushed-hd.png */; };
@@ -280,6 +283,10 @@
 		CDABFDAD15BB2036004CE52A /* dekiagari-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dekiagari-hd.png"; sourceTree = "<group>"; };
 		CDABFDAE15BB2036004CE52A /* dekiagari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dekiagari.png; sourceTree = "<group>"; };
 		CDABFDB215BB22DA004CE52A /* nabe_perfect-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nabe_perfect-hd.png"; sourceTree = "<group>"; };
+		CDABFDB415BB280D004CE52A /* Roo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Roo.h; sourceTree = "<group>"; };
+		CDABFDB515BB280D004CE52A /* Roo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Roo.mm; sourceTree = "<group>"; };
+		CDABFDB715BB28B6004CE52A /* roo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roo.png; sourceTree = "<group>"; };
+		CDABFDB815BB28B6004CE52A /* roo-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roo-hd.png"; sourceTree = "<group>"; };
 		CDB4508015BA7E7600429DC3 /* button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hd.png"; sourceTree = "<group>"; };
 		CDB4508115BA7E7600429DC3 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		CDB4508515BA7FFE00429DC3 /* button_pushed-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_pushed-hd.png"; sourceTree = "<group>"; };
@@ -690,6 +697,8 @@
 			children = (
 				CDF3CDD915A97AB000418612 /* PolygonSprite.h */,
 				CDF3CDDA15A97AB000418612 /* PolygonSprite.mm */,
+				CDABFDB415BB280D004CE52A /* Roo.h */,
+				CDABFDB515BB280D004CE52A /* Roo.mm */,
 				CD3D988015B35D6E00A60998 /* Ninjin.h */,
 				CD3D988115B35D6E00A60998 /* Ninjin.mm */,
 				CD8CF4C115B3EF5900C7B247 /* Potato_m.h */,
@@ -1324,6 +1333,8 @@
 				CD97809B15BA6F8C0085F47B /* button_lighted0-hd.png */,
 				CD97809C15BA6F8C0085F47B /* button_lighted0.png */,
 				CDC3732D15BB0D840065245E /* nabe_perfect.png */,
+				CDABFDB715BB28B6004CE52A /* roo.png */,
+				CDABFDB815BB28B6004CE52A /* roo-hd.png */,
 				CD97809D15BA6F8C0085F47B /* button_lighted1-hd.png */,
 				CD97809E15BA6F8C0085F47B /* button_lighted1.png */,
 				CDB4508515BA7FFE00429DC3 /* button_pushed-hd.png */,
@@ -1463,6 +1474,8 @@
 				CDABFDAF15BB2036004CE52A /* dekiagari-hd.png in Resources */,
 				CDABFDB015BB2036004CE52A /* dekiagari.png in Resources */,
 				CDABFDB315BB22DA004CE52A /* nabe_perfect-hd.png in Resources */,
+				CDABFDB915BB28B7004CE52A /* roo.png in Resources */,
+				CDABFDBA15BB28B7004CE52A /* roo-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1636,6 +1649,7 @@
 				CD027E4415B8551B0083FF69 /* ContactListener.mm in Sources */,
 				CD7122E115B888DE00A94F62 /* CCAnimationHelper.m in Sources */,
 				CDC3732A15BB05C80065245E /* DekiagaLayer.mm in Sources */,
+				CDABFDB615BB280D004CE52A /* Roo.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

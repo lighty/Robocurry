@@ -17,6 +17,14 @@ typedef enum _Tag
     kTagNabeTop = 1
 } Tag;
 
+enum {
+	kTagParentNode = 100,
+	kTagNabe,
+	kTagNabebuta,
+	kTagNabeFront,
+	kTagButton
+};
+
 #import <GameKit/GameKit.h>
 
 // When you import this file, you import all the cocos2d classes
@@ -79,14 +87,17 @@ typedef enum _Tag
     NSMutableArray *_vegeArray;
     
     NSTimer *_createVegeTimer;
-    
     ContactListener* _contactListener;
+    // ナベに入った内容を保存しておくやつ
+    NSMutableDictionary *_nabeContents;
+    
 }
 
 // returns a CCScene that contains the GameLayer as the only child
 +(CCScene *) scene;
 
-@property(nonatomic,retain)CCArray *cache;
+@property(nonatomic,readwrite)NSMutableDictionary *nabeContents;
+
 
 -(b2Vec2*)arrangeVertices:(b2Vec2*)vertices count:(int)count;
 -(void)splitPolygonSprite:(PolygonSprite*)sprite;
