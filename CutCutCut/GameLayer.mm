@@ -116,6 +116,14 @@ int comparetor(const void *a, const void *b) {
     nabe_front.position = ccp((screen.width/2), nabe_front.texture.contentSize.height/2);
     [self addChild:nabe_front z:Z_NABE_FRONT tag:kTagNabeFront];
     
+    // 水の部分
+    CCSprite *water_front = [CCSprite spriteWithFile:@"water_front.png"];
+    water_front.position = ccp((screen.width/2), nabe_front.texture.contentSize.height/2 + 14);
+    [self addChild:water_front z:Z_NABE_WATER_FRONT tag:kTagNabeWaterFront];
+    CCSprite *water_back = [CCSprite spriteWithFile:@"water_back.png"];
+    water_back.position = ccp((screen.width/2), nabe_front.texture.contentSize.height/2 + 14);
+    [self addChild:water_back z:Z_NABE_WATER_BACK tag:kTagNabeWaterBack];
+    
 
     // Define the ground body.
 	b2BodyDef nabeBodyDef;
@@ -159,24 +167,18 @@ int comparetor(const void *a, const void *b) {
 //                                    repeats:NO];
     
     // 発射ボタン
-    CCSprite *button = [CCSprite spriteWithFile:@"button.png"];
-    button.position = ccp((screen.width/4*3), 40);
+    CCSprite *button = [CCSprite spriteWithFile:@"switch0.png"];
+    button.position = ccp((screen.width-32), screen.height-96);
     [self addChild:button z:Z_BUTTON tag:kTagButton];
-    // とりあえず15秒後にちかちかさせる
-    [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
-                                     target:self //呼び出すオブジェクト
-                                   selector:@selector(blinkingButton:)
-                                   userInfo:nil
-                                    repeats:NO];
+    _fireButtonEnabled = NO;
 
 }
 
 -(void)blinkingButton:(ccTime *)timer
 {
-    CCAnimation* animation = [CCAnimation animationWithFile:@"button_lighted" frameCount:2 delay:0.2f];
+    CCAnimation* animation = [CCAnimation animationWithFile:@"switch" frameCount:2 delay:0.2f];
     id anim = [CCAnimate actionWithAnimation:animation];
     id act = [CCSequence actions:anim, nil];
-//    id repeat_act = [CCRepeat actionWithAction:act times:4];
     id repeat_act = [CCRepeatForever actionWithAction:act];
     CCSprite* sprite = [self getChildByTag:kTagButton];
     CCLOG(@"animation.frames:%d",animation.frames.count);
@@ -187,6 +189,7 @@ int comparetor(const void *a, const void *b) {
     [self removeChild:sprite cleanup:YES];
     // ナベのタグをどっかに定義したい
     [self addChild:button_blink z:Z_BUTTON tag:kTagButton];
+    _fireButtonEnabled = YES;
 }
 
 -(void)updateNabe:(ccTime *)timer
@@ -440,9 +443,9 @@ int comparetor(const void *a, const void *b) {
         {
             CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
             CCNode* sprite = [self getChildByTag:kTagButton];
-            if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
+            if(CGRectContainsPoint(sprite.boundingBox, touchLocation) && _fireButtonEnabled){
                 // ボタン押下でpushed画像に変更
-                CCSprite *button_pushed = [CCSprite spriteWithFile:@"button_pushed.png"];
+                CCSprite *button_pushed = [CCSprite spriteWithFile:@"switch1_pushed.png"];
                 button_pushed.position = sprite.position;
                 [self addChild:button_pushed z:Z_BUTTON tag:kTagButton];
                 [self removeChild:sprite cleanup:YES];
@@ -515,9 +518,9 @@ int comparetor(const void *a, const void *b) {
         {
             CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
             CCNode* sprite = [self getChildByTag:kTagButton];
-            if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
+            if(CGRectContainsPoint(sprite.boundingBox, touchLocation) && _fireButtonEnabled){
                 // ボタン押下で普通のボタン画像に変更
-                CCSprite *button = [CCSprite spriteWithFile:@"button.png"];
+                CCSprite *button = [CCSprite spriteWithFile:@"switch1.png"];
                 button.position = sprite.position;
                 [self addChild:button z:Z_BUTTON tag:kTagButton];
                 [self removeChild:sprite cleanup:YES];
@@ -911,7 +914,9 @@ int comparetor(const void *a, const void *b) {
     CGPoint nabePosition = [self getChildByTag:kTagNabe].position;
     CCLOG(@"nabePosion.x:%d y:%d", nabePosition.x, nabePosition.y);
     id anim = [CCMoveTo actionWithDuration:1.0f position:nabePosition];
-    [nabebuta runAction:anim];
+    id act_func =[CCCallFunc actionWithTarget:self selector:@selector(removeNabeWater)];
+    id seqAnim = [CCSequence actions:anim, act_func, nil];
+    [nabebuta runAction:seqAnim];
     
     
     // 発射のアニメーションセット
@@ -922,6 +927,11 @@ int comparetor(const void *a, const void *b) {
                                     repeats:NO];
     
     
+}
+-(void)removeNabeWater
+{
+    [self removeChildByTag:kTagNabeWaterFront cleanup:YES];
+    [self removeChildByTag:kTagNabeWaterBack cleanup:YES];
 }
 -(void)balseBody:(ccTime *)timer
 {

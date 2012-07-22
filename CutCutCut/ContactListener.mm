@@ -66,13 +66,27 @@ void ContactListener::BeginContact(b2Contact* contact)
             // ルーの合計の面積が一定数を超えたら画像切り替え
             if(sum > ROO_CHANGE_2){
                 id action1 = [CCTintTo actionWithDuration:1 red:70 green:51 blue:13];
-                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+                [[_node getChildByTag:kTagNabeWaterFront] runAction: action1];
+                id action2 = [CCTintTo actionWithDuration:1 red:70 green:51 blue:13];
+                [[_node getChildByTag:kTagNabeWaterBack] runAction: action2];
             }else if(sum > ROO_CHANGE_1){
                 id action1 = [CCTintTo actionWithDuration:1 red:103 green:77 blue:32];
-                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+                [[_node getChildByTag:kTagNabeWaterFront] runAction: action1];
+                id action2 = [CCTintTo actionWithDuration:1 red:103 green:77 blue:32];
+                [[_node getChildByTag:kTagNabeWaterBack] runAction: action2];
+                
+                // ここらへんで発射ボタン押せるようにする
+                [NSTimer scheduledTimerWithTimeInterval:random_range(3, 6) // 時間間隔(秒)
+                                                 target:_node //呼び出すオブジェクト
+                                               selector:@selector(blinkingButton:)
+                                               userInfo:nil
+                                                repeats:NO];
+                
             }else if(sum > ROO_CHANGE_0){
                 id action1 = [CCTintTo actionWithDuration:1 red:145 green:122 blue:92];
-                [[_node getChildByTag:kTagNabeFront] runAction: action1];
+                [[_node getChildByTag:kTagNabeWaterFront] runAction: action1];
+                id action2 = [CCTintTo actionWithDuration:1 red:145 green:122 blue:92];
+                [[_node getChildByTag:kTagNabeWaterBack] runAction: action2];
             }
             CCLOG(@"Roo area:%f",sum);
         }

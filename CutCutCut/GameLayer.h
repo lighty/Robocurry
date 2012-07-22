@@ -22,6 +22,8 @@ enum {
 	kTagNabe,
 	kTagNabebuta,
 	kTagNabeFront,
+	kTagNabeWaterFront,
+	kTagNabeWaterBack,
 	kTagButton
 };
 
@@ -47,6 +49,8 @@ enum {
 // zOrderの管理はどうするべき?
 #define Z_NABE_FRONT 100
 #define Z_NABE 20
+#define Z_NABE_WATER_FRONT 90
+#define Z_NABE_WATER_BACK 30
 #define Z_NABEBUTA 110
 #define Z_BUTTON 15
 #define Z_SHIBUKI 90
@@ -91,6 +95,10 @@ enum {
     // ナベに入った内容を保存しておくやつ
     NSMutableDictionary *_nabeContents;
     
+    // 発射ボタンの使用可否フラグ
+    BOOL _fireButtonEnabled;
+
+    
 }
 
 // returns a CCScene that contains the GameLayer as the only child
@@ -105,6 +113,7 @@ enum {
 -(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
 -(void)destroyMouseJoint:(b2Body*)body;
 -(BOOL)hasMouseJoint:(b2Body*)body;
+-(void)blinkingButton:(ccTime *)timer;
 
 @end
 
