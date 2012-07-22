@@ -7,11 +7,6 @@
 #import "CCAnimationHelper.h"
 #import "GameLayer.h"
 
-#define ROO_CHANGE_0 10
-#define ROO_CHANGE_1 20
-#define ROO_CHANGE_2 30
-#define ROO_CHANGE_3 40
-
 void ContactListener::SetNode(id node)
 {
     _node = node;
@@ -26,12 +21,33 @@ void ContactListener::BeginContact(b2Contact* contact)
     
     if(spriteA != NULL && spriteB != NULL && [spriteA isKindOfClass:[NSString class]] && spriteA == @"nabe_top"){
         // 水しぶき
-        CCAnimation* animation = [CCAnimation animationWithFile:@"shibuk" frameCount:3 delay:0.2f];
+        CCAnimation* animation = [CCAnimation animationWithFile:@"water_drop" frameCount:3 delay:0.2f];
         id anim = [CCAnimate actionWithAnimation:animation];
+        float32 rooArea = [[[_node nabeContents] objectForKey:[Roo class]] floatValue];
+        id coloring;
+        ccColor3B color;
+        if(rooArea > ROO_CHANGE_2){
+            coloring = [CCTintTo actionWithDuration:0 red:70 green:51 blue:13];
+            color = (ccColor3B){70,51,13};
+        }else if(rooArea > ROO_CHANGE_1){
+            coloring = [CCTintTo actionWithDuration:0 red:103 green:77 blue:32];
+            color = (ccColor3B){103,77,32};
+        }else if(rooArea > ROO_CHANGE_0){
+            coloring = [CCTintTo actionWithDuration:0 red:145 green:122 blue:92];
+            color = (ccColor3B){145,122,92};
+        }else {
+            coloring = NULL;
+            color = (ccColor3B){213,239,239};
+        }
         
         // 水しぶきの廃棄処理
         id act_func =[CCCallFunc actionWithTarget:_node selector:@selector(cleanUpShibuki)];
-        id act = [CCSequence actions:anim, act_func, nil];
+        id act;
+        if (coloring == NULL) {
+            act = [CCSequence actions:anim, act_func, nil];
+        }else {
+            act = [CCSequence actions:coloring, anim, act_func, nil];
+        }
         
         // 衝突位置の割り出し
         b2WorldManifold manifold;
@@ -39,8 +55,10 @@ void ContactListener::BeginContact(b2Contact* contact)
         b2Vec2 b2ContactPoint = manifold.points[0];
         
         // 水しぶきのスプライト作成
-        CCSprite *sprite = [CCSprite spriteWithFile:@"shibuk0.png"];
+        CCSprite *sprite = [CCSprite spriteWithFile:@"water_drop0.png"];
         sprite.position = ccp(b2ContactPoint.x * PTM_RATIO, b2ContactPoint.y * PTM_RATIO + sprite.texture.contentSize.height/2-5);
+        sprite.color = color;
+        
         [sprite runAction:act];
         // ナベのタグをどっかに定義したい
         [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];

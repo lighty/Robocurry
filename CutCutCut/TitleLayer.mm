@@ -56,7 +56,7 @@
 
 -(void) onStart:(id)item
 {
-    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[GameLayer scene]];
+    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:[GameLayer scene]];
     [[CCDirector sharedDirector] pushScene:transition];
 }
 
@@ -65,7 +65,7 @@
     CCScene *scene;
     scene = [CreatorLayer scene];
     //[self addChild:scene];
-    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:scene];
+    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:scene];
     [[CCDirector sharedDirector] pushScene:transition];
 }
 

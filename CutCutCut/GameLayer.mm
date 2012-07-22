@@ -167,7 +167,7 @@ int comparetor(const void *a, const void *b) {
 //                                    repeats:NO];
     
     // 発射ボタン
-    CCSprite *button = [CCSprite spriteWithFile:@"switch0.png"];
+    CCSprite *button = [CCSprite spriteWithFile:@"switch_disabled.png"];
     button.position = ccp((screen.width-32), screen.height-96);
     [self addChild:button z:Z_BUTTON tag:kTagButton];
     _fireButtonEnabled = NO;
@@ -213,7 +213,7 @@ int comparetor(const void *a, const void *b) {
 {
     CGSize size = [[CCDirector sharedDirector] winSize];
 
-    CCMenuItem *returnItem = [CCMenuItemImage itemWithNormalImage:@"home.png" selectedImage:@"home_selected.png" target:self selector:@selector(onReturn:)];
+    CCMenuItem *returnItem = [CCMenuItemImage itemWithNormalImage:@"modoru.png" selectedImage:@"modoru_selected.png" target:self selector:@selector(onReturn:)];
     CCMenu *menu = [CCMenu menuWithItems:returnItem, nil];
     menu.position = ccp(returnItem.boundingBox.size.width /2 , size.height - returnItem.boundingBox.size.height / 2);
     [self addChild:menu];
@@ -237,10 +237,10 @@ int comparetor(const void *a, const void *b) {
     // 野菜作成の準備
     NSMutableDictionary *vegeDefine = [NSMutableDictionary dictionary];
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Ninjin class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_d class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:1] forKey:[Potato_d class]];
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_m class]];
     [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Onion class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:1000] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Roo class]];
     NSArray *vegeDefineKeys = [vegeDefine allKeys];
     _vegeArray = [[NSMutableArray alloc]init];
     int vegeDefineCount = [vegeDefineKeys count];
@@ -255,8 +255,8 @@ int comparetor(const void *a, const void *b) {
             [_vegeArray addObject:clazz];
         }
     }
-    [self createVegetableRandom:NULL];
-    _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 // 時間間隔(秒)
+    //[self createVegetableRandom:NULL];
+    _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 // 時間間隔(秒)
                                      target:self //呼び出すオブジェクト
                                    selector:@selector(createVegetableRandom:)
                                    userInfo:nil
@@ -300,7 +300,7 @@ int comparetor(const void *a, const void *b) {
 
     // ランダムで作成する時間を決める
     if (_createVegeTimer != nil) {
-        _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:frandom_range(4.0, 10.0) // 時間間隔(秒)
+        _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:frandom_range(4.0, 6.0) // 時間間隔(秒)
                                                             target:self //呼び出すオブジェクト
                                                           selector:@selector(createVegetableRandom:)
                                                           userInfo:nil
@@ -342,16 +342,16 @@ int comparetor(const void *a, const void *b) {
 	
 	world->SetContinuousPhysics(true);
 	
-	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-	world->SetDebugDraw(m_debugDraw);
+	//m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+	//world->SetDebugDraw(m_debugDraw);
 	
-	uint32 flags = 0;
-	flags += b2Draw::e_shapeBit;
+	//uint32 flags = 0;
+	//flags += b2Draw::e_shapeBit;
 	//		flags += b2Draw::e_jointBit;
 	//		flags += b2Draw::e_aabbBit;
 	//		flags += b2Draw::e_pairBit;
 	//		flags += b2Draw::e_centerOfMassBit;
-	m_debugDraw->SetFlags(flags);		
+	//m_debugDraw->SetFlags(flags);		
 	
 	
 	// Define the ground body.
@@ -881,9 +881,9 @@ int comparetor(const void *a, const void *b) {
     CGSize screen = [[CCDirector sharedDirector] winSize];
 
     // 暗い背景を付ける
-    CCSprite *backGroundBlack = [CCSprite spriteWithFile:@"bg_black.png"];
-    backGroundBlack.position = ccp(screen.width/2,screen.height/2);
-    [self addChild:backGroundBlack z:Z_BG_BLACK tag:1];
+//    CCSprite *backGroundBlack = [CCSprite spriteWithFile:@"bg_black.png"];
+//    backGroundBlack.position = ccp(screen.width/2,screen.height/2);
+//    [self addChild:backGroundBlack z:Z_BG_BLACK tag:1];
     
     // 効果音とか
     

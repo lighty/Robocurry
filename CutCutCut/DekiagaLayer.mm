@@ -54,7 +54,7 @@
 
 -(void) onModoru:(id)item
 {
-    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:[TitleLayer scene]];
+    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[TitleLayer scene]];
     [[CCDirector sharedDirector] replaceScene:transition];
 }
 -(void) dealloc

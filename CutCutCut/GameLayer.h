@@ -12,6 +12,11 @@
 #define random_range(low,high) (arc4random()%(high-low+1))+low
 #define midpoint(a,b) (float)(a+b)/2
 
+#define ROO_CHANGE_0 10
+#define ROO_CHANGE_1 20
+#define ROO_CHANGE_2 30
+#define ROO_CHANGE_3 40
+
 typedef enum _Tag
 {
     kTagNabeTop = 1
