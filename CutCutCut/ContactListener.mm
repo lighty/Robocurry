@@ -63,6 +63,10 @@ void ContactListener::BeginContact(b2Contact* contact)
         // ナベのタグをどっかに定義したい
         [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];
         
+        // 底についたあと浮き上がるのを防止するため
+        bodyB->ApplyForce(b2Vec2(0,-10000), bodyB->GetPosition());
+
+        
         // ナベの下についたやつは壁以外の衝突を無効にして、以降MouseJointさせない
         //[spriteB deactivateCollisions];
         //((PolygonSprite*)spriteB).canGrab = NO;
@@ -106,7 +110,7 @@ void ContactListener::BeginContact(b2Contact* contact)
                 id action2 = [CCTintTo actionWithDuration:1 red:145 green:122 blue:92];
                 [[_node getChildByTag:kTagNabeWaterBack] runAction: action2];
             }
-            CCLOG(@"Roo area:%f",sum);
+            //CCLOG(@"Roo area:%f",sum);
         }
     }    
 
