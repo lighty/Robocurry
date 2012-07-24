@@ -63,17 +63,12 @@ int comparetor(const void *a, const void *b) {
 {
 	if( (self=[super init])) {
 		
-		// enable events
-		
 		self.isTouchEnabled = YES;
 		self.isAccelerometerEnabled = YES;
         
         _canSliceObject = YES;
         _canTouch = YES;
         
-		//CGSize s = [CCDirector sharedDirector].winSize;
-		
-		// init physics
 		[self initPhysics];
 		
         [self initSprites];
@@ -159,6 +154,11 @@ int comparetor(const void *a, const void *b) {
     filter.categoryBits = 0x0002;   // 0010
     filter.maskBits = 0x0007;       // 0111
     sensorFixture->SetFilterData(filter);
+    
+    // 水に野菜が入ったときに沈み込むエフェクトをかけるための判定用のbody
+    //b2Body* nabeTopBody;
+    
+    
     
     // 発射ボタン
     CCSprite *button = [CCSprite spriteWithFile:@"switch_disabled.png"];
@@ -379,7 +379,7 @@ int comparetor(const void *a, const void *b) {
 	
 	kmGLPushMatrix();
     
-//    ccDrawLine(_startPoint, _endPoint);
+    ccDrawLine(_startPoint, _endPoint);
 //	
 	world->DrawDebugData();	
 	
@@ -399,14 +399,12 @@ int comparetor(const void *a, const void *b) {
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);	
-    [self checkAndSliceObjects];
-//    [self spriteLoop];
-    [self moveNabe];
-    
+    [self checkAndSliceObjects];    
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    CCLOG(@"touch! count:%d", [touches count]);
     if (!_canTouch) {
         return;
     }
@@ -458,8 +456,11 @@ int comparetor(const void *a, const void *b) {
             _mouseJoint->SetTarget(b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO));
         }
     }
-    
-    if (ccpLengthSQ(ccpSub(_startPoint, _endPoint)) > 25 && !_mouseJoint) {
+    // movingForce(1フレームで動いた距離) が10000を超えるようならマルチタッチと仮定してRaycastを無視する
+    float movingForce = ccpLengthSQ(ccpSub(_startPoint, _endPoint));
+    CCLOG(@"moving movingForce:%f", movingForce);
+    if (10000 > movingForce && movingForce > 25 && !_mouseJoint) {
+        CCLOG(@"RayCast!");
         world->RayCast(_rayCastCallback, 
                        b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
                        b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
@@ -824,32 +825,6 @@ int comparetor(const void *a, const void *b) {
     }
 }
 
--(void)pushSprite:(PolygonSprite*)sprite
-{
-    sprite.body->SetLinearVelocity(b2Vec2(100/PTM_RATIO,10/PTM_RATIO));
-    //sprite.body->SetAngularVelocity(1.0);
-}
-
-//-(void)spriteLoop
-//{
-//    double curTime = CACurrentMediaTime();
-//    
-//    if (_tmPushCount < 2 && curTime > _nextPushTime) {
-//        //PolygonSprite* sprite;
-//        
-//        int pushSpriteIndex = random_range(0, [_cache count] -1);
-//        CCLOG(@"cache count:%i",[_cache count]);
-//        CCLOG(@"pushSpriteIndex:%i",pushSpriteIndex);
-//        [self pushSprite:[_cache objectAtIndex:pushSpriteIndex]];
-//        
-//        [_cache removeObjectAtIndex:pushSpriteIndex];
-//        
-//        _pushInterval = random_range(2,8);
-//        _nextPushTime = curTime + _pushInterval;
-//        _tmPushCount++;
-//    }
-//}
-
 // 時よとまれ
 -(void)theWorld
 {
@@ -857,11 +832,6 @@ int comparetor(const void *a, const void *b) {
     _canSliceObject = NO;
     CGSize screen = [[CCDirector sharedDirector] winSize];
 
-    // 暗い背景を付ける
-//    CCSprite *backGroundBlack = [CCSprite spriteWithFile:@"bg_black.png"];
-//    backGroundBlack.position = ccp(screen.width/2,screen.height/2);
-//    [self addChild:backGroundBlack z:Z_BG_BLACK tag:1];
-    
     // 効果音とか
     
     // 野菜の動きを止める
