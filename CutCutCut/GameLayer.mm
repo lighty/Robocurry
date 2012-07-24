@@ -133,16 +133,17 @@ int comparetor(const void *a, const void *b) {
     nabeBody->SetUserData(@"nabe_body");
    	b2EdgeShape groundBox;	
     {
-        groundBox.Set(b2Vec2(30.0/PTM_RATIO,100.0/PTM_RATIO), b2Vec2(33.0/PTM_RATIO,0.0/PTM_RATIO));
+        groundBox.Set(b2Vec2(30.0/PTM_RATIO,100.0/PTM_RATIO), b2Vec2(33.0/PTM_RATIO,-5.0/PTM_RATIO));
 		nabeBody->CreateFixture(&groundBox,0);
     }
     {
-        groundBox.Set(b2Vec2(33.0/PTM_RATIO,0.0/PTM_RATIO), b2Vec2(222.0/PTM_RATIO,0.0/PTM_RATIO));
+        // bottomはぶつかると野菜がbodyを失うので、ナベのtopからの参入以外では触れられないように間隔を空けておく
+        groundBox.Set(b2Vec2(34.0/PTM_RATIO,0.0/PTM_RATIO), b2Vec2(221.0/PTM_RATIO,0.0/PTM_RATIO));
 		b2Fixture *nabeBottomFixture = nabeBody->CreateFixture(&groundBox,0);
 		nabeBottomFixture->SetUserData(@"nabe_bottom_fixture");
     }
     {
-        groundBox.Set(b2Vec2(222.0/PTM_RATIO,0.0/PTM_RATIO), b2Vec2(225.0/PTM_RATIO,100.0/PTM_RATIO));
+        groundBox.Set(b2Vec2(222.0/PTM_RATIO,-5.0/PTM_RATIO), b2Vec2(225.0/PTM_RATIO,100.0/PTM_RATIO));
 		nabeBody->CreateFixture(&groundBox,0);
     }
     // top
@@ -160,11 +161,6 @@ int comparetor(const void *a, const void *b) {
     sensorFixture->SetFilterData(filter);
     
     _isNabeMoving = NO;
-//    [NSTimer scheduledTimerWithTimeInterval:15.0 // 時間間隔(秒)
-//                                     target:self //呼び出すオブジェクト
-//                                   selector:@selector(updateNabe:)
-//                                   userInfo:nil
-//                                    repeats:NO];
     
     // 発射ボタン
     CCSprite *button = [CCSprite spriteWithFile:@"switch_disabled.png"];
