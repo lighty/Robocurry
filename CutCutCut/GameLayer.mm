@@ -160,8 +160,6 @@ int comparetor(const void *a, const void *b) {
     filter.maskBits = 0x0007;       // 0111
     sensorFixture->SetFilterData(filter);
     
-    _isNabeMoving = NO;
-    
     // 発射ボタン
     CCSprite *button = [CCSprite spriteWithFile:@"switch_disabled.png"];
     button.position = ccp((screen.width-32), screen.height-96);
@@ -186,23 +184,6 @@ int comparetor(const void *a, const void *b) {
     // ナベのタグをどっかに定義したい
     [self addChild:button_blink z:Z_BUTTON tag:kTagButton];
     _fireButtonEnabled = YES;
-}
-
--(void)updateNabe:(ccTime *)timer
-{
-    _isNabeMoving = YES;
-}
-
--(void)moveNabe
-{
-    if (_isNabeMoving) {
-        CCSprite* nabe;
-        nabe = (CCSprite*)[self getChildByTag:1];
-        nabe.position = ccp(nabe.position.x, nabe.position.y+NABE_SPEED);
-        if(nabe.position.y > 64){
-            _isNabeMoving = false;
-        }
-    }
 }
 
 -(void) initScene

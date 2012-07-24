@@ -83,9 +83,6 @@ enum {
     double _pushInterval;
     int _tmPushCount;
     
-    // ナベを画面下からズズッとするための変数
-    BOOL _isNabeMoving;
-    
     // オブジェクトのcutのon/offを設定
     BOOL _canSliceObject;
     
