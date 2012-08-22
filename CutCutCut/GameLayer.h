@@ -57,11 +57,13 @@ enum {
 #define Z_NABE_WATER_FRONT 90
 #define Z_NABE_WATER_BACK 30
 #define Z_NABEBUTA 110
-#define Z_BUTTON 15
 #define Z_SHIBUKI 90
 #define Z_VEGE 50
 #define Z_VEGE_SLICED 50
 #define Z_BG_BLACK 100
+#define Z_MODORU 100
+#define Z_ROBO 100
+#define Z_SWITCH 100
 
 // GameLayer
 @interface GameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
@@ -99,6 +101,8 @@ enum {
     
     // 発射ボタンの使用可否フラグ
     BOOL _fireButtonEnabled;
+    // 発射ボタンを押下しているかどうか
+    BOOL _fireButtonPushing;
 
     
 }

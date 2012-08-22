@@ -62,8 +62,6 @@
 		CDABFDF415BBB278004CE52A /* modoru-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDF015BBB25E004CE52A /* modoru-hd.png */; };
 		CDABFDF515BBB278004CE52A /* modoru_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDF115BBB267004CE52A /* modoru_selected.png */; };
 		CDABFDF615BBB278004CE52A /* modoru_selected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDABFDF215BBB26F004CE52A /* modoru_selected-hd.png */; };
-		CDB4508215BA7E7600429DC3 /* button-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4508015BA7E7600429DC3 /* button-hd.png */; };
-		CDB4508315BA7E7600429DC3 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB4508115BA7E7600429DC3 /* button.png */; };
 		CDC3731815BAD80B0065245E /* bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC3731615BAD80A0065245E /* bg1.png */; };
 		CDC3731915BAD80B0065245E /* bg1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC3731715BAD80B0065245E /* bg1-hd.png */; };
 		CDC3731C15BAEE860065245E /* nabe0-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC3731A15BAEE840065245E /* nabe0-hd.png */; };
@@ -83,6 +81,9 @@
 		CDD8B2ED15E4F0E800A6E79C /* pork-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD8B2E515E4F0E600A6E79C /* pork-hd.png */; };
 		CDD8B2EE15E4F0E800A6E79C /* pork.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD8B2E615E4F0E700A6E79C /* pork.png */; };
 		CDD8B2F115E4F17500A6E79C /* Nasu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD8B2F015E4F17400A6E79C /* Nasu.mm */; };
+		CDD8B2F415E4F76000A6E79C /* Paprika_r.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD8B2F315E4F76000A6E79C /* Paprika_r.mm */; };
+		CDD8B2F715E4F77200A6E79C /* Pork.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD8B2F615E4F77200A6E79C /* Pork.mm */; };
+		CDD8B2FA15E4F86800A6E79C /* Paprika_y.mm in Sources */ = {isa = PBXBuildFile; fileRef = CDD8B2F915E4F86700A6E79C /* Paprika_y.mm */; };
 		CDF3CBA115A9695400418612 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA015A9695400418612 /* QuartzCore.framework */; };
 		CDF3CBA315A9695400418612 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA215A9695400418612 /* OpenGLES.framework */; };
 		CDF3CBA515A9695400418612 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF3CBA415A9695400418612 /* OpenAL.framework */; };
@@ -323,8 +324,6 @@
 		CDABFDF015BBB25E004CE52A /* modoru-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modoru-hd.png"; sourceTree = "<group>"; };
 		CDABFDF115BBB267004CE52A /* modoru_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modoru_selected.png; sourceTree = "<group>"; };
 		CDABFDF215BBB26F004CE52A /* modoru_selected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modoru_selected-hd.png"; sourceTree = "<group>"; };
-		CDB4508015BA7E7600429DC3 /* button-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hd.png"; sourceTree = "<group>"; };
-		CDB4508115BA7E7600429DC3 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		CDC3731615BAD80A0065245E /* bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg1.png; sourceTree = "<group>"; };
 		CDC3731715BAD80B0065245E /* bg1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1-hd.png"; sourceTree = "<group>"; };
 		CDC3731A15BAEE840065245E /* nabe0-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nabe0-hd.png"; sourceTree = "<group>"; };
@@ -346,6 +345,12 @@
 		CDD8B2E615E4F0E700A6E79C /* pork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pork.png; sourceTree = "<group>"; };
 		CDD8B2EF15E4F17400A6E79C /* Nasu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Nasu.h; path = Resources/Nasu.h; sourceTree = "<group>"; };
 		CDD8B2F015E4F17400A6E79C /* Nasu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Nasu.mm; path = Resources/Nasu.mm; sourceTree = "<group>"; };
+		CDD8B2F215E4F75F00A6E79C /* Paprika_r.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paprika_r.h; sourceTree = "<group>"; };
+		CDD8B2F315E4F76000A6E79C /* Paprika_r.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paprika_r.mm; sourceTree = "<group>"; };
+		CDD8B2F515E4F77200A6E79C /* Pork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pork.h; sourceTree = "<group>"; };
+		CDD8B2F615E4F77200A6E79C /* Pork.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Pork.mm; sourceTree = "<group>"; };
+		CDD8B2F815E4F86700A6E79C /* Paprika_y.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Paprika_y.h; sourceTree = "<group>"; };
+		CDD8B2F915E4F86700A6E79C /* Paprika_y.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Paprika_y.mm; sourceTree = "<group>"; };
 		CDF2195915B24EC3001F11D9 /* RayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RayCastCallback.h; sourceTree = "<group>"; };
 		CDF3CB9C15A9695400418612 /* Robocurry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Robocurry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF3CBA015A9695400418612 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -748,6 +753,12 @@
 				CD027E3915B83B470083FF69 /* Onion.mm */,
 				CDD8B2EF15E4F17400A6E79C /* Nasu.h */,
 				CDD8B2F015E4F17400A6E79C /* Nasu.mm */,
+				CDD8B2F815E4F86700A6E79C /* Paprika_y.h */,
+				CDD8B2F915E4F86700A6E79C /* Paprika_y.mm */,
+				CDD8B2F215E4F75F00A6E79C /* Paprika_r.h */,
+				CDD8B2F315E4F76000A6E79C /* Paprika_r.mm */,
+				CDD8B2F515E4F77200A6E79C /* Pork.h */,
+				CDD8B2F615E4F77200A6E79C /* Pork.mm */,
 			);
 			name = Vegetable;
 			sourceTree = "<group>";
@@ -1380,8 +1391,6 @@
 				CDABFDE215BB9BF4004CE52A /* water_drop1-hd.png */,
 				CDABFDE315BB9BFA004CE52A /* water_drop0.png */,
 				CDABFDE415BB9C00004CE52A /* water_drop0-hd.png */,
-				CDB4508015BA7E7600429DC3 /* button-hd.png */,
-				CDB4508115BA7E7600429DC3 /* button.png */,
 				CD027E2715B832FD0083FF69 /* caro-hd.png */,
 				CDABFDC715BB8F4E004CE52A /* switch_disabled-hd.png */,
 				CDABFDC815BB8F53004CE52A /* switch_disabled.png */,
@@ -1504,8 +1513,6 @@
 				CD7122D815B883E600A94F62 /* shibuk0.png in Resources */,
 				CD7122D915B883E600A94F62 /* shibuk1.png in Resources */,
 				CD7122DA15B883E600A94F62 /* shibuk2.png in Resources */,
-				CDB4508215BA7E7600429DC3 /* button-hd.png in Resources */,
-				CDB4508315BA7E7600429DC3 /* button.png in Resources */,
 				CDC3731815BAD80B0065245E /* bg1.png in Resources */,
 				CDC3731915BAD80B0065245E /* bg1-hd.png in Resources */,
 				CDC3731C15BAEE860065245E /* nabe0-hd.png in Resources */,
@@ -1728,6 +1735,9 @@
 				CDC3732A15BB05C80065245E /* DekiagaLayer.mm in Sources */,
 				CDABFDB615BB280D004CE52A /* Roo.mm in Sources */,
 				CDD8B2F115E4F17500A6E79C /* Nasu.mm in Sources */,
+				CDD8B2F415E4F76000A6E79C /* Paprika_r.mm in Sources */,
+				CDD8B2F715E4F77200A6E79C /* Pork.mm in Sources */,
+				CDD8B2FA15E4F86800A6E79C /* Paprika_y.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,9 @@
 #import "Onion.h"
 #import "Roo.h"
 #import "Nasu.h"
+#import "Paprika_r.h"
+#import "Paprika_y.h"
+#import "Pork.h"
 
 #import "Nabe.h"
 // Import the interfaces
@@ -164,8 +167,9 @@ int comparetor(const void *a, const void *b) {
     // 発射ボタン
     CCSprite *button = [CCSprite spriteWithFile:@"switch_disabled.png"];
     button.position = ccp((screen.width-32), screen.height-96);
-    [self addChild:button z:Z_BUTTON tag:kTagButton];
+    [self addChild:button z:Z_SWITCH tag:kTagButton];
     _fireButtonEnabled = NO;
+    _fireButtonPushing = NO;
 
 }
 
@@ -183,7 +187,7 @@ int comparetor(const void *a, const void *b) {
     [button_blink runAction:repeat_act];
     [self removeChild:sprite cleanup:YES];
     // ナベのタグをどっかに定義したい
-    [self addChild:button_blink z:Z_BUTTON tag:kTagButton];
+    [self addChild:button_blink z:Z_SWITCH tag:kTagButton];
     _fireButtonEnabled = YES;
 }
 
@@ -194,7 +198,7 @@ int comparetor(const void *a, const void *b) {
     CCMenuItem *returnItem = [CCMenuItemImage itemWithNormalImage:@"modoru.png" selectedImage:@"modoru_selected.png" target:self selector:@selector(onReturn:)];
     CCMenu *menu = [CCMenu menuWithItems:returnItem, nil];
     menu.position = ccp(returnItem.boundingBox.size.width /2 , size.height - returnItem.boundingBox.size.height / 2);
-    [self addChild:menu];
+    [self addChild:menu z:Z_MODORU];
 }
 
 -(void) onReturn:(id)item
@@ -208,7 +212,7 @@ int comparetor(const void *a, const void *b) {
     CGSize screen = [[CCDirector sharedDirector] winSize];
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robot1.png"];
-        [self addChild:sprite z:1];
+        [self addChild:sprite z:Z_ROBO];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
     }
     
@@ -218,8 +222,11 @@ int comparetor(const void *a, const void *b) {
     [vegeDefine setObject:[NSNumber numberWithInt:1] forKey:[Potato_d class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Potato_m class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Onion class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Roo class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:100] forKey:[Nasu class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:20] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Nasu class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_r class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_y class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Pork class]];
     NSArray *vegeDefineKeys = [vegeDefine allKeys];
     _vegeArray = [[NSMutableArray alloc]init];
     int vegeDefineCount = [vegeDefineKeys count];
@@ -424,8 +431,9 @@ int comparetor(const void *a, const void *b) {
                 // ボタン押下でpushed画像に変更
                 CCSprite *button_pushed = [CCSprite spriteWithFile:@"switch1_pushed.png"];
                 button_pushed.position = sprite.position;
-                [self addChild:button_pushed z:Z_BUTTON tag:kTagButton];
+                [self addChild:button_pushed z:Z_SWITCH tag:kTagButton];
                 [self removeChild:sprite cleanup:YES];
+                _fireButtonPushing = YES;
                 break;
             }
         }
@@ -498,14 +506,21 @@ int comparetor(const void *a, const void *b) {
         {
             CGPoint touchLocation = [self convertTouchToNodeSpace:touch];
             CCNode* sprite = [self getChildByTag:kTagButton];
-            if(CGRectContainsPoint(sprite.boundingBox, touchLocation) && _fireButtonEnabled){
-                // ボタン押下で普通のボタン画像に変更
-                CCSprite *button = [CCSprite spriteWithFile:@"switch1.png"];
-                button.position = sprite.position;
-                [self addChild:button z:Z_BUTTON tag:kTagButton];
-                [self removeChild:sprite cleanup:YES];
-                [self theWorld];
-                break;
+            if(_fireButtonPushing){
+                if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
+                    // ##### 発射処理 #####
+                    // ボタン押下で普通のボタン画像に変更
+                    CCSprite *button = [CCSprite spriteWithFile:@"switch1.png"];
+                    button.position = sprite.position;
+                    [self addChild:button z:Z_SWITCH tag:kTagButton];
+                    [self removeChild:sprite cleanup:YES];
+                    [self theWorld];
+                    break;
+                }else{
+                    // ##### ボタン押したけどズラして押さないことにしたい場合 #####
+                    _fireButtonPushing = NO;
+                    [self blinkingButton:nil];
+                }
             }
         }
 	}
