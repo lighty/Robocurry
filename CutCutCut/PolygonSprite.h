@@ -17,7 +17,11 @@ enum {
 	kTagVegePote_m,
 	kTagVegePote_d,
 	kTagVegeOnion,
-	kTagRoo
+	kTagRoo,
+	kTagVegeNasu,
+	kTagVegePaprika_r,
+	kTagVegePaprika_y,
+	kTagVegePork
 };
 
 @interface PolygonSprite : PRFilledPolygon {

@@ -11,6 +11,7 @@
 #import "Potato_d.h"
 #import "Onion.h"
 #import "Roo.h"
+#import "Nasu.h"
 
 #import "Nabe.h"
 // Import the interfaces
@@ -213,11 +214,12 @@ int comparetor(const void *a, const void *b) {
     
     // 野菜作成の準備
     NSMutableDictionary *vegeDefine = [NSMutableDictionary dictionary];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Ninjin class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Ninjin class]];
     [vegeDefine setObject:[NSNumber numberWithInt:1] forKey:[Potato_d class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Potato_m class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Onion class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Potato_m class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Onion class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:100] forKey:[Nasu class]];
     NSArray *vegeDefineKeys = [vegeDefine allKeys];
     _vegeArray = [[NSMutableArray alloc]init];
     int vegeDefineCount = [vegeDefineKeys count];
@@ -379,7 +381,7 @@ int comparetor(const void *a, const void *b) {
 	
 	kmGLPushMatrix();
     
-    ccDrawLine(_startPoint, _endPoint);
+    //ccDrawLine(_startPoint, _endPoint);
 //	
 	world->DrawDebugData();	
 	
