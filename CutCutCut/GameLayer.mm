@@ -183,7 +183,7 @@ int comparetor(const void *a, const void *b) {
     id act = [CCSequence actions:anim, nil];
     id repeat_act = [CCRepeatForever actionWithAction:act];
     CCSprite* sprite = [self getChildByTag:kTagButton];
-    CCLOG(@"animation.frames:%d",animation.frames.count);
+    //CCLOG(@"animation.frames:%d",animation.frames.count);
     CCSprite *button_blink = [CCSprite spriteWithSpriteFrame:[[animation.frames objectAtIndex:0] spriteFrame]];
     button_blink.position = sprite.position;
     
@@ -416,15 +416,13 @@ int comparetor(const void *a, const void *b) {
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CCLOG(@"touch! count:%d", [touches count]);
+    //CCLOG(@"touch! count:%d", [touches count]);
     if (!_canTouch) {
         return;
     }
     for(UITouch *touch in touches){
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector]convertToGL:location];
-//        _startPoint = location;
-//        _endPoint = location;
         CFDictionarySetValue(_startPoints, touch, [NSValue valueWithCGPoint:location]);
         CFDictionarySetValue(_endPoints, touch, [NSValue valueWithCGPoint:location]);
 
@@ -481,16 +479,14 @@ int comparetor(const void *a, const void *b) {
         
         NSValue *mouseJointValue = (id)CFDictionaryGetValue(_mouseJoints, touch);
         mouseJoint = (b2MouseJoint *)[mouseJointValue pointerValue];
-        CCLOG(@"soto");
         if (mouseJoint) {
-            CCLOG(@"naka");
             mouseJoint->SetTarget(b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO));
         }
         
         // movingForce(1フレームで動いた距離) が10000を超えるようならマルチタッチと仮定してRaycastを無視する
         float movingForce = ccpLengthSQ(ccpSub(startPoint, endPoint));
         if (10000 > movingForce && movingForce > 25 && !mouseJoint) {
-            CCLOG(@"RayCast!");
+            //CCLOG(@"RayCast!");
             world->RayCast(_rayCastCallback, 
                            b2Vec2(startPoint.x / PTM_RATIO, startPoint.y / PTM_RATIO),
                            b2Vec2(endPoint.x / PTM_RATIO, endPoint.y / PTM_RATIO));
@@ -513,6 +509,7 @@ int comparetor(const void *a, const void *b) {
         mouseJoint = (b2MouseJoint *)[touchValue pointerValue];
         if (mouseJoint) {
             world->DestroyJoint(mouseJoint);
+            CFDictionaryRemoveValue(_mouseJoints, touch);
         }
     }
 }
@@ -555,6 +552,7 @@ int comparetor(const void *a, const void *b) {
         mouseJoint = (b2MouseJoint *)[touchValue pointerValue];
         if (mouseJoint) {
             world->DestroyJoint(mouseJoint);
+            CFDictionaryRemoveValue(_mouseJoints, touch);
         }
 	}
         
@@ -903,7 +901,7 @@ int comparetor(const void *a, const void *b) {
     nabebuta.position = ccp((screen.width/2), screen.height);
     [self addChild:nabebuta z:Z_NABEBUTA tag:kTagNabebuta];
     CGPoint nabePosition = [self getChildByTag:kTagNabe].position;
-    CCLOG(@"nabePosion.x:%d y:%d", nabePosition.x, nabePosition.y);
+    //CCLOG(@"nabePosion.x:%d y:%d", nabePosition.x, nabePosition.y);
     id anim = [CCMoveTo actionWithDuration:1.0f position:nabePosition];
     id act_func =[CCCallFunc actionWithTarget:self selector:@selector(removeNabeWater)];
     id seqAnim = [CCSequence actions:anim, act_func, nil];
@@ -978,12 +976,17 @@ int comparetor(const void *a, const void *b) {
 
 -(BOOL)hasMouseJoint:(b2Body*)body
 {
+    NSArray* valueArray = [(NSDictionary*)_mouseJoints allKeys];
+    if([valueArray count] > 0){
+        return YES;
+    }else{
+        return NO;
+    }
 //    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
 //        return YES;
 //    }else {
 //        return NO;
 //    };
-    return NO;
 }
 //-(void)destroyMouseJoint:(b2Body*)body
 //{
