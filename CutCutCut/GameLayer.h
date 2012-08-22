@@ -73,12 +73,16 @@ enum {
 	GLESDebugDraw *m_debugDraw;		// strong ref
     
     
-    CGPoint _startPoint;
-    CGPoint _endPoint;
+    // Raycastに使用するstart/endPointをUITouchオブジェクトをキーとして保持
+    CFMutableDictionaryRef _startPoints;
+    CFMutableDictionaryRef _endPoints;
+    //CGPoint _startPoint;
+    //CGPoint _endPoint;
     
     RayCastCallback *_rayCastCallback;
     
-    b2MouseJoint *_mouseJoint;
+    // マウスジョイントをUITouchオブジェクトをキーとして保持
+    CFMutableDictionaryRef _mouseJoints;
     
     // 野菜を画面外からpushするための変数
     double _nextPushTime;

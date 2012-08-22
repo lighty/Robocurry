@@ -72,6 +72,9 @@ int comparetor(const void *a, const void *b) {
         
         _canSliceObject = YES;
         _canTouch = YES;
+        _mouseJoints = CFDictionaryCreateMutable(NULL, 5, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        _startPoints = CFDictionaryCreateMutable(NULL, 5, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+        _endPoints = CFDictionaryCreateMutable(NULL, 5, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
         
 		[self initPhysics];
 		
@@ -420,8 +423,10 @@ int comparetor(const void *a, const void *b) {
     for(UITouch *touch in touches){
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector]convertToGL:location];
-        _startPoint = location;
-        _endPoint = location;
+//        _startPoint = location;
+//        _endPoint = location;
+        CFDictionarySetValue(_startPoints, touch, [NSValue valueWithCGPoint:location]);
+        CFDictionarySetValue(_endPoints, touch, [NSValue valueWithCGPoint:location]);
 
         // 発射ボタンの押下判定
         {
@@ -439,13 +444,15 @@ int comparetor(const void *a, const void *b) {
         }
         
         CCNode* node;
+        b2MouseJoint *mouseJoint;
         CCARRAY_FOREACH([self children], node){
             if ([node isKindOfClass:[PolygonSprite class]]) {
                 //CCLOG(@"startTest:%p",_mouseJoint);
-                _mouseJoint = [(PolygonSprite*)node testPointWithLocation:b2Vec2(location.x / PTM_RATIO, location.y / PTM_RATIO) 
+                mouseJoint = [(PolygonSprite*)node testPointWithLocation:b2Vec2(location.x / PTM_RATIO, location.y / PTM_RATIO) 
                                                  groundBody:groundBody 
                                                       world:world];
-                if(_mouseJoint){
+                CFDictionarySetValue(_mouseJoints, touch, [NSValue valueWithPointer:mouseJoint]);
+                if(mouseJoint){
                     break;
                 }
                 //CCLOG(@"endTest:%p", _mouseJoint);
@@ -457,37 +464,56 @@ int comparetor(const void *a, const void *b) {
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    b2MouseJoint *mouseJoint;
+    CGPoint startPoint;
+    CGPoint endPoint;
     for(UITouch *touch in touches){
         CGPoint location = [touch locationInView:[touch view]];
         location = [[CCDirector sharedDirector]convertToGL:location];
-        _endPoint = location;
+        //_endPoint = location;
+        CFDictionarySetValue(_endPoints, touch, [NSValue valueWithCGPoint:location]);
         
-        if (_mouseJoint) {
-            _mouseJoint->SetTarget(b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO));
+        NSValue *startPointValue = (id)CFDictionaryGetValue(_startPoints, touch);
+        startPoint = [startPointValue CGPointValue];
+        NSValue *endPointValue = (id)CFDictionaryGetValue(_endPoints, touch);
+        endPoint = [endPointValue CGPointValue];
+        
+        
+        NSValue *mouseJointValue = (id)CFDictionaryGetValue(_mouseJoints, touch);
+        mouseJoint = (b2MouseJoint *)[mouseJointValue pointerValue];
+        CCLOG(@"soto");
+        if (mouseJoint) {
+            CCLOG(@"naka");
+            mouseJoint->SetTarget(b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO));
         }
-    }
-    // movingForce(1フレームで動いた距離) が10000を超えるようならマルチタッチと仮定してRaycastを無視する
-    float movingForce = ccpLengthSQ(ccpSub(_startPoint, _endPoint));
-    CCLOG(@"moving movingForce:%f", movingForce);
-    if (10000 > movingForce && movingForce > 25 && !_mouseJoint) {
-        CCLOG(@"RayCast!");
-        world->RayCast(_rayCastCallback, 
-                       b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO),
-                       b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO));
-        world->RayCast(_rayCastCallback, 
-                       b2Vec2(_endPoint.x / PTM_RATIO, _endPoint.y / PTM_RATIO),
-                       b2Vec2(_startPoint.x / PTM_RATIO, _startPoint.y / PTM_RATIO));
-        _startPoint = _endPoint;
         
+        // movingForce(1フレームで動いた距離) が10000を超えるようならマルチタッチと仮定してRaycastを無視する
+        float movingForce = ccpLengthSQ(ccpSub(startPoint, endPoint));
+        if (10000 > movingForce && movingForce > 25 && !mouseJoint) {
+            CCLOG(@"RayCast!");
+            world->RayCast(_rayCastCallback, 
+                           b2Vec2(startPoint.x / PTM_RATIO, startPoint.y / PTM_RATIO),
+                           b2Vec2(endPoint.x / PTM_RATIO, endPoint.y / PTM_RATIO));
+            world->RayCast(_rayCastCallback, 
+                           b2Vec2(endPoint.x / PTM_RATIO, endPoint.y / PTM_RATIO),
+                           b2Vec2(startPoint.x / PTM_RATIO, startPoint.y / PTM_RATIO));
+            CFDictionarySetValue(_startPoints, touch, [NSValue valueWithCGPoint:endPoint]);
+            //startPoint = endPoint;
+            
+        }
     }
     
 }
 
 -(void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (_mouseJoint) {
-        world->DestroyJoint(_mouseJoint);
-        _mouseJoint = NULL;
+    b2MouseJoint *mouseJoint;
+    for(UITouch *touch in touches){
+        NSValue *touchValue = (id)CFDictionaryGetValue(_mouseJoints, touch);
+        mouseJoint = (b2MouseJoint *)[touchValue pointerValue];
+        if (mouseJoint) {
+            world->DestroyJoint(mouseJoint);
+        }
     }
 }
 
@@ -496,6 +522,7 @@ int comparetor(const void *a, const void *b) {
     if (!_canTouch) {
         return;
     }
+    b2MouseJoint *mouseJoint;
 	//Add a new body/atlas sprite at the touched location
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
@@ -512,7 +539,7 @@ int comparetor(const void *a, const void *b) {
                     // ボタン押下で普通のボタン画像に変更
                     CCSprite *button = [CCSprite spriteWithFile:@"switch1.png"];
                     button.position = sprite.position;
-                    [self addChild:button z:Z_SWITCH tag:kTagButton];
+                    [self addChild:button z:Z_SWITCH+1 tag:kTagButton];
                     [self removeChild:sprite cleanup:YES];
                     [self theWorld];
                     break;
@@ -523,13 +550,13 @@ int comparetor(const void *a, const void *b) {
                 }
             }
         }
+        // タッチ移動の解除
+        NSValue *touchValue = (id)CFDictionaryGetValue(_mouseJoints, touch);
+        mouseJoint = (b2MouseJoint *)[touchValue pointerValue];
+        if (mouseJoint) {
+            world->DestroyJoint(mouseJoint);
+        }
 	}
-    
-    // タッチ移動の解除
-    if (_mouseJoint) {
-        world->DestroyJoint(_mouseJoint);
-        _mouseJoint = NULL;
-    }
         
     [self clearSlices];
 }
@@ -951,19 +978,20 @@ int comparetor(const void *a, const void *b) {
 
 -(BOOL)hasMouseJoint:(b2Body*)body
 {
-    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
-        return YES;
-    }else {
-        return NO;
-    };
+//    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
+//        return YES;
+//    }else {
+//        return NO;
+//    };
+    return NO;
 }
--(void)destroyMouseJoint:(b2Body*)body
-{
-    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
-        world->DestroyJoint(_mouseJoint);
-        _mouseJoint = NULL;
-    }
-}
+//-(void)destroyMouseJoint:(b2Body*)body
+//{
+//    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
+//        world->DestroyJoint(_mouseJoint);
+//        _mouseJoint = NULL;
+//    }
+//}
 
 #pragma mark GameKit delegate
 

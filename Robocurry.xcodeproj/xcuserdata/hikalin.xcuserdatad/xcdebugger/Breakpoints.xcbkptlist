@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "411"
-         endingLineNumber = "411"
+         startingLineNumber = "414"
+         endingLineNumber = "414"
          landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343313.611989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "648"
-         endingLineNumber = "648"
+         startingLineNumber = "675"
+         endingLineNumber = "675"
          landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343313.611989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "816"
-         endingLineNumber = "816"
+         startingLineNumber = "843"
+         endingLineNumber = "843"
          landmarkName = "-checkAndSliceObjects"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367327610.43585"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "-initNabe"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "184"
-         endingLineNumber = "184"
+         startingLineNumber = "187"
+         endingLineNumber = "187"
          landmarkName = "-blinkingButton:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "185"
-         endingLineNumber = "185"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-blinkingButton:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
+         startingLineNumber = "189"
+         endingLineNumber = "189"
          landmarkName = "-blinkingButton:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
+         startingLineNumber = "225"
+         endingLineNumber = "225"
          landmarkName = "-initSprites"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "223"
-         endingLineNumber = "223"
+         startingLineNumber = "226"
+         endingLineNumber = "226"
          landmarkName = "-initSprites"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "238"
-         endingLineNumber = "238"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
          landmarkName = "-initSprites"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,11 +372,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "427"
-         endingLineNumber = "427"
+         startingLineNumber = "432"
+         endingLineNumber = "432"
          landmarkName = "-ccTouchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -385,37 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "452"
-         endingLineNumber = "452"
-         landmarkName = "-ccTouchesBegan:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "480"
-         endingLineNumber = "480"
-         landmarkName = "-ccTouchesMoved:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "451"
-         endingLineNumber = "451"
+         startingLineNumber = "459"
+         endingLineNumber = "459"
          landmarkName = "-ccTouchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "453"
-         endingLineNumber = "453"
+         startingLineNumber = "460"
+         endingLineNumber = "460"
          landmarkName = "-ccTouchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -437,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367327610.43585"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
          landmarkName = "-initBackground"
          landmarkType = "5">
       </FileBreakpoint>
@@ -450,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "458"
-         endingLineNumber = "458"
+         startingLineNumber = "465"
+         endingLineNumber = "465"
          landmarkName = "-ccTouchesMoved:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -463,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343167.391265"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "459"
-         endingLineNumber = "459"
+         startingLineNumber = "466"
+         endingLineNumber = "466"
          landmarkName = "-ccTouchesMoved:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -476,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343313.611989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "554"
-         endingLineNumber = "554"
+         startingLineNumber = "581"
+         endingLineNumber = "581"
          landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -489,24 +463,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343313.611989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "476"
-         endingLineNumber = "476"
-         landmarkName = "-ccTouchesMoved:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "508"
-         endingLineNumber = "508"
+         startingLineNumber = "535"
+         endingLineNumber = "535"
          landmarkName = "-ccTouchesEnded:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CutCutCut/GameLayer.mm"
-         timestampString = "367330173.695476"
+         timestampString = "367343313.611989"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "552"
-         endingLineNumber = "552"
+         startingLineNumber = "579"
+         endingLineNumber = "579"
          landmarkName = "-splitPolygonSprite:"
          landmarkType = "5">
       </FileBreakpoint>
