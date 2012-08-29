@@ -33,6 +33,7 @@ enum {
 };
 
 #import <GameKit/GameKit.h>
+#import <AudioToolbox/AudioServices.h>
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
@@ -62,9 +63,20 @@ enum {
 #define Z_VEGE_SLICED 50
 #define Z_BG_BLACK 100
 #define Z_MODORU 100
-#define Z_ROBO 100
+#define Z_ROBO 110
+#define Z_ROBO_LEG 105
+#define Z_ROBO_ARM1 108
+#define Z_ROBO_ARM2 105
 #define Z_SWITCH 100
 
+#define LBL_ROBO_ARM1_L 101
+#define LBL_ROBO_ARM1_R 102
+#define LBL_ROBO_ARM2_L 103
+#define LBL_ROBO_ARM2_R 104
+#define LBL_ROBO_LEG_L  105
+#define LBL_ROBO_LEG_R  106
+
+#define kFilterFactor 2.0
 // GameLayer
 @interface GameLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
@@ -108,7 +120,16 @@ enum {
     // 発射ボタンを押下しているかどうか
     BOOL _fireButtonPushing;
 
+    // ロボの手足のspriteを格納
+    NSMutableArray* _roboLimbs;
+    NSMutableArray* _roboLimbJoints;
+	b2World* _roboWorld;   // 重力を加速度センサーから得る
+    float prevX, prevY;
+    float accelX, accelY;
     
+    SystemSoundID waterDropSoundID;
+    SystemSoundID fireSoundID;
+    SystemSoundID cutSoundID;
 }
 
 // returns a CCScene that contains the GameLayer as the only child
@@ -123,6 +144,7 @@ enum {
 -(b2Body*)createBodyWithPosition:(b2Vec2)position rotation:(float)rotation vertices:(b2Vec2*)vertices vertexCount:(int32)count density:(float)density friction:(float)friction restitution:(float)restitution;
 -(void)destroyMouseJoint:(b2Body*)body;
 -(BOOL)hasMouseJoint:(b2Body*)body;
+-(void)soundWaterDrop;
 -(void)blinkingButton:(ccTime *)timer;
 
 @end

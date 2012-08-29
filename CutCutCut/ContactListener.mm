@@ -60,6 +60,10 @@ void ContactListener::BeginContact(b2Contact* contact)
         sprite.color = color;
         
         [sprite runAction:act];
+        
+        // 水しぶきの効果音
+        [_node soundWaterDrop];
+        
         // ナベのタグをどっかに定義したい
         [(CCNode*)_node addChild:sprite z:Z_SHIBUKI tag:100];
         

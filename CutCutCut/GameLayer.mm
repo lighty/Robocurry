@@ -79,7 +79,10 @@ int comparetor(const void *a, const void *b) {
 		[self initPhysics];
 		
         [self initSprites];
+        [self initRobo];
         _rayCastCallback = new RayCastCallback();
+        
+        [self initSounds];
         
 		[self scheduleUpdate];
 
@@ -101,6 +104,23 @@ int comparetor(const void *a, const void *b) {
     background.position = ccp(screen.width/2 + 1,screen.height/2 + 1);
     [self addChild:background z:-1];
 }
+
+-(void)initSounds
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"se_waterdrop" ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((CFURLRef)url, &waterDropSoundID);
+
+    path = [[NSBundle mainBundle] pathForResource:@"se_fire" ofType:@"mp3"];
+    url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((CFURLRef)url, &fireSoundID);
+
+    path = [[NSBundle mainBundle] pathForResource:@"se_cut" ofType:@"mp3"];
+    url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((CFURLRef)url, &cutSoundID);
+
+}
+
 
 -(void)initNabe
 {
@@ -211,21 +231,13 @@ int comparetor(const void *a, const void *b) {
 
 -(void)initSprites
 {
-    // ロボ
-    CGSize screen = [[CCDirector sharedDirector] winSize];
-    {
-        CCSprite *sprite = [CCSprite spriteWithFile:@"robot1.png"];
-        [self addChild:sprite z:Z_ROBO];
-        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
-    }
-    
     // 野菜作成の準備
     NSMutableDictionary *vegeDefine = [NSMutableDictionary dictionary];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Ninjin class]];
     [vegeDefine setObject:[NSNumber numberWithInt:1] forKey:[Potato_d class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Potato_m class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Onion class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:20] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Roo class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Nasu class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_r class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_y class]];
@@ -245,7 +257,7 @@ int comparetor(const void *a, const void *b) {
         }
     }
     //[self createVegetableRandom:NULL];
-    _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 // 時間間隔(秒)
+    _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 // 時間間隔(秒)
                                      target:self //呼び出すオブジェクト
                                    selector:@selector(createVegetableRandom:)
                                    userInfo:nil
@@ -289,7 +301,7 @@ int comparetor(const void *a, const void *b) {
 
     // ランダムで作成する時間を決める
     if (_createVegeTimer != nil) {
-        _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:frandom_range(4.0, 6.0) // 時間間隔(秒)
+        _createVegeTimer = [NSTimer scheduledTimerWithTimeInterval:frandom_range(2.0, 4.0) // 時間間隔(秒)
                                                             target:self //呼び出すオブジェクト
                                                           selector:@selector(createVegetableRandom:)
                                                           userInfo:nil
@@ -314,8 +326,252 @@ int comparetor(const void *a, const void *b) {
     
     _vegeArray = nil;
     _nabeContents = nil;
+    _roboLimbs = nil;
+    _roboLimbJoints = nil;
     
 }	
+
+-(void) initRobo
+{
+    // ロボワールドの初期化
+	b2Vec2 gravity;
+	gravity.Set(0.0f, 0.0f);
+	_roboWorld = new b2World(gravity);
+	_roboWorld->SetAllowSleeping(true);
+	_roboWorld->SetContinuousPhysics(true);
+	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+	//_roboWorld->SetDebugDraw(m_debugDraw);
+	uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+    flags += b2Draw::e_jointBit;
+    flags += b2Draw::e_aabbBit;
+    flags += b2Draw::e_pairBit;
+    flags += b2Draw::e_centerOfMassBit;
+	m_debugDraw->SetFlags(flags);		
+    
+    // 加速度センサーの初期化
+    UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+    accelerometer.updateInterval = 0.02;
+    accelerometer.delegate = self;
+    
+    _roboLimbs = [[NSMutableArray alloc] init];
+    _roboLimbJoints = [[NSMutableArray alloc] init];
+    
+    //ロボ本体
+    CGSize screen = [[CCDirector sharedDirector] winSize];
+    b2Body* roboBody;
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robot.png"];
+        [self addChild:sprite z:Z_ROBO];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
+        
+        b2BodyDef roboBodyDef;
+        roboBodyDef.type = b2_staticBody;
+        roboBodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        roboBodyDef.userData = sprite;
+        roboBody = _roboWorld->CreateBody(&roboBodyDef);
+
+        b2PolygonShape roboShape;
+        roboShape.SetAsBox(64 / PTM_RATIO * 0.5f, 64 / PTM_RATIO * 0.5f);
+        b2FixtureDef roboFixtureDef;
+        roboFixtureDef.density = 1;
+        roboFixtureDef.filter.categoryBits = 0;
+        roboFixtureDef.filter.maskBits = 0;
+        roboFixtureDef.shape = &roboShape;
+        roboBody->CreateFixture( &roboFixtureDef );
+    }
+    
+    // ロボ右足
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_leg.png"];
+        [self addChild:sprite z:Z_ROBO_LEG tag:LBL_ROBO_LEG_R];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -48);
+        b2BodyDef legBodyDef;
+        legBodyDef.type = b2_dynamicBody;
+        legBodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        legBodyDef.userData = sprite;
+        b2Body* legBody = _roboWorld->CreateBody(&legBodyDef);
+        
+        b2PolygonShape legShape;
+        legShape.SetAsBox(32.0 / PTM_RATIO * 0.5f, 32.0 / PTM_RATIO * 0.5f);
+        b2FixtureDef legFixtureDef;
+        legFixtureDef.density = 10;
+        legFixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        legFixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        legFixtureDef.shape = &legShape;
+        legBody->CreateFixture( &legFixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = roboBody;
+        revoluteJointDef.bodyB = legBody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(16.0 / PTM_RATIO * 0.5f, -32.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 8.0 / PTM_RATIO);
+        [_roboLimbJoints addObject:[NSValue valueWithPointer:(b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef )]];
+        
+        //legBody->ApplyForce(b2Vec2(1000,0), b2Vec2(legBody->GetPosition()));
+    }
+    
+    // ロボ左足
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_leg.png"];
+        [self addChild:sprite z:Z_ROBO_LEG tag:LBL_ROBO_LEG_L];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -48);
+        b2BodyDef legBodyDef;
+        legBodyDef.type = b2_dynamicBody;
+        legBodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        legBodyDef.userData = sprite;
+        b2Body* legBody = _roboWorld->CreateBody(&legBodyDef);
+        
+        b2PolygonShape legShape;
+        legShape.SetAsBox(32 / PTM_RATIO * 0.5f, 32 / PTM_RATIO * 0.5f);
+        b2FixtureDef legFixtureDef;
+        legFixtureDef.density = 10;
+        legFixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        legFixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        legFixtureDef.shape = &legShape;
+        legBody->CreateFixture( &legFixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = roboBody;
+        revoluteJointDef.bodyB = legBody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(-16.0 / PTM_RATIO * 0.5f, -32.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 8.0 / PTM_RATIO);//center of the circle
+        (b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef );
+    }
+    
+    // ロボ右アーム2
+    b2Body* arm2Rbody;
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm2.png"];
+        [self addChild:sprite z:Z_ROBO_ARM2 tag:LBL_ROBO_ARM2_R];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -18);
+        b2BodyDef arm2BodyDef;
+        arm2BodyDef.type = b2_dynamicBody;
+        arm2BodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        arm2BodyDef.userData = sprite;
+        arm2Rbody = _roboWorld->CreateBody(&arm2BodyDef);
+        
+        b2PolygonShape arm2Shape;
+        arm2Shape.SetAsBox(8.0 / PTM_RATIO * 0.5f, 32.0 / PTM_RATIO * 0.5f);
+        b2FixtureDef arm2FixtureDef;
+        arm2FixtureDef.density = 10;
+        arm2FixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        arm2FixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        arm2FixtureDef.shape = &arm2Shape;
+        arm2Rbody->CreateFixture( &arm2FixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = roboBody;
+        revoluteJointDef.bodyB = arm2Rbody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(17.0 / PTM_RATIO * 0.5f, 10.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 16.0 / PTM_RATIO);
+        //[_roboLimbJoints addObject:[NSValue valueWithPointer:(b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef )]];
+        _roboWorld->CreateJoint( &revoluteJointDef );
+    }
+    
+    // ロボ右アーム1
+    b2Body* arm1Rbody;
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm1.png"];
+        [self addChild:sprite z:Z_ROBO_ARM1 tag:LBL_ROBO_ARM1_R];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -18);
+        b2BodyDef arm1BodyDef;
+        arm1BodyDef.type = b2_dynamicBody;
+        arm1BodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        arm1BodyDef.userData = sprite;
+        arm1Rbody = _roboWorld->CreateBody(&arm1BodyDef);
+        
+        b2PolygonShape arm1Shape;
+        arm1Shape.SetAsBox(8.0 / PTM_RATIO * 0.5f, 32.0 / PTM_RATIO * 0.5f);
+        b2FixtureDef arm1FixtureDef;
+        arm1FixtureDef.density = 10;
+        arm1FixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        arm1FixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        arm1FixtureDef.shape = &arm1Shape;
+        arm1Rbody->CreateFixture( &arm1FixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = arm2Rbody;
+        revoluteJointDef.bodyB = arm1Rbody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(0, 0);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 15.0 / PTM_RATIO);
+        _roboWorld->CreateJoint( &revoluteJointDef );
+    }
+    
+    // ロボ左アーム2
+    b2Body* arm2Lbody;
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm2.png"];
+        [self addChild:sprite z:Z_ROBO_ARM2 tag:LBL_ROBO_ARM2_R];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -18);
+        b2BodyDef arm2BodyDef;
+        arm2BodyDef.type = b2_dynamicBody;
+        arm2BodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        arm2BodyDef.userData = sprite;
+        arm2Lbody = _roboWorld->CreateBody(&arm2BodyDef);
+        
+        b2PolygonShape arm2Shape;
+        arm2Shape.SetAsBox(8.0 / PTM_RATIO * 0.5f, 32.0 / PTM_RATIO * 0.5f);
+        b2FixtureDef arm2FixtureDef;
+        arm2FixtureDef.density = 10;
+        arm2FixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        arm2FixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        arm2FixtureDef.shape = &arm2Shape;
+        arm2Lbody->CreateFixture( &arm2FixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = roboBody;
+        revoluteJointDef.bodyB = arm2Lbody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(-17.0 / PTM_RATIO * 0.5f, 10.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 16.0 / PTM_RATIO);
+        //[_roboLimbJoints addObject:[NSValue valueWithPointer:(b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef )]];
+        _roboWorld->CreateJoint( &revoluteJointDef );
+    }
+    
+    // ロボ左アーム1
+    b2Body* arm1Lbody;
+    {
+        CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm1.png"];
+        [self addChild:sprite z:Z_ROBO_ARM1 tag:LBL_ROBO_ARM1_R];
+        [_roboLimbs addObject:sprite];
+        sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -18);
+        b2BodyDef arm1BodyDef;
+        arm1BodyDef.type = b2_dynamicBody;
+        arm1BodyDef.position = b2Vec2(sprite.position.x / PTM_RATIO, sprite.position.y / PTM_RATIO);
+        arm1BodyDef.userData = sprite;
+        arm1Lbody = _roboWorld->CreateBody(&arm1BodyDef);
+        
+        b2PolygonShape arm1Shape;
+        arm1Shape.SetAsBox(8.0 / PTM_RATIO * 0.5f, 32.0 / PTM_RATIO * 0.5f);
+        b2FixtureDef arm1FixtureDef;
+        arm1FixtureDef.density = 10;
+        arm1FixtureDef.filter.categoryBits = 0x0010;   // 1000 
+        arm1FixtureDef.filter.maskBits = 0x0007;       // 0100 野菜とだけぶつかる
+        arm1FixtureDef.shape = &arm1Shape;
+        arm1Lbody->CreateFixture( &arm1FixtureDef );
+        
+        b2RevoluteJointDef revoluteJointDef;
+        revoluteJointDef.bodyA = arm2Lbody;
+        revoluteJointDef.bodyB = arm1Lbody;
+        revoluteJointDef.collideConnected = false;
+        revoluteJointDef.localAnchorA.Set(0, 0);//the top right corner of the box
+        revoluteJointDef.localAnchorB.Set(0, 15.0 / PTM_RATIO);
+        _roboWorld->CreateJoint( &revoluteJointDef );
+    }
+    
+   
+    
+}
 
 -(void) initPhysics
 {
@@ -331,16 +587,16 @@ int comparetor(const void *a, const void *b) {
 	
 	world->SetContinuousPhysics(true);
 	
-	//m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+	m_debugDraw = new GLESDebugDraw( PTM_RATIO );
 	//world->SetDebugDraw(m_debugDraw);
 	
-	//uint32 flags = 0;
-	//flags += b2Draw::e_shapeBit;
-	//		flags += b2Draw::e_jointBit;
-	//		flags += b2Draw::e_aabbBit;
-	//		flags += b2Draw::e_pairBit;
-	//		flags += b2Draw::e_centerOfMassBit;
-	//m_debugDraw->SetFlags(flags);		
+	uint32 flags = 0;
+	flags += b2Draw::e_shapeBit;
+			flags += b2Draw::e_jointBit;
+			flags += b2Draw::e_aabbBit;
+			flags += b2Draw::e_pairBit;
+			flags += b2Draw::e_centerOfMassBit;
+	m_debugDraw->SetFlags(flags);		
 	
 	
 	// Define the ground body.
@@ -376,6 +632,7 @@ int comparetor(const void *a, const void *b) {
     _contactListener = new ContactListener();
     _contactListener->SetNode(self);
     world->SetContactListener(_contactListener);
+    
 }
 
 -(void) draw
@@ -394,6 +651,7 @@ int comparetor(const void *a, const void *b) {
     //ccDrawLine(_startPoint, _endPoint);
 //	
 	world->DrawDebugData();	
+    _roboWorld->DrawDebugData();
 	
 	kmGLPopMatrix();
 }
@@ -411,8 +669,47 @@ int comparetor(const void *a, const void *b) {
 	// Instruct the world to perform a single step of simulation. It is
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);	
+	_roboWorld->Step(dt, velocityIterations, positionIterations);	
     [self checkAndSliceObjects];    
+    
+    // ロボの動き
+    for (b2Body* body = _roboWorld->GetBodyList(); body != nil; body = body->GetNext()) {
+        CCSprite* sprite = (CCSprite*)body->GetUserData();         
+        if([_roboLimbs containsObject:sprite]){
+            // 位置と傾きを変更 
+            b2Vec2 vec = body->GetPosition();
+            sprite.position = ccpMult(CGPointMake(vec.x, vec.y), PTM_RATIO);
+            float angle = body->GetAngle();
+            sprite.rotation = CC_RADIANS_TO_DEGREES(-angle);
+        }
+    }
+    b2RevoluteJoint* revoluteJoint;
+//    for (NSValue* value in _roboLimbJoints) {
+//        revoluteJoint = (b2RevoluteJoint*)[value pointerValue];
+//        CCLOG(@"%f",revoluteJoint->GetJointSpeed());
+//        revoluteJoint->SetMotorSpeed(revoluteJoint->GetJointSpeed()-1);
+//    }
+        
 }
+
+- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration *)acceleration{
+    accelX = (float) acceleration.x * kFilterFactor + (1- kFilterFactor)*prevX;
+    accelY = (float) acceleration.y * kFilterFactor + (1- kFilterFactor)*prevY;
+    prevX = accelX;
+    prevY = accelY;
+    // accelerometer values are in "Portrait" mode. Change them to Landscape left
+    // multiply the gravity by 10
+    b2Vec2 gravity( -accelY * 10, accelX * 10);
+    _roboWorld->SetGravity( gravity );
+    
+//    for (b2Body* body = _roboWorld->GetBodyList(); body != nil; body = body->GetNext()) {
+//        CCSprite* sprite = (CCSprite*)body->GetUserData();         
+//        if([_roboLimbs containsObject:sprite]){
+//            body->ApplyForce(b2Vec2(acceleration.x,acceleration.y), b2Vec2(0, 8.0 / PTM_RATIO));
+//        }
+//    }
+}
+
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -625,7 +922,9 @@ int comparetor(const void *a, const void *b) {
     // step5
     // you destroy the old shape and create the new shapes and sprites
     if (sprite1VerticesAcceptable && sprite2VerticesAcceptable) {
-        
+        // 効果音
+        AudioServicesPlaySystemSound(cutSoundID);
+
         // linearImplus to splitted bodys
         b2Vec2 worldEntry = sprite.body->GetWorldPoint(sprite.entryPoint);
         b2Vec2 worldExit = sprite.body->GetWorldPoint(sprite.exitPoint);
@@ -680,6 +979,8 @@ int comparetor(const void *a, const void *b) {
             world->DestroyBody(sprite.body);
             [self removeChild:sprite cleanup:YES];
         }
+        
+        
     } else {
         sprite.sliceEntered = NO;
         sprite.sliceExited = NO;
@@ -935,6 +1236,9 @@ int comparetor(const void *a, const void *b) {
 }
 -(void)fire:(ccTime *)timer
 {
+    // 効果音
+    AudioServicesPlaySystemSound(fireSoundID);
+    
     CGSize screen = [[CCDirector sharedDirector] winSize];
     CCSprite* nabe = (CCSprite*)[self getChildByTag:kTagNabe];
     CCSprite* nabebuta = (CCSprite*)[self getChildByTag:kTagNabebuta];
@@ -976,12 +1280,15 @@ int comparetor(const void *a, const void *b) {
 
 -(BOOL)hasMouseJoint:(b2Body*)body
 {
-    NSArray* valueArray = [(NSDictionary*)_mouseJoints allKeys];
-    if([valueArray count] > 0){
-        return YES;
-    }else{
-        return NO;
+    NSArray* valueArray = [(NSDictionary*)_mouseJoints allValues];
+    b2MouseJoint* mouseJoint;
+    for (NSValue *value in valueArray) {
+        mouseJoint = (b2MouseJoint*)[value pointerValue];
+        if(mouseJoint && mouseJoint->GetBodyB() == body){
+            return YES;
+        }
     }
+    return NO;
 //    if (_mouseJoint && _mouseJoint->GetBodyB() == body) {
 //        return YES;
 //    }else {
@@ -995,6 +1302,9 @@ int comparetor(const void *a, const void *b) {
 //        _mouseJoint = NULL;
 //    }
 //}
+-(void) soundWaterDrop{
+    AudioServicesPlaySystemSound(waterDropSoundID);
+}
 
 #pragma mark GameKit delegate
 
