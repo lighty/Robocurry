@@ -1796,6 +1796,48 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		659AFC4B15F062F6003611BD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: paperboy&co., Inc.";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"COCOS2D_DEBUG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B2AFC211-74CB-42B4-B4C6-B05FC36F088C";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Distribution;
+		};
+		659AFC4C15F062F6003611BD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CutCutCut/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"CutCutCut/libs/kazmath/include\"";
+				INFOPLIST_FILE = CutCutCut/Resources/Info.plist;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-ObjC",
+				);
+				PRODUCT_NAME = Robocurry;
+				USER_HEADER_SEARCH_PATHS = "\"CutCutCut/libs\"";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
 		CDF3CDC915A9695800418612 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1883,6 +1925,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF3CDC915A9695800418612 /* Debug */,
+				659AFC4B15F062F6003611BD /* Distribution */,
 				CDF3CDCA15A9695800418612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1892,6 +1935,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF3CDCC15A9695800418612 /* Debug */,
+				659AFC4C15F062F6003611BD /* Distribution */,
 				CDF3CDCD15A9695800418612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
