@@ -119,6 +119,14 @@ int comparetor(const void *a, const void *b) {
     url = [NSURL fileURLWithPath:path];
     AudioServicesCreateSystemSoundID((CFURLRef)url, &cutSoundID);
 
+    path = [[NSBundle mainBundle] pathForResource:@"se_te" ofType:@"mp3"];
+    url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((CFURLRef)url, &teSoundID);
+    
+    path = [[NSBundle mainBundle] pathForResource:@"se_kachi" ofType:@"mp3"];
+    url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((CFURLRef)url, &kachiSoundID);
+    
 }
 
 
@@ -226,6 +234,7 @@ int comparetor(const void *a, const void *b) {
 
 -(void) onReturn:(id)item
 {
+    AudioServicesPlaySystemSound(teSoundID);
     [[CCDirector sharedDirector] popScene];
 }
 
@@ -362,7 +371,7 @@ int comparetor(const void *a, const void *b) {
     b2Body* roboBody;
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robot.png"];
-        [self addChild:sprite z:Z_ROBO];
+        [self addChild:sprite z:Z_ROBO tag:kTagRobo];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2, screen.height - sprite.boundingBox.size.height/2);
         
         b2BodyDef roboBodyDef;
@@ -384,7 +393,7 @@ int comparetor(const void *a, const void *b) {
     // ロボ右足
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_leg.png"];
-        [self addChild:sprite z:Z_ROBO_LEG tag:LBL_ROBO_LEG_R];
+        [self addChild:sprite z:Z_ROBO_LEG tag:kTagRoboLegR];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -48);
         b2BodyDef legBodyDef;
@@ -416,7 +425,7 @@ int comparetor(const void *a, const void *b) {
     // ロボ左足
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_leg.png"];
-        [self addChild:sprite z:Z_ROBO_LEG tag:LBL_ROBO_LEG_L];
+        [self addChild:sprite z:Z_ROBO_LEG tag:kTagRoboLegL];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -48);
         b2BodyDef legBodyDef;
@@ -447,7 +456,7 @@ int comparetor(const void *a, const void *b) {
     b2Body* arm2Rbody;
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm2.png"];
-        [self addChild:sprite z:Z_ROBO_ARM2 tag:LBL_ROBO_ARM2_R];
+        [self addChild:sprite z:Z_ROBO_ARM2 tag:kTagRoboArm2R];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -18);
         b2BodyDef arm2BodyDef;
@@ -469,7 +478,7 @@ int comparetor(const void *a, const void *b) {
         revoluteJointDef.bodyA = roboBody;
         revoluteJointDef.bodyB = arm2Rbody;
         revoluteJointDef.collideConnected = false;
-        revoluteJointDef.localAnchorA.Set(17.0 / PTM_RATIO * 0.5f, 10.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorA.Set(21.0 / PTM_RATIO * 0.5f, 12.0 / PTM_RATIO * 0.5f);//the top right corner of the box
         revoluteJointDef.localAnchorB.Set(0, 16.0 / PTM_RATIO);
         //[_roboLimbJoints addObject:[NSValue valueWithPointer:(b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef )]];
         _roboWorld->CreateJoint( &revoluteJointDef );
@@ -479,7 +488,7 @@ int comparetor(const void *a, const void *b) {
     b2Body* arm1Rbody;
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm1.png"];
-        [self addChild:sprite z:Z_ROBO_ARM1 tag:LBL_ROBO_ARM1_R];
+        [self addChild:sprite z:Z_ROBO_ARM1 tag:kTagRoboArm1R];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -16, screen.height - sprite.boundingBox.size.height/2 -18);
         b2BodyDef arm1BodyDef;
@@ -510,7 +519,7 @@ int comparetor(const void *a, const void *b) {
     b2Body* arm2Lbody;
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm2.png"];
-        [self addChild:sprite z:Z_ROBO_ARM2 tag:LBL_ROBO_ARM2_R];
+        [self addChild:sprite z:Z_ROBO_ARM2 tag:kTagRoboArm2R];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -18);
         b2BodyDef arm2BodyDef;
@@ -532,7 +541,7 @@ int comparetor(const void *a, const void *b) {
         revoluteJointDef.bodyA = roboBody;
         revoluteJointDef.bodyB = arm2Lbody;
         revoluteJointDef.collideConnected = false;
-        revoluteJointDef.localAnchorA.Set(-17.0 / PTM_RATIO * 0.5f, 10.0 / PTM_RATIO * 0.5f);//the top right corner of the box
+        revoluteJointDef.localAnchorA.Set(-21.0 / PTM_RATIO * 0.5f, 12.0 / PTM_RATIO * 0.5f);//the top right corner of the box
         revoluteJointDef.localAnchorB.Set(0, 16.0 / PTM_RATIO);
         //[_roboLimbJoints addObject:[NSValue valueWithPointer:(b2RevoluteJoint*)_roboWorld->CreateJoint( &revoluteJointDef )]];
         _roboWorld->CreateJoint( &revoluteJointDef );
@@ -542,7 +551,7 @@ int comparetor(const void *a, const void *b) {
     b2Body* arm1Lbody;
     {
         CCSprite *sprite = [CCSprite spriteWithFile:@"robo_arm1.png"];
-        [self addChild:sprite z:Z_ROBO_ARM1 tag:LBL_ROBO_ARM1_R];
+        [self addChild:sprite z:Z_ROBO_ARM1 tag:kTagRoboArm2L];
         [_roboLimbs addObject:sprite];
         sprite.position = ccp(screen.width - sprite.boundingBox.size.width/2 -31, screen.height - sprite.boundingBox.size.height/2 -18);
         b2BodyDef arm1BodyDef;
@@ -830,6 +839,7 @@ int comparetor(const void *a, const void *b) {
             if(_fireButtonPushing){
                 if(CGRectContainsPoint(sprite.boundingBox, touchLocation)){
                     // ##### 発射処理 #####
+                    AudioServicesPlaySystemSound(kachiSoundID);
                     // ボタン押下で普通のボタン画像に変更
                     CCSprite *button = [CCSprite spriteWithFile:@"switch1.png"];
                     button.position = sprite.position;

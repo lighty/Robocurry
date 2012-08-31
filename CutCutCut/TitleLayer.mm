@@ -31,10 +31,14 @@
 		
         [self initBackground];
         
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"se_te" ofType:@"mp3"];
+        NSURL *url = [NSURL fileURLWithPath:path];
+        AudioServicesCreateSystemSoundID((CFURLRef)url, &teSoundID);
+        
 		CGSize size = [[CCDirector sharedDirector] winSize];
         // setup menu
         CCMenuItem *startItem = [CCMenuItemFont itemWithString:@"ハジメル" target:self selector:@selector(onStart:)];
-//        CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"作った人たち" target:self selector:@selector(onCreator:)];
+        //CCMenuItem *createrItem = [CCMenuItemFont itemWithString:@"キーハ・ライト・スター" target:self selector:@selector(onCreator:)];
         CCMenu *menu = [CCMenu menuWithItems:startItem, nil];
         menu.position = ccp(size.width / 2, size.height / 10 * 1);
         [menu alignItemsVertically];
@@ -56,16 +60,14 @@
 
 -(void) onStart:(id)item
 {
-    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:[GameLayer scene]];
+    AudioServicesPlaySystemSound(teSoundID);
+    CCTransitionSlideInL* transition = [CCTransitionFade transitionWithDuration:0.5 scene:[GameLayer scene]];
     [[CCDirector sharedDirector] pushScene:transition];
 }
 
 -(void) onCreator:(id)item
 {
-    CCScene *scene;
-    scene = [CreatorLayer scene];
-    //[self addChild:scene];
-    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:scene];
+    CCTransitionSlideInL* transition = [CCTransitionSlideInR transitionWithDuration:0.5 scene:[CreatorLayer scene]];
     [[CCDirector sharedDirector] pushScene:transition];
 }
 

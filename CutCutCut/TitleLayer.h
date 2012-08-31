@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioServices.h>
 #import "cocos2d.h"
 
 @interface TitleLayer : CCLayer {
-    
+    SystemSoundID teSoundID;
 }
 
 +(id) scene;

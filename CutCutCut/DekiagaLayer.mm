@@ -14,9 +14,6 @@
 
 +(id) scene
 {
-	CCLOG(@"===========================================");
-	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
-	
 	CCScene* scene = [CCScene node];
 	DekiagaLayer* layer = [DekiagaLayer node];
 	[scene addChild:layer];
@@ -27,10 +24,12 @@
 {
 	if ((self = [super init]))
 	{
-		CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
-		
         [self initBackground];
         
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"se_te" ofType:@"mp3"];
+        NSURL *url = [NSURL fileURLWithPath:path];
+        AudioServicesCreateSystemSoundID((CFURLRef)url, &teSoundID);
+
 		CGSize size = [[CCDirector sharedDirector] winSize];
         // setup menu
         CCMenuItem *modoruItem = [CCMenuItemFont itemWithString:@"モドル" target:self selector:@selector(onModoru:)];
@@ -54,7 +53,8 @@
 
 -(void) onModoru:(id)item
 {
-    CCTransitionSlideInL* transition = [CCTransitionSlideInL transitionWithDuration:0.5 scene:[TitleLayer scene]];
+    AudioServicesPlaySystemSound(teSoundID);
+    CCTransitionSlideInL* transition = [CCTransitionFade transitionWithDuration:0.5 scene:[TitleLayer scene]];
     [[CCDirector sharedDirector] replaceScene:transition];
 }
 -(void) dealloc

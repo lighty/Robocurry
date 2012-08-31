@@ -29,7 +29,14 @@ enum {
 	kTagNabeFront,
 	kTagNabeWaterFront,
 	kTagNabeWaterBack,
-	kTagButton
+	kTagButton,
+	kTagRobo,
+	kTagRoboArm1R,
+	kTagRoboArm1L,
+	kTagRoboArm2R,
+	kTagRoboArm2L,
+	kTagRoboLegR,
+	kTagRoboLegL
 };
 
 #import <GameKit/GameKit.h>
@@ -63,18 +70,11 @@ enum {
 #define Z_VEGE_SLICED 50
 #define Z_BG_BLACK 100
 #define Z_MODORU 100
-#define Z_ROBO 110
+#define Z_ROBO 102
 #define Z_ROBO_LEG 105
 #define Z_ROBO_ARM1 108
 #define Z_ROBO_ARM2 105
 #define Z_SWITCH 100
-
-#define LBL_ROBO_ARM1_L 101
-#define LBL_ROBO_ARM1_R 102
-#define LBL_ROBO_ARM2_L 103
-#define LBL_ROBO_ARM2_R 104
-#define LBL_ROBO_LEG_L  105
-#define LBL_ROBO_LEG_R  106
 
 #define kFilterFactor 2.0
 // GameLayer
@@ -130,6 +130,8 @@ enum {
     SystemSoundID waterDropSoundID;
     SystemSoundID fireSoundID;
     SystemSoundID cutSoundID;
+    SystemSoundID teSoundID;
+    SystemSoundID kachiSoundID;
 }
 
 // returns a CCScene that contains the GameLayer as the only child

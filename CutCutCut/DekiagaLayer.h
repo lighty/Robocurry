@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioServices.h>
 #import "cocos2d.h"
 
 @interface DekiagaLayer : CCLayer {
-    
+    SystemSoundID teSoundID;
 }
 
 +(id) scene;
