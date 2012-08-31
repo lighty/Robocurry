@@ -15,6 +15,7 @@
 #import "Paprika_r.h"
 #import "Paprika_y.h"
 #import "Pork.h"
+#import "Ika.h"
 
 #import "Nabe.h"
 // Import the interfaces
@@ -246,10 +247,11 @@ int comparetor(const void *a, const void *b) {
     [vegeDefine setObject:[NSNumber numberWithInt:1] forKey:[Potato_d class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Potato_m class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Onion class]];
-    [vegeDefine setObject:[NSNumber numberWithInt:10] forKey:[Roo class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:15] forKey:[Roo class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Nasu class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_r class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Paprika_y class]];
+    [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Ika class]];
     [vegeDefine setObject:[NSNumber numberWithInt:5] forKey:[Pork class]];
     NSArray *vegeDefineKeys = [vegeDefine allKeys];
     _vegeArray = [[NSMutableArray alloc]init];
@@ -342,6 +344,11 @@ int comparetor(const void *a, const void *b) {
 
 -(void) initRobo
 {
+    
+//    CCSprite *ikasprite = [CCSprite spriteWithFile:@"ika.png"];
+//    [self addChild:ikasprite z:Z_ROBO tag:kTagRobo];
+//    ikasprite.position = ccp(200,200);
+    
     // ロボワールドの初期化
 	b2Vec2 gravity;
 	gravity.Set(0.0f, 0.0f);

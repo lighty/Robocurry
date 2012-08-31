@@ -21,6 +21,7 @@ enum {
 	kTagVegeNasu,
 	kTagVegePaprika_r,
 	kTagVegePaprika_y,
+	kTagVegeIka,
 	kTagVegePork
 };
 
