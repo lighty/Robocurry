@@ -36,6 +36,7 @@
 		CD5EDBAB15EE293000E6304E /* nasu-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CD5EDBA915EE293000E6304E /* nasu-hd.png */; };
 		CD5EDBB215EFB49800E6304E /* se_kachi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CD5EDBB015EFB49800E6304E /* se_kachi.mp3 */; };
 		CD5EDBB715EFBAC000E6304E /* se_te.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CD5EDBB615EFBAC000E6304E /* se_te.mp3 */; };
+		CD5EDBC515F09B2800E6304E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CD5EDBC415F09B2700E6304E /* icon.png */; };
 		CD70D49E15B57FC0002C94D6 /* TitleLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */; };
 		CD70D4A115B58A4A002C94D6 /* CreatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD70D4A015B58A4A002C94D6 /* CreatorLayer.m */; };
 		CD7122D815B883E600A94F62 /* shibuk0.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7122D515B883E600A94F62 /* shibuk0.png */; };
@@ -305,6 +306,7 @@
 		CD5EDBA915EE293000E6304E /* nasu-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nasu-hd.png"; sourceTree = "<group>"; };
 		CD5EDBB015EFB49800E6304E /* se_kachi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_kachi.mp3; sourceTree = "<group>"; };
 		CD5EDBB615EFBAC000E6304E /* se_te.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_te.mp3; sourceTree = "<group>"; };
+		CD5EDBC415F09B2700E6304E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		CD70D49C15B57FC0002C94D6 /* TitleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLayer.h; sourceTree = "<group>"; };
 		CD70D49D15B57FC0002C94D6 /* TitleLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleLayer.mm; sourceTree = "<group>"; };
 		CD70D49F15B58A4A002C94D6 /* CreatorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatorLayer.h; sourceTree = "<group>"; };
@@ -883,6 +885,7 @@
 				CDF3CBB815A9695400418612 /* fps_images-hd.png */,
 				CDF3CBBA15A9695400418612 /* fps_images-ipadhd.png */,
 				CDF3CBBC15A9695400418612 /* Icon-72.png */,
+				CD5EDBC415F09B2700E6304E /* icon.png */,
 				CDABFDED15BBA81D004CE52A /* icon@2x.png */,
 				CDF3CBBE15A9695400418612 /* Icon-Small-50.png */,
 				CDF3CBC015A9695400418612 /* Icon-Small.png */,
@@ -1620,6 +1623,7 @@
 				CD5EDBAB15EE293000E6304E /* nasu-hd.png in Resources */,
 				CD5EDBB215EFB49800E6304E /* se_kachi.mp3 in Resources */,
 				CD5EDBB715EFBAC000E6304E /* se_te.mp3 in Resources */,
+				CD5EDBC515F09B2800E6304E /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
